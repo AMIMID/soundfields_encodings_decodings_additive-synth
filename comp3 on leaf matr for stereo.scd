@@ -15,8 +15,8 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 var decay=12;
 
 y=2.pow(num/12);
-	//envd=EnvGen.ar(Env.perc(attack,(12),amp/10),doneAction:2);
-	envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
+	envd=EnvGen.ar(Env.perc(attack,(24),amp/10),doneAction:2);
+	//envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
 
 
 		12.do{
@@ -31,8 +31,8 @@ y=2.pow(num/12);
 	//	sig1=Pan4.ar(SinOsc.ar((((fund*i))*under)+envf,mul:env1,phase:pi),xpos:pan1.linlin(0,360,-1,1),ypos:pan3.linlin(0,360,-1,1));
 		//sig2=Pan4.ar(SinOsc.ar((((fund*ii))*over)+envf,mul:env2,phase:pi),xpos:pan2.linlin(0,360,1,-1),ypos:pan4.linlin(0,360,1,-1));
 
-		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,1),width:1,orientation:0,level:envd);
-		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,1),width:1,orientation:0,level:envd);
+		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.001),width:1,orientation:0,level:envd);
+		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,0.001),width:1,orientation:0,level:envd);
 
 		x=x+1;
 		over=(x+1)/1;
