@@ -2,7 +2,7 @@
 (
 SynthDef.new(\id1, {
 
-	arg dur=1, attack=0.1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
+	arg dur=1, attack=0.01,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,
 	num=1;
 	var sig1,sig2,x=0,amp=1,fund=440;  var enva,envb,envd,envf;
@@ -15,11 +15,11 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 var decay=12;
 
 y=2.pow(num/12);
-	envd=EnvGen.ar(Env.perc(attack,(24),amp/10),doneAction:2);
-	//envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
+	//envd=EnvGen.ar(Env.perc(attack,(24),amp/10),doneAction:2);
+	envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
 
 
-		12.do{
+		24.do{
 		env1=EnvGen.ar(Env.perc(attack,(24),amp/under,[-4,-4]));
 		 env2=EnvGen.ar(Env.perc(attack,(24),amp/over,[-4,-4]));
 
@@ -31,8 +31,8 @@ y=2.pow(num/12);
 	//	sig1=Pan4.ar(SinOsc.ar((((fund*i))*under)+envf,mul:env1,phase:pi),xpos:pan1.linlin(0,360,-1,1),ypos:pan3.linlin(0,360,-1,1));
 		//sig2=Pan4.ar(SinOsc.ar((((fund*ii))*over)+envf,mul:env2,phase:pi),xpos:pan2.linlin(0,360,1,-1),ypos:pan4.linlin(0,360,1,-1));
 
-		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.001),width:1,orientation:0,level:envd);
-		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,0.001),width:1,orientation:0,level:envd);
+		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.01),width:1,orientation:0,level:envd);
+		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,0.01),width:1,orientation:0,level:envd);
 
 		x=x+1;
 		over=(x+1)/1;
@@ -114,6 +114,12 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=10
 TempoClock.default.tempo_(120/40);
-s.options.memSize = 65536;
+s.options.memSize = 8192*8;
+s.options.sampleRate = 44100;
+s.options.numBuffers = 1024*1;
+s.options.numRGens=64*1;
+s.options.numWireBufs=64*1;
+s.options.numRGens=ouputStreamsEnabled=;
 s.options.numInputBusChannels=0;
+s.options.outputStreamsEnabled.postln
 s.record(numChannels:12) ;
