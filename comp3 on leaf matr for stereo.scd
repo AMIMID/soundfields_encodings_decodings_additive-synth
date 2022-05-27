@@ -9,14 +9,14 @@ SynthDef.new(\id1, {
 	var under=1,over=1;
 	var an=0,pan=an.wrap(0,360);
 	/*var 	i=(1+interval)/interval,ii=interval/(1+interval);*/
-	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
+	var i=fund*2.pow(interval/12), ii=fund/2.pow(num/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
 var decay=12;
 
 y=2.pow(num/12);
-	envd=EnvGen.ar(Env.perc(attack,(12),amp/10),doneAction:2);
-	//envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
+	//envd=EnvGen.ar(Env.perc(attack,(12),amp/10),doneAction:2);
+	envd=EnvGen.ar(Env.sine((24),amp),doneAction:2);
 
 
 		12.do{
@@ -31,16 +31,15 @@ y=2.pow(num/12);
 	//	sig1=Pan4.ar(SinOsc.ar((((fund*i))*under)+envf,mul:env1,phase:pi),xpos:pan1.linlin(0,360,-1,1),ypos:pan3.linlin(0,360,-1,1));
 		//sig2=Pan4.ar(SinOsc.ar((((fund*ii))*over)+envf,mul:env2,phase:pi),xpos:pan2.linlin(0,360,1,-1),ypos:pan4.linlin(0,360,1,-1));
 
-		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:pan.linlin(0,360,0,8/4),width:1,orientation:0,level:envd);
-		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:pan.linlin(0,360,0,8/4),width:1,orientation:1,level:envd);
+		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,1),width:1,orientation:0,level:envd);
+		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,1),width:1,orientation:0,level:envd);
 
 		x=x+1;
 		over=(x+1)/1;
 		 under=1/(x+1);
 
 		 an=an+137.5;
-		pan=an.wrap(0,360);
-
+		pan=an.wrap(0,360).linlin(0,360,-1,1);
 
 
 		//Out.ar(0,sig1*envd*pr);
@@ -97,8 +96,8 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pbrown(1,12,2,inf),
-	\num,Prand([1,5,7,12],inf),
+	\interval,Prand([1,5,7,12],inf),
+	\num,Prand([1,4,5,12],inf),
 	\pr,Pexprand(0.1,0.6,inf),
 		\w1,Pexprand(0.01,1,inf),\w2,Pexprand(0.01,1,inf),\w3,Pexprand(0.01,1,inf),\w4,Pexprand(0.01,1,inf),
 	\w5,Pexprand(0.01,1,inf),\w6,Pexprand(0.001,1,inf),\w7,Pexprand(0.01,1,inf),\w8,Pexprand(0.01,1,inf),
