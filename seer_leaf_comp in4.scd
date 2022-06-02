@@ -6,7 +6,7 @@ SynthDef.new(\id1, {
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
 	var sig1,sig2,x=0,amp=1,fund=261.63;  var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
-	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
+	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1)*an;
 	/*var 	i=(1+interval)/interval,ii=interval/(1+interval);*/
 	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
 	var amp1=2.pow(interval/12),amp2=2.pow(interval/12);
@@ -41,7 +41,7 @@ var decay=8;
 
 		 an=an+137.5;
 		pan=an.wrap(0,360);
-		pa=exp(Complex.new(0,1)*pan);
+		pa=exp(Complex.new(0,1)*an);
 
 
 		//Out.ar(2,sig1*envd1*pr);
