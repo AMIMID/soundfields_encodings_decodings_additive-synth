@@ -4,9 +4,9 @@ SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,x=0,amp=1,fund=261.63*2;  var enva,envb,envd1,envd2,envf;
+	var sig1,sig2,x=0,amp=1,fund=220*2;  var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
-	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
+	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1)*an;
 	/*var 	i=(1+interval)/interval,ii=interval/(1+interval);*/
 	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
 	var amp1=2.pow(interval/12);
@@ -14,13 +14,13 @@ SynthDef.new(\id1, {
 var env1,env2,env3,env4,env5,env6,env7,env8;
 var decay=8;
 
-	//envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
-	//	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
+	envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
+		envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
 	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
 		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
-		12.do{
+		16.do{
 		env1=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 		 env2=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
@@ -40,8 +40,8 @@ var decay=8;
 		 under=1/(x+1);
 
 		 an=an+137.5;
-		pan=an.wrap(0,360);
-		pa=exp(Complex.new(0,1)*pan);
+	//	pan=an.wrap(0,360);
+		pa=exp(Complex.new(0,1)*an);
 
 
 		//Out.ar(2,sig1*envd1*pr);
@@ -99,8 +99,11 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([1,5,7,12],inf),
 	\pr,Pexprand(0.1,0.6,inf),
+	/*\w1,Prand([0,0,0,1],inf),\w2,Prand([0,0,0,1],inf),\w3,Prand([0,0,0,1],inf),\w4,Prand([0,0,0,1],inf),
+	\w5,Prand([0,0,0,1],inf),\w6,Prand([0,0,0,1],inf),\w7,Prand([0,0,0,1],inf),\w8,Prand([0,0,0,1],inf),*/
+
 		\w1,Pexprand(0.01,1,inf),\w2,Pexprand(0.01,1,inf),\w3,Pexprand(0.01,1,inf),\w4,Pexprand(0.01,1,inf),
-	\w5,Pexprand(0.01,1,inf),\w6,Pexprand(0.01,1,inf),\w7,Pexprand(0.01,1,inf),\w8,Pexprand(0.01,1,inf),
+	\w5,Pexprand(0.01,1,inf),\w6,Pexprand(0.001,1,inf),\w7,Pexprand(0.01,1,inf),\w8,Pexprand(0.01,1,inf),
 	\pan1,Pbrown(-1,1,0.2,inf),\pan2,Pbrown(-1,1,0.2,inf),\pan3,Pbrown(-1,1,0.2,inf),\pan4,Pbrown(-1,1,0.2,inf),
 		\pan5,Pbrown(-1,1,0.2,inf),\pan6,Pbrown(-1,1,0.2,inf),\pan7,Pbrown(-1,1,0.2,inf),\pan8,Pbrown(-1,1,0.2,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
