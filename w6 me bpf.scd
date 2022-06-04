@@ -1,3 +1,4 @@
+4pi/((sqrt(5)+1)/2)
 (
 (
 SynthDef.new(\id1, {
@@ -10,7 +11,7 @@ SynthDef.new(\id1, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 
 		audio = audio +sig;
 		x=x+1;
@@ -37,7 +38,7 @@ SynthDef.new(\id2, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -63,7 +64,7 @@ SynthDef.new(\id3, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-	sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+	sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -89,7 +90,7 @@ SynthDef.new(\id4, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -115,7 +116,7 @@ SynthDef.new(\id5, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -141,7 +142,7 @@ SynthDef.new(\id6, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -167,7 +168,7 @@ SynthDef.new(\id7, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -193,7 +194,7 @@ SynthDef.new(\id8, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -219,7 +220,7 @@ SynthDef.new(\id9, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 			envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -245,7 +246,7 @@ SynthDef.new(\id10, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -271,7 +272,7 @@ SynthDef.new(\id11, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -297,7 +298,7 @@ SynthDef.new(\id12, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -323,7 +324,7 @@ SynthDef.new(\id13, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -349,7 +350,7 @@ SynthDef.new(\id14, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -375,7 +376,7 @@ SynthDef.new(\id15, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -401,7 +402,7 @@ SynthDef.new(\id16, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -427,7 +428,7 @@ SynthDef.new(\id17, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -453,7 +454,7 @@ SynthDef.new(\id18, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -479,7 +480,7 @@ SynthDef.new(\id19, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -505,7 +506,7 @@ SynthDef.new(\id20, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -531,7 +532,7 @@ SynthDef.new(\id21, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -557,7 +558,7 @@ SynthDef.new(\id22, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 			envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+		sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -583,7 +584,7 @@ SynthDef.new(\id23, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -609,7 +610,7 @@ SynthDef.new(\id24, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -635,7 +636,7 @@ SynthDef.new(\id25, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;
@@ -661,7 +662,7 @@ SynthDef.new(\id26, {
 		12.do{
 		env=EnvGen.ar(Env.perc(attack,10,1/amp,[-4,-4]));
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand,0.999.rand],[-4]));
-			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.001),LFNoise1.ar(1/pan),width:1);
+			sig=PanAz.ar(6,BPF.ar(BrownNoise.ar(mul:env),fund+envf,0.003),LFNoise1.ar(1/((sqrt(5)+1)/2)),width:1);
 		audio = audio +sig;
 		x=x+1;
 		freq=(x+interval)/x;

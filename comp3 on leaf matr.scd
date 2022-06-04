@@ -21,8 +21,8 @@ var decay=4pi;
 
 
 		4.do{
-		env1=EnvGen.ar(Env.perc(attack,(12),amp/under,[-4,-4]));
-		 env2=EnvGen.ar(Env.perc(attack,(12),amp/over,[-4,-4]));
+		enva=EnvGen.ar(Env.perc(attack,(12),amp/under,[-4,-4]));
+		 envb=EnvGen.ar(Env.perc(attack,(12),amp/over,[-4,-4]));
 
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand,(12*dur).rand],[-4]));
 
@@ -35,8 +35,8 @@ var decay=4pi;
 /*		sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.01),width:1,orientation:0,level:envd1);
 		sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,0.01),width:1,orientation:0,level:envd2);*/
 
-			sig1=PanAz.ar(8,BPF.ar(BrownNoise.ar(mul:env1),(i*under)+envf,0.001),pos:Line.ar(-1*pan,1*pan,0.001),width:1,orientation:0,level:envd1);
-		sig2=PanAz.ar(8,BPF.ar(BrownNoise.ar(mul:env2),(ii*over)+envf,0.001),pos:Line.ar(1*pan,-1*pan,0.001),width:1,orientation:0,level:envd2);
+			sig1=PanAz.ar(8,BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),pos:Line.ar(-1*pan,1*pan,0.001),width:1,orientation:0,level:envd1);
+		sig2=PanAz.ar(8,BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.001),pos:Line.ar(1*pan,-1*pan,0.001),width:1,orientation:0,level:envd2);
 
 
 
