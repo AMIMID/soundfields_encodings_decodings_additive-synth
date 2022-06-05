@@ -9,8 +9,8 @@ SynthDef.new(\id1, {
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
 	var xc=0,yc=0,zc=0;
-	var i=fund*2.pow(interval/4pi), ii=fund/2.pow(interval/4pi);
-	var amp1=2.pow(interval/4pi);
+	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
+	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
 var 	var decay=dur*((sqrt(5)+1)/2);
@@ -124,7 +124,7 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=8
-TempoClock.default.tempo_(120/60);
+TempoClock.default.tempo_(120/20);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -146,8 +146,8 @@ SynthDef.new(\id1, {
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
 	var xc=0,yc=0,zc=0;
-	var i=fund*2.pow(interval/4pi), ii=fund/2.pow(interval/4pi);
-	var amp1=2.pow(interval/4pi);
+	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
+	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
 	var decay=dur*((sqrt(5)+1)/2);
@@ -158,7 +158,7 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 //////	envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
-		48.do{
+		12.do{
 		enva=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 		 envb=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
@@ -170,9 +170,9 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 	/*	sig1=Pan4.ar(SinOsc.ar((i*under)+envf,mul:env1,phase:pi),xpos:pa.real,ypos:pa.imag);
 		sig2=Pan4.ar(SinOsc.ar((ii*over)+envf,mul:env2,phase:pi),xpos:pa.imag,ypos:pa.real);*/
 
-sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.0001),xpos:xc,ypos:yc);
+sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.001),xpos:xc,ypos:yc);
 /*	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.001),xpos:xc,ypos:yc);*/
-	sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.0001),pos:zc);
+	sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.001),pos:zc);
 /*    sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.001),pos:zc);*/
 
 
@@ -235,8 +235,8 @@ SynthDef.new(\id2, {
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
 	var xc=0,yc=0,zc=0;
-	var i=fund*2.pow(interval/4pi), ii=fund/2.pow(interval/4pi);
-	var amp1=2.pow(interval/4pi);
+	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
+	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
 	var decay=dur*((sqrt(5)+1)/2);
@@ -247,7 +247,7 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
-		48.do{
+		12.do{
 		enva=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 		 envb=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
@@ -260,9 +260,9 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		sig2=Pan4.ar(SinOsc.ar((ii*over)+envf,mul:env2,phase:pi),xpos:pa.imag,ypos:pa.real);*/
 
 /*	sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),xpos:xc,ypos:yc);*/
-	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.0001),xpos:xc,ypos:yc);
+	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over+envf),0.001),xpos:xc,ypos:yc);
 	/*sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),pos:zc);*/
-   sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.0001),pos:zc);
+   sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over+envf),0.001),pos:zc);
 
 
 /*		/*	sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),xpos:xc,ypos:yc);*/

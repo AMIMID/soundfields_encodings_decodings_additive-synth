@@ -4,7 +4,7 @@
 SynthDef.new(\id1, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/1,[-4,-4]),doneAction:2);
@@ -31,7 +31,7 @@ SynthDef.new(\id1, {
 SynthDef.new(\id2, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/1,[-4,-4]),doneAction:2);
@@ -57,7 +57,7 @@ SynthDef.new(\id2, {
 SynthDef.new(\id3, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -83,7 +83,7 @@ SynthDef.new(\id3, {
 SynthDef.new(\id4, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -109,7 +109,7 @@ SynthDef.new(\id4, {
 SynthDef.new(\id5, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -135,7 +135,7 @@ SynthDef.new(\id5, {
 SynthDef.new(\id6, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -161,7 +161,7 @@ SynthDef.new(\id6, {
 SynthDef.new(\id7, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -187,7 +187,7 @@ SynthDef.new(\id7, {
 SynthDef.new(\id8, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -213,7 +213,7 @@ SynthDef.new(\id8, {
 SynthDef.new(\id9, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -239,7 +239,7 @@ SynthDef.new(\id9, {
 SynthDef.new(\id10, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -265,7 +265,7 @@ SynthDef.new(\id10, {
 SynthDef.new(\id11, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -291,7 +291,7 @@ SynthDef.new(\id11, {
 SynthDef.new(\id12, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -317,7 +317,7 @@ SynthDef.new(\id12, {
 SynthDef.new(\id13, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -343,7 +343,7 @@ SynthDef.new(\id13, {
 SynthDef.new(\id14, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/1,[-4,-4]),doneAction:2);
@@ -369,7 +369,7 @@ SynthDef.new(\id14, {
 SynthDef.new(\id15, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((1/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/1,[-4,-4]),doneAction:2);
@@ -395,7 +395,7 @@ SynthDef.new(\id15, {
 SynthDef.new(\id16, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -421,7 +421,7 @@ SynthDef.new(\id16, {
 SynthDef.new(\id17, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -447,7 +447,7 @@ SynthDef.new(\id17, {
 SynthDef.new(\id18, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((4/3)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -473,7 +473,7 @@ SynthDef.new(\id18, {
 SynthDef.new(\id19, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,3/4,[-4,-4]),doneAction:2);
@@ -499,7 +499,7 @@ SynthDef.new(\id19, {
 SynthDef.new(\id20, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -525,7 +525,7 @@ SynthDef.new(\id20, {
 SynthDef.new(\id21, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -551,7 +551,7 @@ SynthDef.new(\id21, {
 SynthDef.new(\id22, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((3/2)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,2/3,[-4,-4]),doneAction:2);
@@ -577,7 +577,7 @@ SynthDef.new(\id22, {
 SynthDef.new(\id23, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -603,7 +603,7 @@ SynthDef.new(\id23, {
 SynthDef.new(\id24, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -629,7 +629,7 @@ SynthDef.new(\id24, {
 SynthDef.new(\id25, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 		var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -655,7 +655,7 @@ SynthDef.new(\id25, {
 SynthDef.new(\id26, {
 
 		arg dur=1,detune=0,attack=4,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr;
-	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*2pi);
+	var sig,x=0,amp=1,audio=0,fund=55*((2/1)*6);
 	var env,freq=4,envd,envf,pan=1;
 	var x1=0,x2=1,x3,y;
 	   envd=EnvGen.ar(Env.perc(attack,10,1/2,[-4,-4]),doneAction:2);
@@ -1419,7 +1419,7 @@ SynthDef.new(\id26, {
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=6
-TempoClock.default.tempo_(30/120);
+TempoClock.default.tempo_(40/120);
 s.options.memSize = 65536;
 s.options.numInputBusChannels=0;
 s.record(numChannels:6) ;
