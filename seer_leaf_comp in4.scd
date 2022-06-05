@@ -116,7 +116,7 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=6
-TempoClock.default.tempo_(120/40);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -146,9 +146,9 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 	var decay=dur*((sqrt(5)+1)/2);
 
 //envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
-	///////	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
+	////////////////////	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
 	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
-//////	envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
+////////////////////	envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
 		24.do{
@@ -214,9 +214,9 @@ SynthDef.new(\id2, {
 var env1,env2,env3,env4,env5,env6,env7,env8;
 	var decay=dur*((sqrt(5)+1)/2);
 
-	//////envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
+	/////////////////////envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
 		//envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
-/////	//envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
+////////////////////	//envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
 		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
@@ -294,8 +294,8 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48],inf),
 	\pr,Pexprand(1,1.6,inf),
-		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
-	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
+		\w1,Pxrand([0,0,0,2],inf),\w2,Pxrand([0,0,0,2],inf),\w3,Pxrand([0,0,0,2],inf),\w4,Pxrand([0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,2],inf),\w6,Pxrand([0,0,0,2],inf),\w7,Pxrand([0,0,0,2],inf),\w8,Pxrand([0,0,0,2],inf),
 	\pan1,Pbrown(-1,1,1,inf),\pan2,Pbrown(-1,1,1,inf),\pan3,Pbrown(-1,1,1,inf),\pan4,Pbrown(-1,1,1,inf),
 		\pan5,Pbrown(-1,1,1,inf),\pan6,Pbrown(-1,1,1,inf),\pan7,Pbrown(-1,1,1,inf),\pan8,Pbrown(-1,1,1,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
@@ -325,8 +325,8 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48],inf),
 	\pr,Pexprand(1,2,inf),
-		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
-	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
+		\w1,Pxrand([0,0,0,2],inf),\w2,Pxrand([0,0,0,2],inf),\w3,Pxrand([0,0,0,2],inf),\w4,Pxrand([0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,2],inf),\w6,Pxrand([0,0,0,2],inf),\w7,Pxrand([0,0,0,2],inf),\w8,Pxrand([0,0,0,2],inf),
 	\pan1,Pbrown(-1,1,1,inf),\pan2,Pbrown(-1,1,1,inf),\pan3,Pbrown(-1,1,1,inf),\pan4,Pbrown(-1,1,1,inf),
 		\pan5,Pbrown(-1,1,1,inf),\pan6,Pbrown(-1,1,1,inf),\pan7,Pbrown(-1,1,1,inf),\pan8,Pbrown(-1,1,1,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),

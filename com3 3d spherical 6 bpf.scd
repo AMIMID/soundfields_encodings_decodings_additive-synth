@@ -124,7 +124,7 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=8
-TempoClock.default.tempo_(120/120);
+TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -141,7 +141,7 @@ SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=1320;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=220;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
@@ -221,7 +221,7 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
+Out.ar(0,(aud5));Out.ar(0,(aud6));
 /*	Out.ar(0,(aud7)*10);Out.ar(0,(aud8)*10);*/
 }).add;
 );
@@ -230,7 +230,7 @@ SynthDef.new(\id2, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=55;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=220;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
@@ -310,7 +310,7 @@ aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
+Out.ar(0,(aud5));Out.ar(0,(aud6));
 /*	Out.ar(0,(aud7)*10);Out.ar(0,(aud8)*10);*/
 }).add;
 )
