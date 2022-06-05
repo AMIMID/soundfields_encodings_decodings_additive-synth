@@ -110,8 +110,8 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48],inf),
 	\pr,Pexprand(1,2,inf),
-		\w1,Prand([0,0,0,0,0,1],inf),\w2,Prand([0,0,0,0,0,1],inf),\w3,Prand([0,0,0,0,0,1],inf),\w4,Prand([0,0,0,0,0,1],inf),
-	\w5,Prand([0,0,0,0,0,1],inf),\w6,Prand([0,0,0,0,0,1],inf),\w7,Prand([0,0,0,0,0,1],inf),\w8,Prand([0,0,0,0,0,1],inf),
+		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
+	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
 	\pan1,Pbrown(-1,1,0.2,inf),\pan2,Pbrown(-1,1,0.2,inf),\pan3,Pbrown(-1,1,0.2,inf),\pan4,Pbrown(-1,1,0.2,inf),
 		\pan5,Pbrown(-1,1,0.2,inf),\pan6,Pbrown(-1,1,0.2,inf),\pan7,Pbrown(-1,1,0.2,inf),\pan8,Pbrown(-1,1,0.2,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
@@ -341,10 +341,10 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48],inf),
 	\pr,Pexprand(1,1.6,inf),
-		\w1,Prand([0,0,0,0,0,1],inf),\w2,Prand([0,0,0,0,0,1],inf),\w3,Prand([0,0,0,0,0,1],inf),\w4,Prand([0,0,0,0,0,1],inf),
-	\w5,Prand([0,0,0,0,0,1],inf),\w6,Prand([0,0,0,0,0,1],inf),\w7,Prand([0,0,0,0,0,1],inf),\w8,Prand([0,0,0,0,0,1],inf),
-	\pan1,Pbrown(-1,1,0.2,inf),\pan2,Pbrown(-1,1,0.2,inf),\pan3,Pbrown(-1,1,0.2,inf),\pan4,Pbrown(-1,1,0.2,inf),
-		\pan5,Pbrown(-1,1,0.2,inf),\pan6,Pbrown(-1,1,0.2,inf),\pan7,Pbrown(-1,1,0.2,inf),\pan8,Pbrown(-1,1,0.2,inf);
+		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
+	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
+	\pan1,Pbrown(-1,1,1,inf),\pan2,Pbrown(-1,1,1,inf),\pan3,Pbrown(-1,1,1,inf),\pan4,Pbrown(-1,1,1,inf),
+		\pan5,Pbrown(-1,1,1,inf),\pan6,Pbrown(-1,1,1,inf),\pan7,Pbrown(-1,1,1,inf),\pan8,Pbrown(-1,1,1,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
@@ -372,10 +372,10 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48],inf),
 	\pr,Pexprand(1,2,inf),
-		\w1,Prand([0,0,0,0,0,1],inf),\w2,Prand([0,0,0,0,0,1],inf),\w3,Prand([0,0,0,0,0,1],inf),\w4,Prand([0,0,0,0,0,1],inf),
-	\w5,Prand([0,0,0,0,0,1],inf),\w6,Prand([0,0,0,0,0,1],inf),\w7,Prand([0,0,0,0,0,1],inf),\w8,Prand([0,0,0,0,0,1],inf),
-	\pan1,Pbrown(-1,1,0.2,inf),\pan2,Pbrown(-1,1,0.2,inf),\pan3,Pbrown(-1,1,0.2,inf),\pan4,Pbrown(-1,1,0.2,inf),
-		\pan5,Pbrown(-1,1,0.2,inf),\pan6,Pbrown(-1,1,0.2,inf),\pan7,Pbrown(-1,1,0.2,inf),\pan8,Pbrown(-1,1,0.2,inf);
+		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
+	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
+	\pan1,Pbrown(-1,1,1,inf),\pan2,Pbrown(-1,1,1,inf),\pan3,Pbrown(-1,1,1,inf),\pan4,Pbrown(-1,1,1,inf),
+		\pan5,Pbrown(-1,1,1,inf),\pan6,Pbrown(-1,1,1,inf),\pan7,Pbrown(-1,1,1,inf),\pan8,Pbrown(-1,1,1,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1))
