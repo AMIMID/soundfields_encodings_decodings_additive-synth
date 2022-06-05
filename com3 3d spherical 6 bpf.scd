@@ -72,9 +72,9 @@ aud5=Pan2.ar(InFeedback.ar(6),pos:pan5,level:env5);aud6=Pan2.ar(InFeedback.ar(7)
 /*aud7=Pan2.ar(InFeedback.ar(8),pos:pan7,level:env7);aud8=Pan2.ar(InFeedback.ar(9),pos:pan8,level:env8);*/
 
 /*aud1=PanAz.ar(6,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(6,InFeedback.ar(3),pos:pan2,level:env2);
-aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);*/
-	// aud1=PanAz.ar(2,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(2,InFeedback.ar(4),pos:pan2,level:env2,width:1);
-	// aud3=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud4=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
+aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);
+ aud5=PanAz.ar(2,InFeedback.ar(6),pos:pan5,level:env5);aud6=PanAz.ar(2,InFeedback.ar(7),pos:pan6,level:env6,width:1);*/
+//aud7=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud8=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
@@ -124,7 +124,7 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=8
-TempoClock.default.tempo_(120/40);
+TempoClock.default.tempo_(120/20);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -141,7 +141,7 @@ SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=440;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=880;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.1;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
@@ -150,7 +150,7 @@ SynthDef.new(\id1, {
 	var amp1=2.pow(interval/4pi);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-var decay=2*dur;
+	var decay=(3/2)*dur;
 
 //envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
 	//	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
@@ -170,9 +170,9 @@ var decay=2*dur;
 	/*	sig1=Pan4.ar(SinOsc.ar((i*under)+envf,mul:env1,phase:pi),xpos:pa.real,ypos:pa.imag);
 		sig2=Pan4.ar(SinOsc.ar((ii*over)+envf,mul:env2,phase:pi),xpos:pa.imag,ypos:pa.real);*/
 
-	sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.1),xpos:xc,ypos:yc);
+	sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),xpos:xc,ypos:yc);
 /*	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.001),xpos:xc,ypos:yc);*/
-	sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.1),pos:zc);
+	sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),pos:zc);
 /*    sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.001),pos:zc);*/
 
 		//sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.01),width:1,orientation:0,level:envd);
@@ -209,9 +209,9 @@ aud5=Pan2.ar(InFeedback.ar(6),pos:pan5,level:env5);aud6=Pan2.ar(InFeedback.ar(7)
 /*aud7=Pan2.ar(InFeedback.ar(8),pos:pan7,level:env7);aud8=Pan2.ar(InFeedback.ar(9),pos:pan8,level:env8);*/
 
 /*aud1=PanAz.ar(6,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(6,InFeedback.ar(3),pos:pan2,level:env2);
-aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);*/
-	// aud1=PanAz.ar(2,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(2,InFeedback.ar(4),pos:pan2,level:env2,width:1);
-	// aud3=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud4=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
+aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);
+ aud5=PanAz.ar(2,InFeedback.ar(6),pos:pan5,level:env5);aud6=PanAz.ar(2,InFeedback.ar(7),pos:pan6,level:env6,width:1);*/
+//aud7=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud8=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
@@ -224,7 +224,7 @@ SynthDef.new(\id2, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=440;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=880;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.1;
 	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
@@ -233,12 +233,12 @@ SynthDef.new(\id2, {
 	var amp1=2.pow(interval/4pi);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-var decay=2*dur;
+var decay=(3/2)*dur;
 
-	//envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
-	//	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
-	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
-		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
+	envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
+		envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
+	//envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
+	//	envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
 		12.do{
@@ -254,9 +254,9 @@ var decay=2*dur;
 		sig2=Pan4.ar(SinOsc.ar((ii*over)+envf,mul:env2,phase:pi),xpos:pa.imag,ypos:pa.real);*/
 
 /*	sig1=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),xpos:xc,ypos:yc);*/
-	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.1),xpos:xc,ypos:yc);
+	sig2=Pan4.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.0001),xpos:xc,ypos:yc);
 	/*sig3=Pan2.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under)+envf,0.001),pos:zc);*/
-   sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.1),pos:zc);
+   sig4=Pan2.ar(BPF.ar(BrownNoise.ar(mul:envb),(ii*over)+envf,0.0001),pos:zc);
 
 		//sig1=PanAz.ar(8,SinOsc.ar(((i)*under)+envf,mul:env1,phase:pi),pos:Line.ar(-1*pan,1*pan,0.01),width:1,orientation:0,level:envd);
 		//sig2=PanAz.ar(8,SinOsc.ar(((ii)*over)+envf,mul:env2,phase:pi),pos:Line.ar(1*pan,-1*pan,0.01),width:1,orientation:0,level:envd);
@@ -292,9 +292,9 @@ aud5=Pan2.ar(InFeedback.ar(6),pos:pan5,level:env5);aud6=Pan2.ar(InFeedback.ar(7)
 /*aud7=Pan2.ar(InFeedback.ar(8),pos:pan7,level:env7);aud8=Pan2.ar(InFeedback.ar(9),pos:pan8,level:env8);*/
 
 /*aud1=PanAz.ar(6,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(6,InFeedback.ar(3),pos:pan2,level:env2);
-aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);*/
-	// aud1=PanAz.ar(2,InFeedback.ar(2),pos:pan1,level:env1);aud2=PanAz.ar(2,InFeedback.ar(4),pos:pan2,level:env2,width:1);
-	// aud3=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud4=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
+aud3=PanAz.ar(6,InFeedback.ar(4),pos:pan3,level:env3);aud4=PanAz.ar(6,InFeedback.ar(5),pos:pan4,level:env4);
+ aud5=PanAz.ar(2,InFeedback.ar(6),pos:pan5,level:env5);aud6=PanAz.ar(2,InFeedback.ar(7),pos:pan6,level:env6,width:1);*/
+//aud7=PanAz.ar(2,InFeedback.ar(5),pos:pan3,level:env3);aud8=PanAz.ar(2,InFeedback.ar(6),pos:pan4,level:env4,width:1);
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
@@ -328,7 +328,7 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48],inf),
-	\pr,Pexprand(1,2,inf),
+	\pr,Pexprand(1,1.6,inf),
 		\w1,Pexprand(0.01,2,inf),\w2,Pexprand(0.01,2,inf),\w3,Pexprand(0.01,2,inf),\w4,Pexprand(0.01,2,inf),
 	\w5,Pexprand(0.01,2,inf),\w6,Pexprand(0.01,2,inf),\w7,Pexprand(0.01,2,inf),\w8,Pexprand(0.01,2,inf),
 	\pan1,Pbrown(-1,1,0.2,inf),\pan2,Pbrown(-1,1,0.2,inf),\pan3,Pbrown(-1,1,0.2,inf),\pan4,Pbrown(-1,1,0.2,inf),
@@ -369,4 +369,3 @@ Out.ar(0,(aud5)*10);Out.ar(0,(aud6)*10);
 )).play(quant:1))
 )
 /////////////////////////////
-//329.63*2.pow(1/12).postlnZ
