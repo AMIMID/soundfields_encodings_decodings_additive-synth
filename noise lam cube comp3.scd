@@ -14,20 +14,20 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id3, {
+SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(2*1024)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(4*256)*2pi;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
-	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
+	var an=0,pan=an.wrap(0,360);
 	var xc=0,yc=0,zc=0;
 	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
 	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-	var decay=dur/((sqrt(5)+1)/2),el1=1,el2=1;
+	var decay=dur*((sqrt(5)+1)/2),el1=1,el2=1;
 
 //envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
 	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
@@ -89,20 +89,20 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 }).add;
 );
 (
-SynthDef.new(\id4, {
+SynthDef.new(\id2, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(2*1024)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(4*256)*2pi;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
-	var an=0,pan=an.wrap(0,360),pa=Complex.new(0,1);
+	var an=0,pan=an.wrap(0,360);
 	var xc=0,yc=0,zc=0;
 	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
 	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-	var decay=dur/((sqrt(5)+1)/2),el1=1,el2=1;
+	var decay=dur*((sqrt(5)+1)/2),el1=1,el2=1;
 
 		//envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
 		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
@@ -164,8 +164,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 )
 
 (
-( Pdef(\3, Pbind(\instrument, \id3,
-		\dur,Pexprand(4,32,inf),
+( Pdef(\1, Pbind(\instrument, \id1,
+		\dur,Pexprand(8,32,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -197,8 +197,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
-( Pdef(\4, Pbind(\instrument, \id4,
-		\dur,Pexprand(4,32,inf),
+( Pdef(\2, Pbind(\instrument, \id2,
+		\dur,Pexprand(8,32,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
