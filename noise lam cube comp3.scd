@@ -53,7 +53,7 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.01),xpos:xc,ypos:yc
 		yc=Spherical.new(1,pan.degrad,pan.degrad).y;
 		zc=Spherical.new(1,pan.degrad,pan.degrad).z;
 	el1=zc.wrap(0,1);
-		el2=zc.wrap(1,0);
+		el2=zc.neg.wrap(1,0);
 
 
 		Out.ar(6,sig1*envd1*pr);

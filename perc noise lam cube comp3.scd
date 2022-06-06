@@ -1,7 +1,7 @@
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=14;
-TempoClock.default.tempo_(120/40);
+TempoClock.default.tempo_(60/20);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -17,7 +17,7 @@ SynthDef.new(\id3, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(4*256)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(2*256)*2pi;
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -58,8 +58,7 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.01),xpos:xc,ypos:yc
 		yc=Spherical.new(1,pan.degrad,pan.degrad).y;
 		zc=Spherical.new(1,pan.degrad,pan.degrad).z;
 	el1=zc.wrap(0,1);
-		el2=zc.wrap(1,0);
-
+		el2=zc.neg.wrap(1,0);
 
 		Out.ar(6,sig1*envd1*pr);
 		Out.ar(10,sig3*envd1*pr);
@@ -98,7 +97,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 
 
 ( Pdef(\3, Pbind(\instrument, \id3,
-		\dur,Pbrown(1/2,4,0.01,inf),
+		\dur,Pbrown(1,10,1,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -121,8 +120,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,Pexprand(0.1,0.2,inf),
-		\w1,Pxrand([0,0,0,0,0,1],inf),\w2,Pxrand([0,0,0,0,0,1],inf),\w3,Pxrand([0,0,0,0,0,1],inf),\w4,Pxrand([0,0,0,0,0,1],inf),
-	\w5,Pxrand([0,0,0,0,0,1],inf),\w6,Pxrand([0,0,0,0,0,1],inf),\w7,Pxrand([0,0,0,0,0,1],inf),\w8,Pxrand([0,0,0,0,0,1],inf),
+		\w1,Pxrand([0,0,0,1],inf),\w2,Pxrand([0,0,0,1],inf),\w3,Pxrand([0,0,0,1],inf),\w4,Pxrand([0,0,0,1],inf),
+	\w5,Pxrand([0,0,0,1],inf),\w6,Pxrand([0,0,0,1],inf),\w7,Pxrand([0,0,0,1],inf),\w8,Pxrand([0,0,0,1],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pbrown(1/2pi,1/pi,0.1,inf),\pan2,Pbrown(1/2pi,1/pi,0.1,inf),\pan3,Pbrown(1/2pi,1/pi,0.1,inf),\pan4,Pbrown(1/2pi,1/pi,0.1,inf),
