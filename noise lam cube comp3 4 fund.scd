@@ -521,7 +521,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 25.5*258*(2/1)
 (
 ( Pdef(\1, Pbind(\instrument, \id1,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -544,8 +544,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/6,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -554,7 +554,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\2, Pbind(\instrument, \id2,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -577,8 +577,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/6,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -587,7 +587,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\3, Pbind(\instrument, \id3,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -610,8 +610,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/8,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -620,7 +620,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\4, Pbind(\instrument, \id4,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -643,8 +643,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/8,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -653,7 +653,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\5, Pbind(\instrument, \id5,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -676,8 +676,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/9,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -686,7 +686,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\6, Pbind(\instrument, \id6,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -709,8 +709,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/9,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -719,7 +719,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\7, Pbind(\instrument, \id7,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -742,8 +742,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/12,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -752,7 +752,7 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
 ( Pdef(\8, Pbind(\instrument, \id8,
-		\dur,Pexprand(8,32,inf),
+		\dur,Pexprand(8,16,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -775,8 +775,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/12,
-		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
-	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
+		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
+	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),

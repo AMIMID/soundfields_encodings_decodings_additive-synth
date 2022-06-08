@@ -1,7 +1,7 @@
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=14;
-TempoClock.default.tempo_(60/20);
+TempoClock.default.tempo_(120/10);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -17,7 +17,7 @@ SynthDef.new(\id3, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(2*256)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=25.5*258*(1/1);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -26,7 +26,7 @@ SynthDef.new(\id3, {
 	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-	var decay=12/((sqrt(5)+1)/2),el1=1,el2=1;
+	var decay=2*((sqrt(5)+1)/2),el1=1,el2=1;
 
 envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
 	//envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
@@ -97,7 +97,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 
 
 ( Pdef(\3, Pbind(\instrument, \id3,
-		\dur,Pbrown(1,10,1,inf),
+		\dur,Pbrown(1,2,0.1,inf),
 	\a,Pexprand(1,20,inf),
 	\b,Pexprand(1,20,inf),
 	\c,Pexprand(1,20,inf),
@@ -118,14 +118,14 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
+	\interval,Pxrand([31,36,40,43,48,52,55,60,64,67],inf),
 	\pr,Pexprand(0.1,0.2,inf),
 		\w1,Pxrand([0,0,1],inf),\w2,Pxrand([0,0,1],inf),\w3,Pxrand([0,0,1],inf),\w4,Pxrand([0,0,1],inf),
 	\w5,Pxrand([0,0,1],inf),\w6,Pxrand([0,0,1],inf),\w7,Pxrand([0,0,0,1],inf),\w8,Pxrand([0,0,1],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
-		\pan1,Pbrown(1/2pi,1/pi,0.1,inf),\pan2,Pbrown(1/2pi,1/pi,0.1,inf),\pan3,Pbrown(1/2pi,1/pi,0.1,inf),\pan4,Pbrown(1/2pi,1/pi,0.1,inf),
-		\pan5,Pbrown(1/2pi,1/pi,0.1,inf),\pan6,Pbrown(1/2pi,1/pi,0.1,inf),\pan7,Pbrown(1/2pi,1/pi,0.1,inf),\pan8,Pbrown(1/2pi,1/pi,0.1,inf);
+		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
+		\pan5,Pexprand(0.01pi,0.1pi,inf),\pan6,Pexprand(0.01pi,0.1pi,inf),\pan7,Pexprand(0.01pi,0.1pi,inf),\pan8,Pexprand(0.01pi,0.1pi,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
