@@ -120,8 +120,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,Pexprand(0.1,0.2,inf),
-		\w1,Pxrand([0,0,0,1],inf),\w2,Pxrand([0,0,0,1],inf),\w3,Pxrand([0,0,0,1],inf),\w4,Pxrand([0,0,0,1],inf),
-	\w5,Pxrand([0,0,0,1],inf),\w6,Pxrand([0,0,0,1],inf),\w7,Pxrand([0,0,0,1],inf),\w8,Pxrand([0,0,0,1],inf),
+		\w1,Pxrand([0,0,1],inf),\w2,Pxrand([0,0,1],inf),\w3,Pxrand([0,0,1],inf),\w4,Pxrand([0,0,1],inf),
+	\w5,Pxrand([0,0,1],inf),\w6,Pxrand([0,0,1],inf),\w7,Pxrand([0,0,0,1],inf),\w8,Pxrand([0,0,1],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pbrown(1/2pi,1/pi,0.1,inf),\pan2,Pbrown(1/2pi,1/pi,0.1,inf),\pan3,Pbrown(1/2pi,1/pi,0.1,inf),\pan4,Pbrown(1/2pi,1/pi,0.1,inf),

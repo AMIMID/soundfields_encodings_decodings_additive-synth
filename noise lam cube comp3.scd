@@ -18,7 +18,7 @@ SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(4*256)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(6*496);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -33,7 +33,7 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
 
 
-		12.do{
+		24.do{
 		enva=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand],[-4]));
@@ -76,10 +76,10 @@ env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(a
 aud7=PanAz.ar(6,InFeedback.ar(12),pos:pan3,level:env3,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:pan4,level:env4,width:1);
 	*/
 
-	aud1=PanAz.ar(2,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(2,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
-	aud3=PanAz.ar(2,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(2,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env4,width:1);
- aud5=PanAz.ar(2,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env5,width:1);aud6=PanAz.ar(2,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env6,width:1);
-aud7=PanAz.ar(2,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env3,width:1);aud8=PanAz.ar(2,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env4,width:1);
+	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
+	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env4,width:1);
+ aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env5,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env6,width:1);
+aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env3,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env4,width:1);
 
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
@@ -93,7 +93,7 @@ SynthDef.new(\id2, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(4*256)*2pi;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(6*496);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -108,7 +108,7 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 
-		12.do{
+		24.do{
 		envb=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
 		envf=EnvGen.ar(Env.new([a.rand2,b.rand2,c.rand2,d.rand2,e.rand2,f.rand2,g.rand2,k.rand2,l.rand2,m.rand2,n.rand2,o.rand2,p.rand2,q.rand2,r.rand2,s.rand2,t.rand2,u.rand2,v.rand2,w.rand2],[decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand,decay.rand],[-4]));
@@ -149,10 +149,10 @@ aud7=Pan2.ar(InFeedback.ar(8),pos:pan7,level:env7);aud8=Pan2.ar(InFeedback.ar(9)
 aud7=PanAz.ar(6,InFeedback.ar(12),pos:pan3,level:env3,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:pan4,level:env4,width:1);
 	*/
 
-	aud1=PanAz.ar(2,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(2,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
-	aud3=PanAz.ar(2,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(2,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env4,width:1);
- aud5=PanAz.ar(2,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env5,width:1);aud6=PanAz.ar(2,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env6,width:1);
-aud7=PanAz.ar(2,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env3,width:1);aud8=PanAz.ar(2,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env4,width:1);
+	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
+	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env4,width:1);
+ aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env5,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env6,width:1);
+aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env3,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env4,width:1);
 
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
@@ -187,13 +187,13 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
 	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
-	\pr,Pexprand(0.6,1,inf),
+	\pr,Pexprand(1,2,inf),
 		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
 	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
-		\pan1,Pbrown(1/2pi,1/pi,0.1,inf),\pan2,Pbrown(1/2pi,1/pi,0.1,inf),\pan3,Pbrown(1/2pi,1/pi,0.1,inf),\pan4,Pbrown(1/2pi,1/pi,0.1,inf),
-		\pan5,Pbrown(1/2pi,1/pi,0.1,inf),\pan6,Pbrown(1/2pi,1/pi,0.1,inf),\pan7,Pbrown(1/2pi,1/pi,0.1,inf),\pan8,Pbrown(1/2pi,1/pi,0.1,inf);
+		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
+		\pan5,Pexprand(0.01pi,0.1pi,inf),\pan6,Pexprand(0.01pi,0.1pi,inf),\pan7,Pexprand(0.01pi,0.1pi,inf),\pan8,Pexprand(0.01pi,0.1pi,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1));
@@ -225,8 +225,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
-		\pan1,Pbrown(1/2pi,1/pi,0.1,inf),\pan2,Pbrown(1/2pi,1/pi,0.1,inf),\pan3,Pbrown(1/2pi,1/pi,0.1,inf),\pan4,Pbrown(1/2pi,1/pi,0.1,inf),
-		\pan5,Pbrown(1/2pi,1/pi,0.1,inf),\pan6,Pbrown(1/2pi,1/pi,0.1,inf),\pan7,Pbrown(1/2pi,1/pi,0.1,inf),\pan8,Pbrown(1/2pi,1/pi,0.1,inf);
+		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
+		\pan5,Pexprand(0.01pi,0.1pi,inf),\pan6,Pexprand(0.01pi,0.1pi,inf),\pan7,Pexprand(0.01pi,0.1pi,inf),\pan8,Pexprand(0.01pi,0.1pi,inf);
 /*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
 	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/
 )).play(quant:1))
