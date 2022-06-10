@@ -1,7 +1,7 @@
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=14;
-TempoClock.default.tempo_(120/80);
+TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -17,8 +17,8 @@ s.record(numChannels:6) ;
 SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(1/1);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(1/1);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -81,8 +81,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id2, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(1/1);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(1/1);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -143,8 +143,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 SynthDef.new(\id3, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(4/3);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(4/3);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -207,8 +207,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id4, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(4/3);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(4/3);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -269,8 +269,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 SynthDef.new(\id5, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(3/2);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(3/2);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -333,8 +333,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id6, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(3/2);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(3/2);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -395,8 +395,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 SynthDef.new(\id7, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(2/1);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(2/1);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -459,8 +459,8 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id8, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
-	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*8)*(2/1);
+	w1,w2,w3,w4,w5,w6,w7,w8,pan1,pan2,pan3,pan4,pan5,pan6,pan7,pan8,harm;
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(440/4)*harm*(2/1);
 	var enva,envb,envd1,envd2,envf;
 	var under=1,over=1, attack=0.01;
 	var an=0,pan=an.wrap(0,360);
@@ -542,10 +542,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,2,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -575,10 +575,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,2,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -608,10 +608,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,4/3,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -641,10 +641,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,4/3,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -674,10 +674,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,3/2,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -707,10 +707,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,3/2,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -740,10 +740,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,1,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 /*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
@@ -773,10 +773,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf), \harm,Prand([6,12,18,24,30,36,42,48,54,60,66],inf),
 	\pr,1,
-		\w1,Pxrand([0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,4],inf),\w4,Pxrand([0,0,0,0,0,4],inf),
-	\w5,Pxrand([0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,4],inf),\w8,Pxrand([0,0,0,0,0,4],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 	/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
 		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
 		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
