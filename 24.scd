@@ -19,29 +19,29 @@ SynthDef.new(\id1, {
 
 	arg dur=1,a,b,c,d,e,f,g,k,l,m,n,o,p,q,r,s,t,u,v,w,interval=1,pr,y=1,
 	w1,w2,w3,w4,w5,w6,w7,w8,pan1=0,pan2=0,pan3=0,pan4=0,pan5=0,pan6=0,pan7=0,pan8=0;
-	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(258*16);
+	var sig1,sig2,sig3,sig4,x=0,amp=1,fund=(1026*8);
 	var enva,envb,envd1,envd2,envf;
-	var under=1,over=1, attack=0.01;
+	var under=1,over=1, attack=6;
 	var an=0,pan=an.wrap(0,360);
 	var xc=0,yc=0,zc=0;
 	var i=fund*2.pow(interval/12), ii=fund/2.pow(interval/12);
 	var amp1=2.pow(interval/12);
 	var aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8;
 var env1,env2,env3,env4,env5,env6,env7,env8;
-	var decay=12*((sqrt(5)+1)/2),el1=1,el2=1;
+	var decay=6*((sqrt(5)+1)/2),el1=1,el2=1;
 	var pos_over=1,pos_under=0;
 	var s1,s2,s3,s4;
-//envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
-	envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
-		//	envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
-		envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
+envd1=EnvGen.ar(Env.perc(attack,(decay),amp/amp1),doneAction:2);
+	//envd1=EnvGen.ar(Env.sine((decay),amp/amp1),doneAction:2);
+			envd2=EnvGen.ar(Env.perc(attack,(decay),amp*amp1),doneAction:2);
+	//	envd2=EnvGen.ar(Env.sine((decay),amp*amp1),doneAction:2);
 
 env1=EnvGen.ar(Env.perc(attack,decay,w1),doneAction:2);env2=EnvGen.ar(Env.perc(attack,decay,w2),doneAction:2);
 env3=EnvGen.ar(Env.perc(attack,decay,w3),doneAction:2);env4=EnvGen.ar(Env.perc(attack,decay,w4),doneAction:2);
 env5=EnvGen.ar(Env.perc(attack,decay,w5),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8),doneAction:2);
 
-		24.do{
+		23.do{
 		enva=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 		envb=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
@@ -55,7 +55,7 @@ env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(a
 				x=x+1;
 		over=(x+1)/1;
 		 under=1/(x+1);
-		pos_over=over.linlin(1/1,24/1,0,1);
+		pos_over=over.linlin(2/1,24/1,1/24,1);
 		pos_under=under.wrap(1,0);
 
 
@@ -65,9 +65,9 @@ env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(a
 		Out.ar(14,s4*envd2*pr);
 
 sig1=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
-sig3=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
-sig2=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
-sig4=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
+sig2=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
+/*sig3=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
+sig4=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));*/
 
 		 an=an+137.5;
 		pan=an.wrap(0,360);
@@ -79,9 +79,9 @@ sig4=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,d
 
 
 		Out.ar(6,sig1);
-		Out.ar(10,sig3);
-		Out.ar(6,sig2);
-		Out.ar(10,sig4);
+		Out.ar(10,sig2);
+/*		Out.ar(6,sig2);
+		Out.ar(10,sig4);*/
 
 	};
 	aud1=PanAz.ar(2,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(2,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
@@ -122,18 +122,17 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 		\u,Pexprand(1,20,inf),
 	\v,Pexprand(1,20,inf),
 	\w,Pexprand(1,20,inf),
-	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
-	\pr,Pexprand(1/2,1,inf),
-		\w1,Pxrand([1],inf),\w2,Pxrand([1],inf),\w3,Pxrand([1],inf),\w4,Pxrand([1],inf),
-	\w5,Pxrand([1],inf),\w6,Pxrand([1],inf),\w7,Pxrand([1],inf),\w8,Pxrand([1],inf),
-/*	\pan1,Pbrown(-1,1,0.5,inf),\pan2,Pbrown(-1,1,0.5,inf),\pan3,Pbrown(-1,1,0.5,inf),\pan4,Pbrown(-1,1,0.5,inf),
-		\pan5,Pbrown(-1,1,0.5,inf),\pan6,Pbrown(-1,1,0.5,inf),\pan7,Pbrown(-1,1,0.5,inf),\pan8,Pbrown(-1,1,0.5,inf);*/
-/*		\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
+	\interval,Prand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84],inf),
+	\pr,Pexprand(0.1,0.2,inf),
+		\w1,Pxrand([0,0,0,0,0,0,0,4],inf),\w2,Pxrand([0,0,0,0,0,0,0,4],inf),\w3,Pxrand([0,0,0,0,0,0,0,4],inf),\w4,Pxrand([0,0,1],inf),
+	\w5,Pxrand([0,0,0,0,0,0,0,4],inf),\w6,Pxrand([0,0,0,0,0,0,0,4],inf),\w7,Pxrand([0,0,0,0,0,0,0,4],inf),\w8,Pxrand([0,0,1],inf),
+
+
+\pan1,Pexprand(0.01pi,0.1pi,inf),\pan2,Pexprand(0.01pi,0.1pi,inf),\pan3,Pexprand(0.01pi,0.1pi,inf),\pan4,Pexprand(0.01pi,0.1pi,inf),
 		\pan5,Pexprand(0.01pi,0.1pi,inf),\pan6,Pexprand(0.01pi,0.1pi,inf),\pan7,Pexprand(0.01pi,0.1pi,inf),\pan8,Pexprand(0.01pi,0.1pi,inf);
-/*	\pan1,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan2,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan3,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan4,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),
-	\pan5,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan6,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan7,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf),\pan8,Pxrand([0,2/6,4/6,6/6,6/6,10/6],inf);*/*/
+
 )).play(quant:1));
 
 )
 /////////////////////////////
- 
+ [12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,78,79,84]
