@@ -41,7 +41,7 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3),doneAction:2);env4=EnvGen.ar(Env.perc(a
 env5=EnvGen.ar(Env.perc(attack,decay,w5),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8),doneAction:2);
 
-		10.do{
+		24.do{
 		enva=EnvGen.ar(Env.perc(attack,decay,amp/under,[-4,-4]));
 		envb=EnvGen.ar(Env.perc(attack,decay,amp/over,[-4,-4]));
 
@@ -55,14 +55,14 @@ env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(a
 				x=x+1;
 		over=(x+1)/1;
 		 under=1/(x+1);
-		pos_over=over.linlin(2/1,12/1,0,1);
+		pos_over=over.linlin(1/1,24/1,0,1);
 		pos_under=under.wrap(1,0);
 
 
 		Out.ar(14,s1*envd1*pr);
 		Out.ar(14,s2*envd1*pr);
 		Out.ar(14,s3*envd2*pr);
-		Out.ar(1,s4*envd2*pr);
+		Out.ar(14,s4*envd2*pr);
 
 sig1=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
 sig3=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
