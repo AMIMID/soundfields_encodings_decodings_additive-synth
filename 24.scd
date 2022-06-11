@@ -1,6 +1,6 @@
 
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=12;
+s.options.numOutputBusChannels=16;
 TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
@@ -59,15 +59,15 @@ env7=EnvGen.ar(Env.perc(attack,decay,w7),doneAction:2);env8=EnvGen.ar(Env.perc(a
 		pos_under=under.wrap(1,0);
 
 
-		Out.ar(6,s1*envd1*pr);
-		Out.ar(6,s2*envd1*pr);
-		Out.ar(6,s3*envd2*pr);
-		Out.ar(6,s4*envd2*pr);
+		Out.ar(14,s1*envd1*pr);
+		Out.ar(14,s2*envd1*pr);
+		Out.ar(14,s3*envd2*pr);
+		Out.ar(1,s4*envd2*pr);
 
-sig1=Pan4.ar(InFeedback.ar(6),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
-sig3=Pan4.ar(InFeedback.ar(7),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
-sig2=Pan4.ar(InFeedback.ar(6),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
-sig4=Pan4.ar(InFeedback.ar(7),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
+sig1=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
+sig3=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el1,[-4,-4])));
+sig2=Pan4.ar(InFeedback.ar(14),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
+sig4=Pan4.ar(InFeedback.ar(15),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,decay,el2,[-4,-4])));
 
 		 an=an+137.5;
 		pan=an.wrap(0,360);
@@ -78,17 +78,22 @@ sig4=Pan4.ar(InFeedback.ar(7),xpos:xc,ypos:yc,level:EnvGen.ar(Env.perc(attack,de
 		el2=zc.neg.wrap(0,0.1);
 
 
-		Out.ar(2,sig1);
-		Out.ar(2,sig3);
-		Out.ar(2,sig2);
-		Out.ar(2,sig4);
+		Out.ar(6,sig1);
+		Out.ar(10,sig3);
+		Out.ar(6,sig2);
+		Out.ar(10,sig4);
 
 	};
-	aud1=PanAz.ar(2,InFeedback.ar(2),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(2,InFeedback.ar(3),pos:LFNoise1.ar(pan2),level:env2,width:1);
-	aud3=PanAz.ar(2,InFeedback.ar(4),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(2,InFeedback.ar(5),pos:LFNoise1.ar(pan4),level:env4,width:1);
+	aud1=PanAz.ar(2,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env1,width:1);aud2=PanAz.ar(2,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env2,width:1);
+	aud3=PanAz.ar(2,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env3,width:1);aud4=PanAz.ar(2,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env4,width:1);
+ aud5=PanAz.ar(2,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env5,width:1);aud6=PanAz.ar(2,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env6,width:1);
+aud7=PanAz.ar(2,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env3,width:1);aud8=PanAz.ar(2,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env4,width:1);
+
 
 	Out.ar(0,(aud1));Out.ar(0,(aud2));
 	Out.ar(0,(aud3));Out.ar(0,(aud4));
+Out.ar(0,(aud5));Out.ar(0,(aud6));
+	Out.ar(0,(aud7));Out.ar(0,(aud8));
 }).add;
 );
 
