@@ -45,15 +45,15 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 
 	var trig = Impulse.ar(0);
 
-	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
+	envd1 = EnvGen.ar(Env.perc(attack,(decay), amp/amp1), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp*amp1), doneAction: 2);
 
 	// repeated structures can be simplified
 	env = wx8.collect { |w|
 		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)
 	};
 
-	23.do {
+	11.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -74,44 +74,18 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 24/1, 1/24, 1);
+		pos_over = over.linlin(2/1, 12/1, 1/12, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(14, s1*envd1*pr);
-		Out.ar(14, s2*envd1*pr);
-		Out.ar(14, s3*envd2*pr);
-		Out.ar(14, s4*envd2*pr);
-
-		sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-
-		an = an+137.5;
-		pan = an.wrap(0, 360);
-		// you could do this a bit more efficiently
-		// by making ONE Spherical object in a variable,
-		// then asking the variable for x y and z
-		sph = Spherical.new(1, pan.degrad, pan.degrad);
-		xc = sph.x;
-		yc = sph.y;
-		zc = sph.z;
-		el1 = zc.wrap(0, 1);
-		el2 = zc.neg.wrap(0, 1);
-
-		Out.ar(6, sig1);
-		Out.ar(10, sig2);
-
-		aud = Array.fill(8, { |i|
-			PanAz.ar(2, InFeedback.ar(6 + i),
-				pos: LFNoise1.ar(panx8[i]),
-				level: env[i],
-				width: 1
-			)
-		});
+		Out.ar(0, s1*envd1*pr);
+		Out.ar(0, s2*envd1*pr);
+		Out.ar(0, s3*envd2*pr);
+		Out.ar(0, s4*envd2*pr);
 
 		aud.do { |channel| Out.ar(0, channel) };
 
 		// 1.wait;  instead, delay the trigger
-		trig = TDelay.ar(trig, 0.5);
+		trig = TDelay.ar(trig, 0.99.rand);
 	};
 }).add;
 )
@@ -120,9 +94,6 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 
 (
 var aPattern = Pexprand(1, 20, inf);
-var wPattern1 = Pxrand([0, 0, 0, 0, 0, 0, 0, 8], inf),
-wPattern2 = Pxrand([0, 0, 1], inf);
-var panPattern = Pexprand(0.01pi, 0.1pi, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
 	\dur, Pexprand(4, 8, inf),
@@ -133,15 +104,9 @@ Pdef(\1, Pbind(\instrument, \id1,
 	\aToW, Ptuple(Array.fill(23, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
+	\interval, Pxrand( [12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
 
-	\w, Ptuple(
-		[wPattern1.dup(3), wPattern2].dup(2).flat,
-		inf
-	).collect { |array| [array] },
-
-	\pan, Ptuple(Array.fill(8, panPattern)).collect { |array| [array] }
 )).play(quant:1)
 )
 
