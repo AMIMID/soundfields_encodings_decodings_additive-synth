@@ -14,7 +14,7 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4)*(1/1);
@@ -38,7 +38,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1;
+	var s1, s2, s3, s4, w=1/2;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -89,6 +89,7 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 		// by making ONE Spherical object in a variable,
 		// then asking the variable for x y and z
 		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph.rotate(angle.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -126,7 +127,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 2/3, fund = (1026 * 4)*(4/3);
@@ -150,7 +151,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1;
+	var s1, s2, s3, s4, w=1/2;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -201,6 +202,7 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 		// by making ONE Spherical object in a variable,
 		// then asking the variable for x y and z
 		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph.rotate(angle.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -239,7 +241,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 }).add;
 );
 (
-SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
+SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 3/4, fund = (1026 * 4)*(3/2);
@@ -263,7 +265,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1;
+	var s1, s2, s3, s4, w=1/2;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -314,6 +316,7 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 		// by making ONE Spherical object in a variable,
 		// then asking the variable for x y and z
 		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph.rotate(angle.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -352,7 +355,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 }).add;
 );
 (
-SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
+SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 1/2, fund = (1026 * 4)*(2/1);
@@ -376,7 +379,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1;
+	var s1, s2, s3, s4, w=1/2;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -427,6 +430,7 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 		// by making ONE Spherical object in a variable,
 		// then asking the variable for x y and z
 		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph.rotate(angle.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -478,11 +482,11 @@ Pdef(\1, Pbind(\instrument, \id1,
 	// in events (the 'collect')
 	\aToW, Ptuple(Array.fill(23, aPattern))
 	.collect { |array| [array] },
-
+	\angle,Pexprand(1,360,inf),
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
 \sc1, Pexprand(0.01pi, 0.1pi, inf),
-	\sc2, Pexprand(0.01pi, 1pi, inf);
+	\sc2, Pexprand(0.01pi, 0.1pi, inf);
 )).play(quant:1)
 );
 (
@@ -498,7 +502,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
 \sc1, Pexprand(0.01pi, 0.1pi, inf),
-	\sc2, Pexprand(0.01pi, 1pi, inf);
+	\sc2, Pexprand(0.01pi, 0.1pi, inf);
 )).play(quant:1)
 );
 (
@@ -510,11 +514,11 @@ Pdef(\3, Pbind(\instrument, \id3,
 	// in events (the 'collect')
 	\aToW, Ptuple(Array.fill(23, aPattern))
 	.collect { |array| [array] },
-
+\angle,Pexprand(1,360,inf),
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
 \sc1, Pexprand(0.01pi, 0.1pi, inf),
-	\sc2, Pexprand(0.01pi, 1pi, inf);
+	\sc2, Pexprand(0.01pi, 0.1pi, inf);
 )).play(quant:1)
 );
 (
@@ -526,11 +530,11 @@ Pdef(\4, Pbind(\instrument, \id4,
 	// in events (the 'collect')
 	\aToW, Ptuple(Array.fill(23, aPattern))
 	.collect { |array| [array] },
-
+\angle,Pexprand(1,360,inf),
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
 \sc1, Pexprand(0.01pi, 0.1pi, inf),
-	\sc2, Pexprand(0.01pi, 1pi, inf);
+	\sc2, Pexprand(0.01pi, 0.1pi, inf);
 )).play(quant:1)
 )
 )
