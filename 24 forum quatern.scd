@@ -37,8 +37,8 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 	var sph;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
-	var pos_over = 1, pos_under = 0;
-	var s1, s2, s3, s4, w=0.2;
+	var pos_over = 0, pos_under = 1;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -149,8 +149,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 	var sph;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
-	var pos_over = 1, pos_under = 0;
-	var s1, s2, s3, s4, w=0.2;
+	var pos_over = 0, pos_under = 1;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -262,8 +262,8 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 	var sph;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
-	var pos_over = 1, pos_under = 0;
-	var s1, s2, s3, s4, w=0.2;
+	var pos_over = 0, pos_under = 1;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -375,8 +375,8 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1;
 	var sph;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
-	var pos_over = 1, pos_under = 0;
-	var s1, s2, s3, s4, w=0.2;
+	var pos_over = 0, pos_under = 1;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
