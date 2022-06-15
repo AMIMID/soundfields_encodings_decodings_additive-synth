@@ -20,7 +20,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 	var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
-	var sig1, sig2, sig3, sig4, x = 0, amp = 2, fund = (1026 * 8);
+	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pan = an.wrap(0, 360);
@@ -64,14 +64,14 @@ envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { (decay.rand) }),
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -113,7 +113,7 @@ envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 		aud.do { |channel| Out.ar(0, channel) };
 
 		// 1.wait;  instead, delay the trigger
-		trig = TDelay.ar(trig, 0.99.rand);
+		trig = TDelay.ar(trig, (decay.rand));
 	};
 }).add;
 );
@@ -124,7 +124,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1;
 	var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
-	var sig1, sig2, sig3, sig4, x = 0, amp = (4/3), fund = (1026 * 4)*(4/3);
+	var sig1, sig2, sig3, sig4, x = 0, amp = (2/3), fund = (1026 * 4)*(4/3);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pan = an.wrap(0, 360);
@@ -169,14 +169,14 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { (decay.rand) }),
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -218,7 +218,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1;
 		aud.do { |channel| Out.ar(0, channel) };
 
 		// 1.wait;  instead, delay the trigger
-		trig = TDelay.ar(trig, 0.99.rand);
+		trig = TDelay.ar(trig, (decay.rand));
 	};
 }).add;
 );
@@ -229,7 +229,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1;
 	var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
-	var sig1, sig2, sig3, sig4, x = 0, amp = (3/2), fund = (1026 * 4)*(3/2);
+	var sig1, sig2, sig3, sig4, x = 0, amp = (3/4), fund = (1026 * 4)*(3/2);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pan = an.wrap(0, 360);
@@ -274,14 +274,14 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { (decay.rand) }),
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -323,7 +323,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1;
 		aud.do { |channel| Out.ar(0, channel) };
 
 		// 1.wait;  instead, delay the trigger
-		trig = TDelay.ar(trig, 0.99.rand);
+		trig = TDelay.ar(trig, 1/(decay.rand));
 	};
 }).add;
 );
@@ -334,7 +334,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1;
 	var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
-	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4)*2;
+	var sig1, sig2, sig3, sig4, x = 0, amp = 1/2, fund = (1026 * 4)*2;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pan = an.wrap(0, 360);
@@ -379,14 +379,14 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { (decay.rand) }),
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.004), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.004), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.002), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.002), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -428,7 +428,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1;
 		aud.do { |channel| Out.ar(0, channel) };
 
 		// 1.wait;  instead, delay the trigger
-		trig = TDelay.ar(trig, 0.99.rand);
+		trig = TDelay.ar(trig, 1/(decay.rand));
 	};
 }).add;
 );
@@ -437,9 +437,9 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1;
 
 
 (
-var aPattern = Pexprand(1, 20, inf);
-var wPattern1 = Pxrand([0, 0, 0, 0, 0, 0, 0, 0.1], inf),
-wPattern2 = Pxrand([0, 0, 0.1], inf);
+var aPattern = Pexprand(1, 24, inf);
+var wPattern1 = Pxrand([0.5], inf),
+wPattern2 = Pxrand([0.5], inf);
 var panPattern = Pexprand(0.01pi, 0.1pi, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,

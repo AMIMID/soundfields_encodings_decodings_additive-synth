@@ -1,6 +1,6 @@
 
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=14;
+s.options.numOutputBusChannels=56;
 TempoClock.default.tempo_(120/100);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
@@ -58,8 +58,8 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.005),xpos:xc,ypos:y
 		el2=zc.neg.wrap(0,1);
 
 
-		Out.ar(6,sig1*envd1*pr);
-		Out.ar(10,sig3*envd1*pr);
+		Out.ar(48,sig1*envd1*pr);
+		Out.ar(52,sig3*envd1*pr);
 
 	};
 
@@ -73,16 +73,16 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(52),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(53),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-Out.ar(0,(aud1));Out.ar(0,(aud2));
-Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7)*env7);Out.ar(0,(aud8)*env8);
+Out.ar(6,(aud1));Out.ar(6,(aud2));
+Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -128,8 +128,8 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		el1=zc.wrap(0,1);
 		el2=zc.neg.wrap(0,1);
 
-		Out.ar(6,sig2*envd2*pr);
-		Out.ar(10,sig4*envd2*pr);
+		Out.ar(48,sig2*envd2*pr);
+	Out.ar(52,sig2*envd2*pr);
 
 	};
 
@@ -143,16 +143,16 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-	Out.ar(4,(aud7)*env7);Out.ar(5,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+	Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -200,8 +200,8 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.005),xpos:xc,ypos:y
 		el2=zc.neg.wrap(0,1);
 
 
-		Out.ar(6,sig1*envd1*pr);
-		Out.ar(10,sig3*envd1*pr);
+		Out.ar(48,sig1*envd1*pr);
+		Out.ar(52,sig3*envd1*pr);
 
 	};
 		azimuth=Cartesian.new(lr,fb,ud).asComplex;
@@ -214,16 +214,16 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
-  aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+  aud5=Pan4.ar(InFeedback.ar(52),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(53),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7)*env7);Out.ar(0,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -269,8 +269,8 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		el1=zc.wrap(0,1);
 		el2=zc.neg.wrap(0,1);
 
-		Out.ar(6,sig2*envd2*pr);
-		Out.ar(10,sig4*envd2*pr);
+		Out.ar(48,sig2*envd2*pr);
+	Out.ar(52,sig2*envd2*pr);
 
 	};
 		azimuth=Cartesian.new(lr,fb,ud).asComplex;
@@ -284,16 +284,16 @@ env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-	Out.ar(4,(aud7)*env7);Out.ar(5,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+	Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -341,8 +341,8 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.005),xpos:xc,ypos:y
 		el2=zc.neg.wrap(0,1);
 
 
-		Out.ar(6,sig1*envd1*pr);
-		Out.ar(10,sig3*envd1*pr);
+		Out.ar(48,sig1*envd1*pr);
+		Out.ar(52,sig3*envd1*pr);
 
 	};
 
@@ -357,16 +357,16 @@ env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7)*env7);Out.ar(0,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -412,8 +412,8 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		el1=zc.wrap(0,1);
 		el2=zc.neg.wrap(0,1);
 
-		Out.ar(6,sig2*envd2*pr);
-		Out.ar(10,sig4*envd2*pr);
+		Out.ar(48,sig2*envd2*pr);
+	Out.ar(52,sig2*envd2*pr);
 
 	};
 		azimuth=Cartesian.new(lr,fb,ud).asComplex;
@@ -426,16 +426,16 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-	Out.ar(4,(aud7)*env7);Out.ar(5,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+	Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -483,8 +483,8 @@ sig3=Pan4.ar(BPF.ar(BrownNoise.ar(mul:enva),(i*under+envf),0.005),xpos:xc,ypos:y
 		el2=zc.neg.wrap(0,1);
 
 
-		Out.ar(6,sig1*envd1*pr);
-		Out.ar(10,sig3*envd1*pr);
+		Out.ar(48,sig1*envd1*pr);
+		Out.ar(52,sig3*envd1*pr);
 
 	};
 		azimuth=Cartesian.new(lr,fb,ud).asComplex;
@@ -497,16 +497,16 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7)*env7);Out.ar(0,(aud8)*env8);
+Out.ar(6,(aud1));Out.ar(6,(aud2));
+Out.ar(6,(aud3));Out.ar(6,(aud4));
+Out.ar(6,(aud5));Out.ar(6,(aud6));
+Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
 (
@@ -552,8 +552,8 @@ var env1,env2,env3,env4,env5,env6,env7,env8;
 		el1=zc.wrap(0,1);
 		el2=zc.neg.wrap(0,1);
 
-		Out.ar(6,sig2*envd2*pr);
-		Out.ar(10,sig4*envd2*pr);
+		Out.ar(48,sig2*envd2*pr);
+	Out.ar(52,sig2*envd2*pr);
 
 	};
 		azimuth=Cartesian.new(lr,fb,ud).asComplex;
@@ -566,18 +566,37 @@ env3=EnvGen.ar(Env.perc(attack,decay,w3*elevation1),doneAction:2);env4=EnvGen.ar
 env5=EnvGen.ar(Env.perc(attack,decay,w5*elevation1),doneAction:2);env6=EnvGen.ar(Env.perc(attack,decay,w6*elevation1),doneAction:2);
 env7=EnvGen.ar(Env.perc(attack,decay,w7*elevation3),doneAction:2);env8=EnvGen.ar(Env.perc(attack,decay,w8*elevation2),doneAction:2);
 
-aud1=Pan4.ar(InFeedback.ar(6),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(7),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
-aud3=Pan4.ar(InFeedback.ar(8),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(9),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
- aud5=Pan4.ar(InFeedback.ar(10),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(11),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
-aud7=InFeedback.ar(12);aud8=InFeedback.ar(13);
+aud1=Pan4.ar(InFeedback.ar(48),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env1); aud2=Pan4.ar(InFeedback.ar(49),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env2);
+aud3=Pan4.ar(InFeedback.ar(50),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env3); aud4= Pan4.ar(InFeedback.ar(51),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env4);
+ aud5=Pan4.ar(InFeedback.ar(16),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env5);aud6=Pan4.ar(InFeedback.ar(17),xpos:azimuth.real.wrap(-1,1),ypos:azimuth.imag.wrap(-1,1),level:env6);
+aud7=InFeedback.ar(54);aud8=InFeedback.ar(55);
 
 
-	Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-	Out.ar(4,(aud7)*env7);Out.ar(5,(aud8)*env8);
+	Out.ar(6,(aud1));Out.ar(6,(aud2));
+	Out.ar(6,(aud3));Out.ar(6,(aud4));
+	Out.ar(6,(aud5));Out.ar(6,(aud6));
+	Out.ar(10,(aud7)*env7);Out.ar(11,(aud8)*env8);
 }).add;
 );
+(
+SynthDef.new(\id9, {
+
+	    Out.ar(12,PanAz.ar(6,InFeedback.ar(6),pos:LFSaw.ar(1),level:1,width:1));
+		Out.ar(18,PanAz.ar(6,InFeedback.ar(7),pos:LFSaw.ar(1),level:1,width:1));
+		Out.ar(24,PanAz.ar(6,InFeedback.ar(8),pos:LFSaw.ar(1),level:1,width:1));
+		Out.ar(30,PanAz.ar(6,InFeedback.ar(9),pos:LFSaw.ar(1),level:1,width:1));
+		Out.ar(36,PanAz.ar(6,InFeedback.ar(10),pos:LFSaw.ar(1),level:1,width:1));
+		Out.ar(42,PanAz.ar(6,InFeedback.ar(11),pos:LFSaw.ar(1),level:1,width:1));
+
+	Out.ar(0,InFeedback.ar(12));Out.ar(0,InFeedback.ar(23));Out.ar(0,InFeedback.ar(28));Out.ar(0,InFeedback.ar(33));Out.ar(0,InFeedback.ar(38));Out.ar(0,InFeedback.ar(43));
+	Out.ar(1,InFeedback.ar(13));Out.ar(1,InFeedback.ar(18));Out.ar(1,InFeedback.ar(29));Out.ar(1,InFeedback.ar(34));Out.ar(1,InFeedback.ar(39));Out.ar(1,InFeedback.ar(44));
+	Out.ar(2,InFeedback.ar(14));Out.ar(2,InFeedback.ar(19));Out.ar(2,InFeedback.ar(24));Out.ar(2,InFeedback.ar(35));Out.ar(2,InFeedback.ar(40));Out.ar(2,InFeedback.ar(45));
+	Out.ar(3,InFeedback.ar(15));Out.ar(3,InFeedback.ar(20));Out.ar(3,InFeedback.ar(25));Out.ar(3,InFeedback.ar(30));Out.ar(3,InFeedback.ar(41));Out.ar(3,InFeedback.ar(46));
+	Out.ar(4,InFeedback.ar(16));Out.ar(4,InFeedback.ar(21));Out.ar(4,InFeedback.ar(26));Out.ar(4,InFeedback.ar(31));Out.ar(4,InFeedback.ar(36));Out.ar(4,InFeedback.ar(47));
+	Out.ar(5,InFeedback.ar(17));Out.ar(5,InFeedback.ar(22));Out.ar(5,InFeedback.ar(27));Out.ar(5,InFeedback.ar(32));Out.ar(5,InFeedback.ar(37));Out.ar(5,InFeedback.ar(42));
+
+}).add;
+)
 )
 
 (
@@ -605,8 +624,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/6,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 		\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -634,8 +653,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/6,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 			\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -663,8 +682,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/8,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 		\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -692,8 +711,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/8,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 			\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -721,8 +740,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/9,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 		\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -750,8 +769,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/9,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 			\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -779,8 +798,8 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/12,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 		\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 
 )).play(quant:1));
@@ -808,9 +827,10 @@ Out.ar(0,(aud5));Out.ar(0,(aud6));
 	\w,Pexprand(1,20,inf),
 	\interval,Pxrand([12,16,19,24,28,31,36,40,43,48,52,55,60,64,67,72,76,79,84],inf),
 	\pr,1/12,
-		\w1,Pxrand([0,0,0,0,0,8],inf),\w2,Pxrand([0,0,0,0,0,8],inf),\w3,Pxrand([0,0,0,0,0,8],inf),\w4,Pxrand([0,0,0,0,0,8],inf),
-	\w5,Pxrand([0,0,0,0,0,8],inf),\w6,Pxrand([0,0,0,0,0,8],inf),\w7,Pxrand([0,0,0,0,0,8],inf),\w8,Pxrand([0,0,0,0,0,8],inf),
+		\w1,Pxrand([0,0,0,0,0,2],inf),\w2,Pxrand([0,0,0,0,0,2],inf),\w3,Pxrand([0,0,0,0,0,2],inf),\w4,Pxrand([0,0,0,0,0,2],inf),
+	\w5,Pxrand([0,0,0,0,0,2],inf),\w6,Pxrand([0,0,0,0,0,2],inf),\w7,Pxrand([0,0,0,0,0,2],inf),\w8,Pxrand([0,0,0,0,0,2],inf),
 		\lr,Pbrown(1,10,1,inf),\fb,Pbrown(1,10,1,inf),\ud,Pbrown(1,10,1,inf);
 )).play(quant:1));
+Synth.new(\id9);
 )
 /////////////////////////////

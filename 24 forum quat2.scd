@@ -14,11 +14,10 @@ s.record(numChannels:6) ;
 
 
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,sc1=1,sc2=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
 	var wx8 = NamedControl.kr(\w, 0 ! 8);
-	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
 	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4);
 	var enva, envb, envd1, envd2, envf;
@@ -44,6 +43,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 	var s1, s2, s3, s4, ww;
 
 	var trig = Impulse.ar(0);
+	var q1,q2;
 
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
@@ -99,10 +99,13 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 
 		Out.ar(6, sig1);
 		Out.ar(10, sig2);
+	q1=Quaternion.new(sc1,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
+    q2=Quaternion.new(sc2,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
+
 
 		aud = Array.fill(8, { |i|
 			PanAz.ar(2, InFeedback.ar(6 + i),
-				pos: LFNoise1.ar(panx8[i]),
+				pos: LFNoise1.ar(q1.distance(q2)),
 				level: env[i],
 				width: 1
 			)
@@ -122,7 +125,6 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 var aPattern = Pexprand(1, 20, inf);
 var wPattern1 = Pxrand([0, 0, 0, 0, 0, 0, 0, 1], inf),
 wPattern2 = Pxrand([0, 0, 1], inf);
-var panPattern = Pexprand(0.01pi, 0.1pi, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
 	\dur, Pexprand(4, 8, inf),
@@ -140,8 +142,8 @@ Pdef(\1, Pbind(\instrument, \id1,
 		[wPattern1.dup(3), wPattern2].dup(2).flat,
 		inf
 	).collect { |array| [array] },
-
-	\pan, Ptuple(Array.fill(8, panPattern)).collect { |array| [array] }
+	\sc1, Pexprand(0.01pi,0.1pi),
+	\sc2, Pexprand(0.01pi,0.1pi),
 )).play(quant:1)
 )
 

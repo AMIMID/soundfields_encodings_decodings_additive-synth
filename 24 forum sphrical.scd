@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=16;
+s.options.numOutputBusChannels=20
 TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
@@ -14,14 +14,12 @@ s.record(numChannels:6) ;
 
 
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,angle=137.5;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
-	var wx8 = NamedControl.kr(\w, 0 ! 8);
-	var panx8 = NamedControl.kr(\pan, 0 ! 8);
 
-	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4);
-	var enva, envb, envd1, envd2, envf;
+	var sig1, sig2, sig3, x = 0, amp = 1, fund = (1026 * 4);
+	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
 	var xc = 0, yc = 0, zc = 0;
@@ -30,7 +28,6 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 	// you have amp1, so you don't need to recalculate twice
 	var amp1 = 2.pow(interval/12);
 	var i = fund * amp1, ii = fund / amp1;
-
 	// "x1 x2 x3" etc. means: use arrays!
 	// var aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8;
 	// var env1, env2, env3, env4, env5, env6, env7, env8;
@@ -48,12 +45,16 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-	// repeated structures can be simplified
-	env = wx8.collect { |w|
-		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)
-	};
 
-	23.do {
+	env1 = EnvGen.ar(Env.perc(attack, decay, w1), doneAction: 2);
+	env2 = EnvGen.ar(Env.perc(attack, decay, w2), doneAction: 2);
+	env3 = EnvGen.ar(Env.perc(attack, decay, w3), doneAction: 2);
+	env4 = EnvGen.ar(Env.perc(attack, decay, w4), doneAction: 2);
+	env5 = EnvGen.ar(Env.perc(attack, decay, w5), doneAction: 2);
+	env6 = EnvGen.ar(Env.perc(attack, decay, w6), doneAction: 2);
+
+
+	11.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -74,16 +75,17 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 24/1, 1/24, 1);
+		pos_over = over.linlin(2/1, 12/1, 1/12, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(14, s1*envd1*pr);
-		Out.ar(14, s2*envd1*pr);
-		Out.ar(14, s3*envd2*pr);
-		Out.ar(14, s4*envd2*pr);
+		Out.ar(18, s1*envd1*pr);
+		Out.ar(18, s2*envd1*pr);
+		Out.ar(18, s3*envd2*pr);
+		Out.ar(18, s4*envd2*pr);
 
-		sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig1 = Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(19), xpos: zc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig3=  Pan4.ar(InFeedback.ar(19), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -96,17 +98,18 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 		zc = sph.z;
 		el1 = zc.wrap(0, 1);
 		el2 = zc.neg.wrap(0, 1);
+		sph.rotate(angle);
 
 		Out.ar(6, sig1);
 		Out.ar(10, sig2);
+		Out.ar(14, sig2);
 
-		aud = Array.fill(8, { |i|
-			PanAz.ar(2, InFeedback.ar(6 + i),
-				pos: LFNoise1.ar(panx8[i]),
-				level: env[i],
-				width: 1
-			)
-		});
+Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(14)*env1);
+Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env2);
+Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(16)*env3);
+Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env4);
+Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(15)*env5);
+Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(17)*env6);
 
 		aud.do { |channel| Out.ar(0, channel) };
 
@@ -120,9 +123,6 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1;
 
 (
 var aPattern = Pexprand(1, 20, inf);
-var wPattern1 = Pxrand([0, 0, 0, 0, 0, 0, 0, 1], inf),
-wPattern2 = Pxrand([0, 0, 1], inf);
-var panPattern = Pexprand(0.01pi, 0.1pi, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
 	\dur, Pexprand(4, 8, inf),
@@ -135,13 +135,9 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
+	\angle,137.5,
+	\w1,Pexprand(0.1,1,inf),\w2,Pexprand(0.1,1,inf),\w3,Pexprand(0.1,1,inf),\w4,Pexprand(0.1,1,inf),\w5,Pexprand(0.1,1,inf),\w6,Pexprand(0.1,1,inf);
 
-	\w, Ptuple(
-		[wPattern1.dup(3), wPattern2].dup(2).flat,
-		inf
-	).collect { |array| [array] },
-
-	\pan, Ptuple(Array.fill(8, panPattern)).collect { |array| [array] }
 )).play(quant:1)
 )
 

@@ -2,7 +2,7 @@ s.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=16;
-TempoClock.default.tempo_(120/120);
+TempoClock.default.tempo_(120/100);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -17,6 +17,7 @@ s.record(numChannels:6) ;
 SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+		var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 1, fund = (1026 * 4)*(1/1);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
@@ -38,7 +39,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1/2;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -48,7 +49,9 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
+	// repeated structures can be simplified
+	env = wx8.collect { |w|
+		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)	};
 
 
 	11.do {
@@ -101,26 +104,19 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 
 	q1=Quaternion.new(sc1,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
     q2=Quaternion.new(sc2,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
-	pan1=q1.a;
-	pan2=q1.b;
-	pan3=q1.c;
-	pan4=q1.d;
-	pan5=q2.a;
-	pan6=q2.b;
-	pan7=q2.c;
-	pan8=q2.d;
+
 				q1.rotate(angle.degrad);
 		q2.rotate(angle.degrad);
 
-	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env,width:1);
-	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env,width:1);
- aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env,width:1);
-aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env,width:1);
+	aud = Array.fill(8, { |i|
+			PanAz.ar(6, InFeedback.ar(6 + i),
+				pos: LFNoise1.ar(q1.distance(q2)),
+				level: env[i],
+				width: 1
+			)
+		});
 
-			Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7));Out.ar(0,(aud8));
+		aud.do { |channel| Out.ar(0, channel) };
 
 
 
@@ -133,6 +129,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+		var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 2/3, fund = (1026 * 4)*(4/3);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
@@ -154,7 +151,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1/2;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -164,7 +161,9 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
+	// repeated structures can be simplified
+	env = wx8.collect { |w|
+		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)	};
 
 
 	11.do {
@@ -218,27 +217,19 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 
 	q1=Quaternion.new(sc1,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
     q2=Quaternion.new(sc2,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
-	pan1=q1.a;
-	pan2=q1.b;
-	pan3=q1.c;
-	pan4=q1.d;
-	pan5=q2.a;
-	pan6=q2.b;
-	pan7=q2.c;
-	pan8=q2.d;
+
 				q1.rotate(angle.degrad);
 		q2.rotate(angle.degrad);
 
-	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env,width:1);
-	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env,width:1);
- aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env,width:1);
-aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env,width:1);
+	aud = Array.fill(8, { |i|
+			PanAz.ar(6, InFeedback.ar(6 + i),
+				pos: LFNoise1.ar(q1.distance(q2)),
+				level: env[i],
+				width: 1
+			)
+		});
 
-			Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7));Out.ar(0,(aud8));
-
+		aud.do { |channel| Out.ar(0, channel) };
 
 
 		// 1.wait;  instead, delay the trigger
@@ -250,6 +241,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+		var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 3/4, fund = (1026 * 4)*(3/2);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
@@ -271,7 +263,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1/2;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -281,7 +273,9 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
+	// repeated structures can be simplified
+	env = wx8.collect { |w|
+		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)	};
 
 
 	11.do {
@@ -334,26 +328,19 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 
 	q1=Quaternion.new(sc1,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
     q2=Quaternion.new(sc2,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
-	pan1=q1.a;
-	pan2=q1.b;
-	pan3=q1.c;
-	pan4=q1.d;
-	pan5=q2.a;
-	pan6=q2.b;
-	pan7=q2.c;
-	pan8=q2.d;
+
 				q1.rotate(angle.degrad);
 		q2.rotate(angle.degrad);
 
-	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env,width:1);
-	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env,width:1);
- aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env,width:1);
-aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env,width:1);
+	aud = Array.fill(8, { |i|
+			PanAz.ar(6, InFeedback.ar(6 + i),
+				pos: LFNoise1.ar(q1.distance(q2)),
+				level: env[i],
+				width: 1
+			)
+		});
 
-			Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7));Out.ar(0,(aud8));
+		aud.do { |channel| Out.ar(0, channel) };
 
 
 
@@ -366,6 +353,7 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+		var wx8 = NamedControl.kr(\w, 0 ! 8);
 	var sig1, sig2, sig3, sig4, x = 0, amp = 1/2, fund = (1026 * 4)*(2/1);
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1, attack = 0.01;
@@ -387,7 +375,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 
 	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
-	var s1, s2, s3, s4, w=1/2;
+	var s1, s2, s3, s4, w=1;
 
 	var trig = Impulse.ar(0);
 	var q1,q2;
@@ -397,7 +385,9 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1, sc1=1, sc2=1,angle=1;
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
+	// repeated structures can be simplified
+	env = wx8.collect { |w|
+		EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2)	};
 
 
 	11.do {
@@ -450,27 +440,19 @@ env=EnvGen.ar(Env.perc(attack,decay,w),doneAction:2);
 
 	q1=Quaternion.new(sc1,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
     q2=Quaternion.new(sc2,pang.linlin(0,360,0,1),pang.linlin(0,360,0,1),pang.linlin(0,360,0,1));
-	pan1=q1.a;
-	pan2=q1.b;
-	pan3=q1.c;
-	pan4=q1.d;
-	pan5=q2.a;
-	pan6=q2.b;
-	pan7=q2.c;
-	pan8=q2.d;
+
 		q1.rotate(angle.degrad);
 		q2.rotate(angle.degrad);
 
-	aud1=PanAz.ar(6,InFeedback.ar(6),pos:LFNoise1.ar(pan1),level:env,width:1);aud2=PanAz.ar(6,InFeedback.ar(7),pos:LFNoise1.ar(pan2),level:env,width:1);
-	aud3=PanAz.ar(6,InFeedback.ar(8),pos:LFNoise1.ar(pan3),level:env,width:1);aud4=PanAz.ar(6,InFeedback.ar(9),pos:LFNoise1.ar(pan4),level:env,width:1);
- aud5=PanAz.ar(6,InFeedback.ar(10),pos:LFNoise1.ar(pan5),level:env,width:1);aud6=PanAz.ar(6,InFeedback.ar(11),pos:LFNoise1.ar(pan6),level:env,width:1);
-aud7=PanAz.ar(6,InFeedback.ar(12),pos:LFNoise1.ar(pan7),level:env,width:1);aud8=PanAz.ar(6,InFeedback.ar(13),pos:LFNoise1.ar(pan8),level:env,width:1);
+	aud = Array.fill(8, { |i|
+			PanAz.ar(6, InFeedback.ar(6 + i),
+				pos: LFNoise1.ar(q1.distance(q2)),
+				level: env[i],
+				width: 1
+			)
+		});
 
-			Out.ar(0,(aud1));Out.ar(0,(aud2));
-	Out.ar(0,(aud3));Out.ar(0,(aud4));
-Out.ar(0,(aud5));Out.ar(0,(aud6));
-Out.ar(0,(aud7));Out.ar(0,(aud8));
-
+		aud.do { |channel| Out.ar(0, channel) };
 
 
 		// 1.wait;  instead, delay the trigger
@@ -483,9 +465,11 @@ Out.ar(0,(aud7));Out.ar(0,(aud8));
 
 (
 var aPattern = Pexprand(1, 55, inf);
+var wPattern1 = Pexprand(length:inf),
+wPattern2 = Pexprand(length:inf);
 (
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(2, 8, inf),
+	\dur, Pexprand(4, 8, inf),
 
 	// all 23 will make separate streams
 	// but there's a subtle thing about array args
@@ -495,8 +479,12 @@ Pdef(\1, Pbind(\instrument, \id1,
 \angle,137.5,
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
-\sc1, 0.1pi,
-	\sc2, 0.1pi;
+		\w, Ptuple(
+		[wPattern1.dup(3), wPattern2].dup(2).flat,
+		inf
+	).collect { |array| [array] },
+\sc1, Pexprand(0.01pi,0.1pi),
+	\sc2, Pexprand(0.01pi,0.1pi);
 )).play(quant:1)
 );
 (
@@ -511,8 +499,12 @@ Pdef(\2, Pbind(\instrument, \id2,
 \angle,137.5,
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
-\sc1, 0.1pi,
-	\sc2, 0.1pi;
+		\w, Ptuple(
+		[wPattern1.dup(3), wPattern2].dup(2).flat,
+		inf
+	).collect { |array| [array] },
+\sc1, Pexprand(0.01pi,0.1pi),
+	\sc2, Pexprand(0.01pi,0.1pi);
 )).play(quant:1)
 );
 (
@@ -527,8 +519,12 @@ Pdef(\3, Pbind(\instrument, \id3,
 \angle,137.5,
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
-\sc1, 0.1pi,
-	\sc2, 0.1pi;
+		\w, Ptuple(
+		[wPattern1.dup(3), wPattern2].dup(2).flat,
+		inf
+	).collect { |array| [array] },
+\sc1, Pexprand(0.01pi,0.1pi),
+	\sc2, Pexprand(0.01pi,0.1pi);
 )).play(quant:1)
 );
 (
@@ -543,8 +539,12 @@ Pdef(\4, Pbind(\instrument, \id4,
 \angle,137.5,
 	\interval, Pxrand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, Pexprand(0.1, 0.2, inf),
-\sc1, 0.1pi,
-	\sc2, 0.1pi;
+		\w, Ptuple(
+		[wPattern1.dup(3), wPattern2].dup(2).flat,
+		inf
+	).collect { |array| [array] },
+	\sc1, Pexprand(0.01pi,0.1pi),
+	\sc2, Pexprand(0.01pi,0.1pi);
 )).play(quant:1)
 )
 )
