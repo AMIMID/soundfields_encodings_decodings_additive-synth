@@ -2,7 +2,7 @@ zs.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=16;
-TempoClock.default.tempo_(120/90);
+TempoClock.default.tempo_(120/240);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 48000;
 s.options.numBuffers = 1024*1;
@@ -16,7 +16,7 @@ s.record(numChannels:6) ;
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
 	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 16)*1;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
@@ -55,7 +55,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	11.do {
+	31.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -76,7 +76,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 		Out.ar(14, s1*envd1*pr);
@@ -125,7 +125,7 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
 	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 16)*(4/3);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
@@ -164,7 +164,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	11.do {
+	31.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -185,7 +185,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
@@ -233,7 +233,7 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
 	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 16)*(3/2);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
@@ -273,7 +273,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	11.do {
+	31.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -294,7 +294,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
@@ -343,7 +343,7 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 11);
+	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
 	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 16)*2;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
@@ -385,7 +385,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	11.do {
+	31.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -406,7 +406,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
