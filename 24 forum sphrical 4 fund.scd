@@ -1,10 +1,10 @@
 zs.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=20;
-TempoClock.default.tempo_(120/80);
+s.options.numOutputBusChannels=16;
+TempoClock.default.tempo_(120/90);
 s.options.memSize = 8192*8;
-s.options.sampleRate = 44100;
+s.options.sampleRate = 48000;
 s.options.numBuffers = 1024*1;
 s.options.numRGens=64*1;
 s.options.numWireBufs=64*1;
@@ -79,17 +79,17 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(18, s1*envd1*pr);
-		Out.ar(18, s2*envd1*pr);
-		Out.ar(18, s3*envd2*pr);
-		Out.ar(18, s4*envd2*pr);
+		Out.ar(14, s1*envd1*pr);
+		Out.ar(14, s2*envd1*pr);
+		Out.ar(14, s3*envd2*pr);
+		Out.ar(14, s4*envd2*pr);
 
-        sig1 = Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(19), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig3=  Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig4=  Pan4.ar(InFeedback.ar(18), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(19), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(19), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+        sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -188,17 +188,17 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(18, s1*envd1*pr);
-		Out.ar(18, s2*envd1*pr);
-		Out.ar(18, s3*envd2*pr);
-		Out.ar(18, s4*envd2*pr);
+	Out.ar(14, s1*envd1*pr);
+		Out.ar(14, s2*envd1*pr);
+		Out.ar(14, s3*envd2*pr);
+		Out.ar(14, s4*envd2*pr);
 
-sig1 = Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(19), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig3=  Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig4=  Pan4.ar(InFeedback.ar(18), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(19), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(19), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+        sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -297,17 +297,17 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(18, s1*envd1*pr);
-		Out.ar(18, s2*envd1*pr);
-		Out.ar(18, s3*envd2*pr);
-		Out.ar(18, s4*envd2*pr);
+	Out.ar(14, s1*envd1*pr);
+		Out.ar(14, s2*envd1*pr);
+		Out.ar(14, s3*envd2*pr);
+		Out.ar(14, s4*envd2*pr);
 
-sig1 = Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(19), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig3=  Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig4=  Pan4.ar(InFeedback.ar(18), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(19), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(19), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+        sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -409,17 +409,17 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		pos_over = over.linlin(2/1, 12/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
-		Out.ar(18, s1*envd1*pr);
-		Out.ar(18, s2*envd1*pr);
-		Out.ar(18, s3*envd2*pr);
-		Out.ar(18, s4*envd2*pr);
+	Out.ar(14, s1*envd1*pr);
+		Out.ar(14, s2*envd1*pr);
+		Out.ar(14, s3*envd2*pr);
+		Out.ar(14, s4*envd2*pr);
 
-		sig1 = Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(19), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig3=  Pan4.ar(InFeedback.ar(18), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig4=  Pan4.ar(InFeedback.ar(18), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(19), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(19), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+        sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
