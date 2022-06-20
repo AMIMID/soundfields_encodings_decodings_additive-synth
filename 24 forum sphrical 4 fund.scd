@@ -2,7 +2,7 @@ zs.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=16;
-TempoClock.default.tempo_(120/300);
+TempoClock.default.tempo_(120/333);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -460,11 +460,11 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.001,inf),
+\delay,Pexprand(0.05,1,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, 0.2,
 	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
+		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
 
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
@@ -472,22 +472,22 @@ Pdef(\2, Pbind(\instrument, \id2,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.001,inf),
+\delay,Pexprand(0.05,1,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, 0.2,
 	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
+		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
 )).play(quant:1);
 Pdef(\3, Pbind(\instrument, \id3,
 	\dur, Pexprand(6, 9, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.001,inf),
+\delay,Pexprand(0.05,1,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, 0.2,
 	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
+		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
 
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \id4,
@@ -495,11 +495,11 @@ Pdef(\4, Pbind(\instrument, \id4,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.001,inf),
+\delay,Pexprand(0.05,1,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
 	\pr, 0.2,
 	\angle,Pexprand(0.01, 137.5, inf),
-	\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
+	\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
 
 )).play(quant:1);
 )
