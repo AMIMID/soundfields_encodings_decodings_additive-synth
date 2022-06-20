@@ -2,7 +2,7 @@ zs.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=16;
-TempoClock.default.tempo_(120/(240*(4/3)));
+TempoClock.default.tempo_(120/300);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -18,9 +18,9 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 8)*1.5*1;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 16)*1;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
-	var under = 1, over = 1, attack = 0.001;
+	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
 	var xc = 0, yc = 0, zc = 0;
 	var aToWNeg = aToW.neg;
@@ -127,9 +127,9 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 8)*1.5*(4/3);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 16)*(4/3);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
-	var under = 1, over = 1, attack = 0.001;
+	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
 	var xc = 0, yc = 0, zc = 0;
 	var aToWNeg = aToW.neg;
@@ -177,10 +177,10 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -235,9 +235,9 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 8)*1.5*(3/2);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 16)*(3/2);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
-	var under = 1, over = 1, attack = 0.001;
+	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
 	var xc = 0, yc = 0, zc = 0;
 	var aToWNeg = aToW.neg;
@@ -286,10 +286,10 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -345,9 +345,9 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 31);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 8)*1.5*2;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 16)*2;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
-	var under = 1, over = 1, attack = 0.001;
+	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
 	var xc = 0, yc = 0, zc = 0;
 	var aToWNeg = aToW.neg;
@@ -398,10 +398,10 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
@@ -454,53 +454,52 @@ Out.ar(5,InFeedback.ar(11)*env6);
 )
 
 (
-var aPattern = Pexprand(1, 55, inf);
-
+var aPattern = Pexprand(1, 20, inf);
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(4, 8, inf),
+	\dur, Pexprand(6, 9, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.1,inf),
+\delay,Pexprand(0.05,0.001,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, Pexprand(0.1, 0.2, inf),
-	\angle,Pexprand(0.001, 137.5, inf),
-		\w1,Pexprand(0.05,0.1,inf),\w2,Pexprand(0.05,0.1,inf),\w3,Pexprand(0.05,0.1,inf),\w4,Pexprand(0.05,0.1,inf),\w5,Pexprand(0.05,0.1,inf),\w6,Pexprand(0.05,0.1,inf),\w7,Pexprand(0.05,0.1,inf),\w8,Pexprand(0.05,0.1,inf),\w9,Pexprand(0.05,0.1,inf),\w10,Pexprand(0.05,0.1,inf);
+	\pr, 0.2,
+	\angle,Pexprand(0.01, 137.5, inf),
+		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
 
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(4, 8, inf),
+	\dur, Pexprand(6, 9, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.1,inf),
+\delay,Pexprand(0.05,0.001,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, Pexprand(0.1, 0.2, inf),
-	\angle,Pexprand(0.001, 137.5, inf),
-		\w1,Pexprand(0.05,0.1,inf),\w2,Pexprand(0.05,0.1,inf),\w3,Pexprand(0.05,0.1,inf),\w4,Pexprand(0.05,0.1,inf),\w5,Pexprand(0.05,0.1,inf),\w6,Pexprand(0.05,0.1,inf),\w7,Pexprand(0.05,0.1,inf),\w8,Pexprand(0.05,0.1,inf),\w9,Pexprand(0.05,0.1,inf),\w10,Pexprand(0.05,0.1,inf);
+	\pr, 0.2,
+	\angle,Pexprand(0.01, 137.5, inf),
+		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
 )).play(quant:1);
 Pdef(\3, Pbind(\instrument, \id3,
-	\dur, Pexprand(4, 8, inf),
+	\dur, Pexprand(6, 9, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.1,inf),
+\delay,Pexprand(0.05,0.001,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, Pexprand(0.1, 0.2, inf),
-	\angle,Pexprand(0.001, 137.5, inf),
-		\w1,Pexprand(0.05,0.1,inf),\w2,Pexprand(0.05,0.1,inf),\w3,Pexprand(0.05,0.1,inf),\w4,Pexprand(0.05,0.1,inf),\w5,Pexprand(0.05,0.1,inf),\w6,Pexprand(0.05,0.1,inf),\w7,Pexprand(0.05,0.1,inf),\w8,Pexprand(0.05,0.1,inf),\w9,Pexprand(0.05,0.1,inf),\w10,Pexprand(0.05,0.1,inf);
+	\pr, 0.2,
+	\angle,Pexprand(0.01, 137.5, inf),
+		\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
 
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \id4,
-	\dur, Pexprand(4, 8, inf),
+	\dur, Pexprand(6, 9, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,0.1,inf),
+\delay,Pexprand(0.05,0.001,inf),
 	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, Pexprand(0.1, 0.2, inf),
-	\angle,Pexprand(0.001, 137.5, inf),
-	\w1,Pexprand(0.05,0.1,inf),\w2,Pexprand(0.05,0.1,inf),\w3,Pexprand(0.05,0.1,inf),\w4,Pexprand(0.05,0.1,inf),\w5,Pexprand(0.05,0.1,inf),\w6,Pexprand(0.05,0.1,inf),\w7,Pexprand(0.05,0.1,inf),\w8,Pexprand(0.05,0.1,inf),\w9,Pexprand(0.05,0.1,inf),\w10,Pexprand(0.05,0.1,inf);
+	\pr, 0.2,
+	\angle,Pexprand(0.01, 137.5, inf),
+	\w1,Pexprand(0.05,0.001,inf),\w2,Pexprand(0.05,0.001,inf),\w3,Pexprand(0.05,0.001,inf),\w4,Pexprand(0.05,0.001,inf),\w5,Pexprand(0.05,0.001,inf),\w6,Pexprand(0.05,0.001,inf),\w7,Pexprand(0.05,0.001,inf),\w8,Pexprand(0.05,0.001,inf),\w9,Pexprand(0.05,0.001,inf),\w10,Pexprand(0.05,0.001,inf);
 
 )).play(quant:1);
 )
