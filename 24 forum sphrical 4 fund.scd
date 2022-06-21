@@ -14,7 +14,7 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -43,16 +43,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
 
-	env1 = EnvGen.ar(Env.perc(attack, decay, w1), doneAction: 2);
-	env2 = EnvGen.ar(Env.perc(attack, decay, w2), doneAction: 2);
-	env3 = EnvGen.ar(Env.perc(attack, decay, w3), doneAction: 2);
-	env4 = EnvGen.ar(Env.perc(attack, decay, w4), doneAction: 2);
-	env5 = EnvGen.ar(Env.perc(attack, decay, w5), doneAction: 2);
-	env6 = EnvGen.ar(Env.perc(attack, decay, w6), doneAction: 2);
-	env7 = EnvGen.ar(Env.perc(attack, decay, w7), doneAction: 2);
-	env8 = EnvGen.ar(Env.perc(attack, decay, w8), doneAction: 2);
-	env9 = EnvGen.ar(Env.perc(attack, decay, w9), doneAction: 2);
-	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
+		env = EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2);
 
 
 	15.do {
@@ -97,8 +88,8 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
-		el1 = zc.wrap(0, 1);
-		el2 = zc.neg.wrap(0, 1);
+		el1 = zc.wrap(0, 1/2);
+		el2 = zc.neg.wrap(0, 1/2);
 	sph.rotate(angle.degrad);
 
 		Out.ar(6, sig1);
@@ -109,12 +100,12 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
-Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
-Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+Out.ar(0,InFeedback.ar(6)*env);Out.ar(0,InFeedback.ar(17)*env);
+Out.ar(1,InFeedback.ar(7)*env);Out.ar(1,InFeedback.ar(11)*env);
+Out.ar(2,InFeedback.ar(8)*env);Out.ar(2,InFeedback.ar(15)*env);
+Out.ar(3,InFeedback.ar(9)*env);Out.ar(3,InFeedback.ar(13)*env);
+Out.ar(4,InFeedback.ar(10)*env);Out.ar(4,InFeedback.ar(14)*env);
+Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 
 
 
@@ -124,7 +115,7 @@ Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -153,17 +144,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
 
-	env1 = EnvGen.ar(Env.perc(attack, decay, w1), doneAction: 2);
-	env2 = EnvGen.ar(Env.perc(attack, decay, w2), doneAction: 2);
-	env3 = EnvGen.ar(Env.perc(attack, decay, w3), doneAction: 2);
-	env4 = EnvGen.ar(Env.perc(attack, decay, w4), doneAction: 2);
-	env5 = EnvGen.ar(Env.perc(attack, decay, w5), doneAction: 2);
-	env6 = EnvGen.ar(Env.perc(attack, decay, w6), doneAction: 2);
-	env7 = EnvGen.ar(Env.perc(attack, decay, w7), doneAction: 2);
-	env8 = EnvGen.ar(Env.perc(attack, decay, w8), doneAction: 2);
-	env9 = EnvGen.ar(Env.perc(attack, decay, w9), doneAction: 2);
-	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
-
+	env = EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2);
 
 	15.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
@@ -207,8 +188,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
-		el1 = zc.wrap(0, 1);
-		el2 = zc.neg.wrap(0, 1);
+	el1 = zc.wrap(0, 1/2);
+		el2 = zc.neg.wrap(0, 1/2);
 			sph.rotate(angle.degrad);
 
 				Out.ar(6, sig1);
@@ -218,12 +199,13 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(14, sig5);
 		Out.ar(10, sig6);
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
-Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
-Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+Out.ar(0,InFeedback.ar(6)*env);Out.ar(0,InFeedback.ar(17)*env);
+Out.ar(1,InFeedback.ar(7)*env);Out.ar(1,InFeedback.ar(11)*env);
+Out.ar(2,InFeedback.ar(8)*env);Out.ar(2,InFeedback.ar(15)*env);
+Out.ar(3,InFeedback.ar(9)*env);Out.ar(3,InFeedback.ar(13)*env);
+Out.ar(4,InFeedback.ar(10)*env);Out.ar(4,InFeedback.ar(14)*env);
+Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
+
 
 
 		// 1.wait;  instead, delay the trigger
@@ -232,7 +214,7 @@ Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
 }).add;
 );
 (
-SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
+SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -262,16 +244,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
 
-	env1 = EnvGen.ar(Env.perc(attack, decay, w1), doneAction: 2);
-	env2 = EnvGen.ar(Env.perc(attack, decay, w2), doneAction: 2);
-	env3 = EnvGen.ar(Env.perc(attack, decay, w3), doneAction: 2);
-	env4 = EnvGen.ar(Env.perc(attack, decay, w4), doneAction: 2);
-	env5 = EnvGen.ar(Env.perc(attack, decay, w5), doneAction: 2);
-	env6 = EnvGen.ar(Env.perc(attack, decay, w6), doneAction: 2);
-	env7 = EnvGen.ar(Env.perc(attack, decay, w7), doneAction: 2);
-	env8 = EnvGen.ar(Env.perc(attack, decay, w8), doneAction: 2);
-	env9 = EnvGen.ar(Env.perc(attack, decay, w9), doneAction: 2);
-	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
+	env = EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2);
 
 
 	15.do {
@@ -316,8 +289,8 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
-		el1 = zc.wrap(0, 1);
-		el2 = zc.neg.wrap(0, 1);
+	el1 = zc.wrap(0, 1/2);
+		el2 = zc.neg.wrap(0, 1/2);
 			sph.rotate(angle.degrad);
 
 			Out.ar(6, sig1);
@@ -328,12 +301,13 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
-Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
-Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+Out.ar(0,InFeedback.ar(6)*env);Out.ar(0,InFeedback.ar(17)*env);
+Out.ar(1,InFeedback.ar(7)*env);Out.ar(1,InFeedback.ar(11)*env);
+Out.ar(2,InFeedback.ar(8)*env);Out.ar(2,InFeedback.ar(15)*env);
+Out.ar(3,InFeedback.ar(9)*env);Out.ar(3,InFeedback.ar(13)*env);
+Out.ar(4,InFeedback.ar(10)*env);Out.ar(4,InFeedback.ar(14)*env);
+Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
+
 
 
 		// 1.wait;  instead, delay the trigger
@@ -342,7 +316,7 @@ Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
 }).add;
 );
 (
-SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
+SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -373,17 +347,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	envd1 = EnvGen.ar(Env.sine((decay), amp/amp1), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp*amp1), doneAction: 2);
 
-
-	env1 = EnvGen.ar(Env.perc(attack, decay, w1), doneAction: 2);
-	env2 = EnvGen.ar(Env.perc(attack, decay, w2), doneAction: 2);
-	env3 = EnvGen.ar(Env.perc(attack, decay, w3), doneAction: 2);
-	env4 = EnvGen.ar(Env.perc(attack, decay, w4), doneAction: 2);
-	env5 = EnvGen.ar(Env.perc(attack, decay, w5), doneAction: 2);
-	env6 = EnvGen.ar(Env.perc(attack, decay, w6), doneAction: 2);
-	env7 = EnvGen.ar(Env.perc(attack, decay, w7), doneAction: 2);
-	env8 = EnvGen.ar(Env.perc(attack, decay, w8), doneAction: 2);
-	env9 = EnvGen.ar(Env.perc(attack, decay, w9), doneAction: 2);
-	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
+	env = EnvGen.ar(Env.perc(attack, decay, w), doneAction: 2);
 
 
 	15.do {
@@ -428,8 +392,8 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
-		el1 = zc.wrap(0, 1);
-		el2 = zc.neg.wrap(0, 1);
+		el1 = zc.wrap(0, 1/2);
+		el2 = zc.neg.wrap(0, 1/2);
 		sph.rotate(angle.degrad);
 
 			Out.ar(6, sig1);
@@ -440,12 +404,13 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
-Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
-Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+Out.ar(0,InFeedback.ar(6)*env);Out.ar(0,InFeedback.ar(17)*env);
+Out.ar(1,InFeedback.ar(7)*env);Out.ar(1,InFeedback.ar(11)*env);
+Out.ar(2,InFeedback.ar(8)*env);Out.ar(2,InFeedback.ar(15)*env);
+Out.ar(3,InFeedback.ar(9)*env);Out.ar(3,InFeedback.ar(13)*env);
+Out.ar(4,InFeedback.ar(10)*env);Out.ar(4,InFeedback.ar(14)*env);
+Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
+
 
 
 		// 1.wait;  instead, delay the trigger
@@ -462,7 +427,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.5,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
 	\angle,Pexprand(0.01, 137.5, inf);
@@ -474,7 +439,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.5,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
 //\angle,Pexprand(0.01, 137.5, inf);
@@ -486,7 +451,7 @@ Pdef(\3, Pbind(\instrument, \id3,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.5,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
 	//\angle,Pexprand(0.01, 137.5, inf),
@@ -500,7 +465,7 @@ Pdef(\4, Pbind(\instrument, \id4,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.5,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
 	//\angle,Pexprand(0.01, 137.5, inf),
