@@ -1,8 +1,8 @@
-zs.options.numWireBufs = 1024;
+s.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=16;
-TempoClock.default.tempo_(120/333);
+s.options.numOutputBusChannels=18;
+TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -16,9 +16,9 @@ s.record(numChannels:6) ;
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 31);
+	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 16)*1;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 2)*1;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -33,7 +33,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var sph;
 
-	var decay = dur*2*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -55,7 +55,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	31.do {
+	15.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -76,7 +76,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 16/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 		Out.ar(14, s1*envd1*pr);
@@ -85,7 +85,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
@@ -93,7 +93,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -103,18 +103,19 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 		Out.ar(6, sig1);
 		Out.ar(6, sig2);
-		Out.ar(10, sig3);
+		Out.ar(14, sig3);
 		Out.ar(10, sig4);
-		Out.ar(10, sig5);
+		Out.ar(14, sig5);
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(12)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(12)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(13)*env9);
+Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
+Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
+Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
 Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);
-Out.ar(5,InFeedback.ar(11)*env6);
+Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
+Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+
 
 
 		// 1.wait;  instead, delay the trigger
@@ -125,9 +126,9 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 31);
+	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 16)*(4/3);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 2)*(4/3);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -142,7 +143,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var sph;
 
-	var decay = dur*2*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -164,7 +165,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	31.do {
+	15.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -177,15 +178,15 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 16/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
@@ -194,7 +195,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
@@ -202,7 +203,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -210,19 +211,19 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		el2 = zc.neg.wrap(0, 1);
 			sph.rotate(angle.degrad);
 
-		Out.ar(6, sig1);
+				Out.ar(6, sig1);
 		Out.ar(6, sig2);
-		Out.ar(10, sig3);
+		Out.ar(14, sig3);
 		Out.ar(10, sig4);
-		Out.ar(10, sig5);
+		Out.ar(14, sig5);
 		Out.ar(10, sig6);
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(12)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(12)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(13)*env9);
+Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
+Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
+Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
 Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);
-Out.ar(5,InFeedback.ar(11)*env6);
+Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
+Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
 
 
 		// 1.wait;  instead, delay the trigger
@@ -233,9 +234,9 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 31);
+	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 16)*(3/2);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 2)*(3/2);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -251,7 +252,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var sph;
 
-	var decay = dur*2*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -273,7 +274,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	31.do {
+	15.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -286,15 +287,15 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 16/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
@@ -303,7 +304,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
@@ -311,7 +312,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -319,20 +320,20 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		el2 = zc.neg.wrap(0, 1);
 			sph.rotate(angle.degrad);
 
-		Out.ar(6, sig1);
+			Out.ar(6, sig1);
 		Out.ar(6, sig2);
-		Out.ar(10, sig3);
+		Out.ar(14, sig3);
 		Out.ar(10, sig4);
-		Out.ar(10, sig5);
+		Out.ar(14, sig5);
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(12)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(12)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(13)*env9);
+Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
+Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
+Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
 Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);
-Out.ar(5,InFeedback.ar(11)*env6);
+Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
+Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
 
 
 		// 1.wait;  instead, delay the trigger
@@ -343,9 +344,9 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5=1,w6=1,w7=1,w8=1,w9=1,w10=1,angle=137.5,delay=1;
 
-	var aToW = NamedControl.kr(\aToW, 0 ! 31);
+	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 16)*2;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 2)*2;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -363,7 +364,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 	var sph;
 
-	var decay = dur*2*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -385,7 +386,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 	env10 = EnvGen.ar(Env.perc(attack, decay, w10), doneAction: 2);
 
 
-	31.do {
+	15.do {
 		enva = EnvGen.ar(Env.perc(attack,decay, amp/under, [-4, -4]), trig);
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
@@ -398,15 +399,15 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 			[-4]
 		), trig);
 
-		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under);
-		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.01), pos: pos_under.neg);
-		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over);
-		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.01), pos: pos_over.neg);
+		s1 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.001), pos: pos_under.neg);
+		s3 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over);
+		s4 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), pos: pos_over.neg);
 
 		x = x+1;
 		over = (x+1)/1;
 		under = 1/(x+1);
-		pos_over = over.linlin(2/1, 32/1, 1/2, 1);
+		pos_over = over.linlin(2/1, 16/1, 1/2, 1);
 		pos_under = under.wrap(1, 0);
 
 	Out.ar(14, s1*envd1*pr);
@@ -415,7 +416,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: yc, ypos: xc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
@@ -423,7 +424,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -431,20 +432,21 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w1=1,w2=1,w3=1,w4=1,w5
 		el2 = zc.neg.wrap(0, 1);
 		sph.rotate(angle.degrad);
 
-		Out.ar(6, sig1);
+			Out.ar(6, sig1);
 		Out.ar(6, sig2);
-		Out.ar(10, sig3);
+		Out.ar(14, sig3);
 		Out.ar(10, sig4);
-		Out.ar(10, sig5);
+		Out.ar(14, sig5);
 		Out.ar(10, sig6);
 
 
-Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(12)*env7);
-Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(12)*env8);
-Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(13)*env9);
+Out.ar(0,InFeedback.ar(6)*env1);Out.ar(0,InFeedback.ar(17)*env7);
+Out.ar(1,InFeedback.ar(7)*env2);Out.ar(1,InFeedback.ar(11)*env8);
+Out.ar(2,InFeedback.ar(8)*env3);Out.ar(2,InFeedback.ar(15)*env9);
 Out.ar(3,InFeedback.ar(9)*env4);Out.ar(3,InFeedback.ar(13)*env10);
-Out.ar(4,InFeedback.ar(10)*env5);
-Out.ar(5,InFeedback.ar(11)*env6);
+Out.ar(4,InFeedback.ar(10)*env5);Out.ar(4,InFeedback.ar(14)*env10);
+Out.ar(5,InFeedback.ar(12)*env6);Out.ar(5,InFeedback.ar(16)*env10);
+
 
 		// 1.wait;  instead, delay the trigger
 		trig = TDelay.ar(trig, delay);
@@ -456,55 +458,60 @@ Out.ar(5,InFeedback.ar(11)*env6);
 (
 var aPattern = Pexprand(1, 20, inf);
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(6, 9, inf),
+	\dur, Pexprand(4, 8, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,1,inf),
-	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, 0.2,
-	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
-
+\delay,Pexprand(0.5,1,inf),
+	\interval, Prand( [4,9,14,19,23,28], inf),
+	\pr, 0.1,
+	\angle,Pexprand(0.01, 137.5, inf);
+		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
+*/
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(6, 9, inf),
+	\dur, Pexprand(4, 8, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,1,inf),
-	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, 0.2,
-	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
+\delay,Pexprand(0.5,1,inf),
+	\interval, Prand( [4,9,14,19,23,28], inf),
+	\pr, 0.1,
+//\angle,Pexprand(0.01, 137.5, inf);
+		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
+*/
 )).play(quant:1);
 Pdef(\3, Pbind(\instrument, \id3,
-	\dur, Pexprand(6, 9, inf),
+	\dur, Pexprand(4, 8, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,1,inf),
-	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, 0.2,
-	\angle,Pexprand(0.01, 137.5, inf),
-		\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
+\delay,Pexprand(0.5,1,inf),
+	\interval, Prand( [4,9,14,19,23,28], inf),
+	\pr, 0.1,
+	//\angle,Pexprand(0.01, 137.5, inf),
+\angle,Pexprand(0.01, 137.5, inf);
+		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
+*/
 
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \id4,
-	\dur, Pexprand(6, 9, inf),
+	\dur, Pexprand(4, 8, inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.05,1,inf),
-	\interval, Prand( [12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72], inf),
-	\pr, 0.2,
-	\angle,Pexprand(0.01, 137.5, inf),
-	\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,1,inf),\w3,Pexprand(0.05,1,inf),\w4,Pexprand(0.05,1,inf),\w5,Pexprand(0.05,1,inf),\w6,Pexprand(0.05,1,inf),\w7,Pexprand(0.05,1,inf),\w8,Pexprand(0.05,1,inf),\w9,Pexprand(0.05,1,inf),\w10,Pexprand(0.05,1,inf);
+\delay,Pexprand(0.5,1,inf),
+	\interval, Prand( [4,9,14,19,23,28], inf),
+	\pr, 0.1,
+	//\angle,Pexprand(0.01, 137.5, inf),
+	\angle,Pexprand(0.01, 137.5, inf);
+		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
+*/
 
 )).play(quant:1);
 )
 
-
+///[12, 16, 19, 24, 28, 31, 36, 40, 43, 48, 52, 55, 60, 64, 67, 72]
 Pdef(\1).stop
 Pdef(\2).stop
 Pdef(\3).stop
