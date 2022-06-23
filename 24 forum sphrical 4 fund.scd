@@ -14,7 +14,7 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -76,15 +76,15 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: yc.neg, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
+		sph = Spherical.new(1, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -115,7 +115,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -176,15 +176,15 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: yc.neg, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
+		sph = Spherical.new(1, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -214,7 +214,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 );
 (
-SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
+SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -277,15 +277,15 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: yc.neg, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
+		sph = Spherical.new(1, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -316,7 +316,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 );
 (
-SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=1;
+SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -380,15 +380,15 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=1,angle=137.5,delay=
 		Out.ar(14, s4*envd2*pr);
 
         sig1 = Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
-		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: yc, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
+		sig2 = Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: yc.neg, level: EnvGen.ar(Env.perc(attack, decay, el1, [-4, -4])));
 		sig3=  Pan4.ar(InFeedback.ar(14), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 		sig4=  Pan4.ar(InFeedback.ar(14), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc, ypos: zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
-		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc, ypos:zc, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig5=  Pan4.ar(InFeedback.ar(15), xpos: xc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
+		sig6=  Pan4.ar(InFeedback.ar(15), xpos: yc.neg, ypos: zc.neg, level: EnvGen.ar(Env.perc(attack, decay, el2, [-4, -4])));
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, (137.5+pang).degrad);
+		sph = Spherical.new(1, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -422,54 +422,52 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 
 (
 var aPattern = Pexprand(1, 20, inf);
-Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(4, 8, inf),
-
-	\aToW, Ptuple(Array.fill(15, aPattern))
-	.collect { |array| [array] },
-\delay,Pexprand(0.1,1,inf),
-	\interval, Prand( [4,9,14,19,23,28], inf),
-	\pr, 0.1,
-	\angle,Pexprand(0.01, 137.5, inf);
-		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
-*/
-)).play(quant:1);
+// Pdef(\1, Pbind(\instrument, \id1,
+// 	\dur, Pexprand(4, 8, inf),
+//
+// 	\aToW, Ptuple(Array.fill(15, aPattern))
+// 	.collect { |array| [array] },
+// 	\delay,Pbrown(0.1,1,1,inf),
+// 	\interval, Prand( [4,9,14,19,23,28], inf),
+// 	\pr, 0.1;
+// 	//\angle,Pexprand(0.01, 137.5, inf);
+// 	/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
+// 	*/
+// )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(4, 8, inf),
+	\dur, 8*(2/3),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.1,1,inf),
+\delay,Pbrown(0.1,1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
-//\angle,Pexprand(0.01, 137.5, inf);
+\angle,Pexprand(0.01, 360, inf);
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
 )).play(quant:1);
 Pdef(\3, Pbind(\instrument, \id3,
-	\dur, Pexprand(4, 8, inf),
+	\dur,8*(3/4),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.1,1,inf),
+\delay,Pbrown(0.1,1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
-	//\angle,Pexprand(0.01, 137.5, inf),
-\angle,Pexprand(0.01, 137.5, inf);
+\angle,Pexprand(0.01, 360, inf),
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
 
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \id4,
-	\dur, Pexprand(4, 8, inf),
+	\dur, 8*(1/2),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pexprand(0.1,1,inf),
+\delay,Pbrown(0.1,1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28], inf),
 	\pr, 0.1,
-	//\angle,Pexprand(0.01, 137.5, inf),
-	\angle,Pexprand(0.01, 137.5, inf);
+	\angle,Pexprand(0.01, 360, inf),
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
 
