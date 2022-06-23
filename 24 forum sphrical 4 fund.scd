@@ -2,7 +2,7 @@ s.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=18;
-TempoClock.default.tempo_(120/80);
+TempoClock.default.tempo_(120/74);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -115,7 +115,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 )*/
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1,rad=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -184,7 +184,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,dela
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(rad, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -212,7 +212,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 );
 (
-SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1;
+SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1,rad=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -282,7 +282,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,dela
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(rad, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -312,7 +312,7 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 }).add;
 );
 (
-SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1;
+SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,delay=1,rad=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
@@ -384,7 +384,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.1,angle=137.5,dela
 
 		an = an+137.5;
 		pang = an.wrap(0, 360);
-		sph = Spherical.new(1, pang.degrad, pang.degrad);
+		sph = Spherical.new(rad, pang.degrad, pang.degrad);
 		xc = sph.x;
 		yc = sph.y;
 		zc = sph.z;
@@ -435,9 +435,10 @@ Pdef(\2, Pbind(\instrument, \id2,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pbrown(0.01,1/2,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28,33,39,44,48,54], inf),
 	\pr, 0.1,
+	\rad,Pexprand(0.1,1,inf),
 \angle,Pexprand(1, 360, inf);
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
@@ -447,9 +448,10 @@ Pdef(\3, Pbind(\instrument, \id3,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pbrown(0.01,1/2,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28,33,39,44,48,54], inf),
 	\pr, 0.1,
+	\rad,Pexprand(0.1,1,inf),
 \angle,Pexprand(1, 360, inf),
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
@@ -460,9 +462,10 @@ Pdef(\4, Pbind(\instrument, \id4,
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
-\delay,Pbrown(0.01,1/2,1,inf),
+\delay,Pexprand(0.1,1,inf),
 	\interval, Prand( [4,9,14,19,23,28,33,39,44,48,54], inf),
 	\pr, 0.1,
+	\rad,Pexprand(0.1,1,inf),
 	\angle,Pexprand(1, 360, inf),
 		/*\w1,Pexprand(0.05,1,inf),\w2,Pexprand(0.05,0.5,inf),\w3,Pexprand(0.05,0.5,inf),\w4,Pexprand(0.05,0.5,inf),\w5,Pexprand(0.05,0.5,inf),\w6,Pexprand(0.05,0.5,inf),\w7,Pexprand(0.05,0.5,inf),\w8,Pexprand(0.05,0.5,inf),\w9,Pexprand(0.05,0.5,inf),\w10,Pexprand(0.05,0.5,inf);
 */
