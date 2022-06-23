@@ -13,12 +13,12 @@ s.options.outputStreamsEnabled.postln
 s.record(numChannels:6) ;
 
 (
-(
+/*(
 SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 * 2)*1;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1, fund = (258 *1)*1;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -33,7 +33,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var sph;
 
-	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -113,13 +113,13 @@ Out.ar(5,InFeedback.ar(12)*env);Out.ar(5,InFeedback.ar(16)*env);
 		trig = TDelay.ar(trig, delay);
 	};
 }).add;
-);
+)*/
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,delay=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 * 2)*(4/3);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 2/3, fund = (258 *1)*(4/3);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -134,7 +134,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var sph;
 
-	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -218,7 +218,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 * 2)*(3/2);
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 3/4, fund = (258 *1)*(3/2);
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -234,7 +234,7 @@ SynthDef.new(\id3, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var sph;
 
-	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -320,7 +320,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 
-	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 * 2)*2;
+	var sig1, sig2, sig3,sig4,sig5,sig6, x = 0, amp = 1/2, fund = (258 *1)*2;
 	var enva, envb, envd1, envd2, env1,env2,env3, env4, env5, env6, env7,env8,env9,env10,envf;
 	var under = 1, over = 1, attack = 0.01;
 	var an = 0, pang = an.wrap(0, 360);
@@ -338,7 +338,7 @@ SynthDef.new(\id4, { arg dur = 1, interval = 1, pr, y = 1,w=0.5,angle=137.5,dela
 
 	var sph;
 
-	var decay = 12*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
+	var decay = 8*((sqrt(5)+1)/2), el1 = 1, el2 = 1;
 	var pos_over = 0, pos_under = 1;
 	var s1, s2, s3, s4, ww;
 
@@ -435,7 +435,7 @@ var aPattern = Pexprand(1, 20, inf);
 // 	*/
 // )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, 8*(2/3),
+\dur, Pexprand(4,8,inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
@@ -447,7 +447,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 */
 )).play(quant:1);
 Pdef(\3, Pbind(\instrument, \id3,
-	\dur,8*(3/4),
+\dur, Pexprand(4,8,inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
@@ -460,7 +460,7 @@ Pdef(\3, Pbind(\instrument, \id3,
 
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \id4,
-	\dur, 8*(1/2),
+	\dur, Pexprand(4,8,inf),
 
 	\aToW, Ptuple(Array.fill(15, aPattern))
 	.collect { |array| [array] },
