@@ -2,7 +2,7 @@ s.options.numWireBufs = 1024;
 
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=12;
-TempoClock.default.tempo_(120/60);
+TempoClock.default.tempo_(120/80);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -14,7 +14,7 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n,
+SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1,
 	pan1=0, pan2=0, pan3=0, pan4=0,attack=0.01;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
@@ -82,7 +82,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n,
+SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1,
 	pan1=0, pan2=0, pan3=0, pan4=0,attack=0.01;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 23);
@@ -164,8 +164,8 @@ Pdef(\1, Pbind(\instrument, \id1,
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [16, 21, 26, 31, 35, 40], inf),
-	\presence, Pexprand(4, 8, inf),
-	\delay, Pexprand(0.001,1,inf),
+	\presence, Pexprand(1, 8, inf),
+	\delay, Pexprand(0.1,1,inf),
 	\n, Prand([(4/3),(3/2),2],inf),
 	//\attack,Pexprand(0.01,0.1,inf),
 
@@ -179,8 +179,8 @@ Pdef(\2, Pbind(\instrument, \id2,
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [16, 21, 26, 31, 35, 40], inf),
-	\presence, Pexprand(4, 8, inf),
-	\delay, Pexprand(0.01,1,inf),
+	\presence, Pexprand(1, 8, inf),
+	\delay, Pexprand(0.1,1,inf),
 	\n, Prand([(4/3),(3/2),2],inf),
 		//\attack,Pexprand(0.01,0.1,inf),
 
