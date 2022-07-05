@@ -50,9 +50,9 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		), trig);
 
 		s1 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.0001), xpos: xc, ypos: yc,level:presence);
-			s2 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), xpos: xc, ypos: yc,level:presence);
+			s2 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.0001), xpos: xc, ypos: yc,level:presence);
 
-			Out.ar(8, s1*envd1);
+		Out.ar(8, s1*envd1);
 		Out.ar(8, s2*envd2);
 
 
@@ -119,7 +119,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		), trig);
 
 				s1 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: enva), (i*under+envf), 0.0001), xpos: xc, ypos: yc,level:presence);
-		s2 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.001), xpos: xc, ypos: yc,level:presence);
+		       s2 = Pan4.ar(BPF.ar(BrownNoise.ar(mul: envb), (ii*over+envf), 0.0001), xpos: xc, ypos: yc,level:presence);
 
 			Out.ar(8, s1*envd1);
 		Out.ar(8, s2*envd2);
