@@ -16,7 +16,7 @@ s.record(numChannels:6) ;
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
-	var  x = 0, amp = (2/n), fund = (440 )*n;
+	var  x = 0, amp = (3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -62,7 +62,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
-	var  x = 0, amp = (2/n), fund = (440 )*n;
+	var  x = 0, amp = (3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
