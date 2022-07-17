@@ -51,7 +51,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 			over = exp(Complex(0,1)*(2.pow(x/12))).real.squared;
 		over=over*1500;
 
-	    pos = over.linlin(2, 24, 1/2, 1);
+	  pos = exp(Complex(0,1)*(2.pow(x/12))).real;
 
 		trig = TDelay.ar(trig, delay);
 	};
@@ -95,8 +95,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		x = x+1;
 		over = exp(Complex(0,1)*(2.pow(x/12))).imag.squared;
 		over=over*1500;
-
-	    pos = over.linlin(2, 24, 1/2, 1);
+		under = (x+1)/x;
+	    pos = exp(Complex(0,1)*(2.pow(x/12))).imag;
 
 		trig = TDelay.ar(trig, delay);
 	};
