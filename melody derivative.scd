@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=12;
-TempoClock.default.tempo_(120/15);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -48,9 +48,8 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 
 		x = x+1;
-			over = exp(Complex(0,1)*(2.pow(x/12))).real.squared;
-		over=over*1500;
-
+			over = exp(Complex(0,1)*(2.pow(x/12))).real.abs;
+		over=over*100;
 	  pos = exp(Complex(0,1)*(2.pow(x/12))).real;
 
 		trig = TDelay.ar(trig, delay);
@@ -93,8 +92,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 
 		x = x+1;
-		over = exp(Complex(0,1)*(2.pow(x/12))).imag.squared;
-		over=over*1500;
+		over = exp(Complex(0,1)*(2.pow(x/12))).imag.abs;
+		over=over*100;
 		under = (x+1)/x;
 	    pos = exp(Complex(0,1)*(2.pow(x/12))).imag;
 
@@ -104,10 +103,10 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 )
 )
 (
-var aPattern = Pexprand(1, 66, inf);
+var aPattern = Pexprand(1, 18, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 4, inf),
+\dur, Pexprand(1, 1.01, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, aPattern))
@@ -123,7 +122,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 )).play(quant:1);
 
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(1, 4, inf),
+	\dur, Pexprand(1, 1.01, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, aPattern))
