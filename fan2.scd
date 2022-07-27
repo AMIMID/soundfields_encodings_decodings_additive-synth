@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=4;
-TempoClock.default.tempo_(120/30);
+TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -14,15 +14,15 @@ s.record(numChannels:4) ;
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-var a=10;
+var a=1000;
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
-	var  x = 0, amp = (16/n), fund = (110 )*n;
+	var  x = 0, amp = (16/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
-	var decay = 3*((sqrt(5)+1)/2);
+	var decay = 4*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 		var an = 0, pang=an.wrap(0,360), pos = 0;
 
@@ -61,15 +61,15 @@ var a=10;
 );
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-var a=10;
+var a=1000;
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
-	var  x = 0, amp = (8/n), fund = (220 )*n;
+	var  x = 0, amp = (8/n), fund = (440 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
-	var decay = 3*((sqrt(5)+1)/2);
+	var decay = 4*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var an = 0, pang=an.wrap(0,360), pos = 0;
 
@@ -118,7 +118,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 	\aToW, Ptuple(Array.fill(12, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Pseq( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
+	\interval, Pxrand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
 		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(0.01,0.1,inf),
@@ -134,7 +134,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 	\aToW, Ptuple(Array.fill(12, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Pseq( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
+	\interval, Pxrand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
 		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(0.01,0.1,inf),
