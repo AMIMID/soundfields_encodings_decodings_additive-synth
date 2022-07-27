@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=8;
-TempoClock.default.tempo_(120/60);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -15,7 +15,7 @@ s.record(numChannels:8) ;
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
-var a=2;
+var a=4;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (1/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -28,8 +28,8 @@ var a=2;
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	8.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
@@ -67,7 +67,7 @@ var a=2;
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
-	var a=2;
+	var a=4;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (0.5/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -79,8 +79,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	8.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
@@ -137,7 +137,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 )).play(quant:1);
 
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(1/2, 1/2, inf),
+	\dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(8, aPattern))
