@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=4;
-TempoClock.default.tempo_(120/15);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -14,7 +14,7 @@ s.record(numChannels:4) ;
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-
+var a=10;
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
 	var  x = 0, amp = (16/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -26,8 +26,8 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 		var an = 0, pang=an.wrap(0,360), pos = 0;
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	12.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
@@ -49,19 +49,19 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 		x = x+1;
 		over = (x+1)/1;
-		under = 1/(x+1);
+		under = 1/(x+a);
 
 			an = an+137.5;
 		pang = an.wrap(0, 360);
 			pos = over.linlin(2, 12, 1/2, 1);
 
-		trig = TDelay.ar(trig, delay);
+		trig = TDelay.ar(trig, under);
 	};
 }).add;
 );
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-
+var a=10;
 	var aToW = NamedControl.kr(\aToW, 0 ! 12);
 	var  x = 0, amp = (8/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -73,8 +73,8 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var an = 0, pang=an.wrap(0,360), pos = 0;
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	12.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
@@ -96,13 +96,13 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 		x = x+1;
 		over = (x+1)/1;
-		under = 1/(x+1);
+		under = 1/(x+a);
 
 			an = an+137.5;
 		pang = an.wrap(0, 360);
 			pos = over.linlin(2, 12, 1/2, 1);
 
-		trig = TDelay.ar(trig, delay);
+		trig = TDelay.ar(trig, under);
 	};
 }).add;
 )
