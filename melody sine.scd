@@ -16,7 +16,7 @@ s.record(numChannels:6) ;
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (0.5/n), fund = (220 )*n;
+	var  x = 0, amp = (0.5/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -49,7 +49,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 		x = x+1;
 		over = (x+1)/1;
-		under = 1/(x+1);
+		under = 1/(x+10);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -64,7 +64,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (1/n), fund = (110 )*n;
+	var  x = 0, amp = (1/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -97,7 +97,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 		x = x+1;
 		over = (x+1)/1;
-		under = 1/(x+1);
+		under = 1/(x+10);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -114,13 +114,13 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 var aPattern = Pexprand(1, 10, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1/2, inf),
+\dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Prand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
+	\interval, Pxrand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
 		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(0.1,0.2,inf),
@@ -130,13 +130,13 @@ Pdef(\1, Pbind(\instrument, \id1,
 )).play(quant:1);
 
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(1, 1/2, inf),
+	\dur, Pexprand(1/2, 1/2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Prand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
+	\interval, Pxrand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
 		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(0.1,0.2,inf),
