@@ -15,9 +15,9 @@ s.record(numChannels:8) ;
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
-var a=4;
+var a=10;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
-	var  x = 0, amp = (1/n), fund = (55 )*n;
+	var  x = 0, amp = (1/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -28,10 +28,13 @@ var a=4;
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
 
-	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+
 
 	8.do {
+
+			envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -42,9 +45,9 @@ var a=4;
 			[-4]
 		), trig);
 
-		s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFSaw.ar(under),orientation:(over-1),level:presence);
+		s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
 
-		s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1, pos:LFSaw.ar(under),orientation:(over-1).neg,level:presence);
+		s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		   Out.ar(0, s4*envd2);
@@ -67,9 +70,9 @@ var a=4;
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
 
-	var a=4;
+	var a=10;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
-	var  x = 0, amp = (0.5/n), fund = (110 )*n;
+	var  x = 0, amp = (0.5/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -79,10 +82,12 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
-	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	8.do {
+
+			envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -93,9 +98,9 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 			[-4]
 		), trig);
 
-s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFSaw.ar(under),orientation:(over-1),level:presence);
+s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
 
-s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:LFSaw.ar(under),orientation:(over-1).neg,level:presence);
+s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		  Out.ar(0, s4*envd2);
