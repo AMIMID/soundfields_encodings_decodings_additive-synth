@@ -13,9 +13,9 @@ s.record(numChannels:8) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 
-var a=10;
+var a=100,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (1/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -53,9 +53,10 @@ var a=10;
 		   Out.ar(0, s4*envd2);
 
 
-		x = x+1;
+		x = x+a;
+			y=y+a;
 		over = (x+1)/1;
-		under = 1/(x+a);
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -68,9 +69,9 @@ var a=10;
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 
-	var a=10;
+	var a=100,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (0.5/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -107,8 +108,9 @@ s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb)
 
 
 		x = x+1;
+		y=y+a;
 		over = (x+1)/1;
-		under = 1/(x+a);
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 

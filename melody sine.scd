@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=12;
-TempoClock.default.tempo_(120/960);
+TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -13,10 +13,10 @@ s.record(numChannels:6) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-var a=1000;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
+var a=1000,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (0.5/n), fund = (110 )*n;
+	var  x = 0, amp = (0.5/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -47,9 +47,10 @@ var a=1000;
 		   Out.ar(0, s4*envd2);
 
 
-		x = x+1;
-		over = (x+1)/1;
-		under = 1/(x+a);
+	x = x+1;
+			y=y+a;
+		over = (y+1)/1;
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -61,10 +62,10 @@ var a=1000;
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-var a=1000;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
+var a=1000,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (1/n), fund = (55 )*n;
+	var  x = 0, amp = (1/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -96,8 +97,9 @@ var a=1000;
 
 
 		x = x+1;
-		over = (x+1)/1;
-		under = 1/(x+a);
+			y=y+a;
+		over = (y+1)/1;
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
