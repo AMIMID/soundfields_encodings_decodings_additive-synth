@@ -1,7 +1,7 @@
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=4;
-TempoClock.default.tempo_(120/15);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
@@ -13,8 +13,8 @@ s.record(numChannels:4) ;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-
+SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
+var a=100,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
 	var  x = 0, amp = (1/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -49,8 +49,9 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 
 
 		x = x+1;
-		over = (x+1)/1;
-		under = 1/(x+1);
+			y=y+a;
+		over = (y+1)/1;
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -58,13 +59,13 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		pang = an.wrap(0, 360);
 	poss=exp(Complex(0,1)*pang);
 
-		trig = TDelay.ar(trig, delay);
+		trig = TDelay.ar(trig, under);
 	};
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , n=1, wide=1;
-
+SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
+var a=100,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
 	var  x = 0, amp = (0.5/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -98,9 +99,10 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		   Out.ar(0, s4*envd2);
 
 
-		x = x+1;
-		over = (x+1)/1;
-		under = 1/(x+1);
+			x = x+1;
+			y=y+a;
+		over = (y+1)/1;
+		under = 1/(y+a);
 
 	    pos = over.linlin(2, 25, 1/2, 1);
 
@@ -108,7 +110,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, y = 1, delay =1 , 
 		pang = an.wrap(0, 360);
 		poss=exp(Complex(0,1)*pang);
 
-		trig = TDelay.ar(trig, delay);
+		trig = TDelay.ar(trig, under);
 	};
 }).add;
 )
@@ -124,10 +126,11 @@ Pdef(\1, Pbind(\instrument, \id1,
 	\aToW, Ptuple(Array.fill(24, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Prand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
-		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
+	\interval, Pxrand( [
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(0.01,0.2,inf),
+	//\delay, Pexprand(0.01,0.2,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
@@ -140,10 +143,11 @@ Pdef(\2, Pbind(\instrument, \id2,
 	\aToW, Ptuple(Array.fill(24, aPattern))
 	.collect { |array| [array] },
 
-	\interval, Prand( [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
-		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10], inf),
+	\interval, Pxrand( [
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(0.01,0.2,inf),
+	//\delay, Pexprand(0.01,0.2,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
@@ -154,5 +158,8 @@ Pdef(\1).play
 Pdef(\2).play
 Pdef(\1).stop
 Pdef(\2).stop
+
+[7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
+		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10]
 
 [12, 16, 19, 24, 28, 31, 36, 40, 43, 48]  C
