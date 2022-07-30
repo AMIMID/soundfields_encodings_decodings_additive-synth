@@ -50,7 +50,7 @@ var a=100,y=0;
 
 		x = x+1;
 			y=y+a;
-		over = (y+1)/1;
+		over = (x+1)/1;
 		under = 1/(y+a);
 
 	    pos = over.linlin(2, 17, 1/2, 1);
@@ -101,7 +101,7 @@ var a=1,y=0;
 
 			x = x+1;
 			y=y+a;
-		over = (y+1)/1;
+		over = (x+1)/1;
 		under = 1/(y+a);
 
 	    pos = over.linlin(2, 17, 1/2, 1);
