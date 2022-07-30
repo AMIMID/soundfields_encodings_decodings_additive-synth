@@ -15,8 +15,8 @@ s.record(numChannels:4) ;
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 var a=100,y=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (1/n), fund = (110 )*n;
+	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var  x = 0, amp = (0.5/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -26,10 +26,10 @@ var a=100,y=0;
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	24.do {
+	16.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -53,7 +53,7 @@ var a=100,y=0;
 		over = (y+1)/1;
 		under = 1/(y+a);
 
-	    pos = over.linlin(2, 25, 1/2, 1);
+	    pos = over.linlin(2, 17, 1/2, 1);
 
 			an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -66,8 +66,8 @@ var a=100,y=0;
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 var a=100,y=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 24);
-	var  x = 0, amp = (0.5/n), fund = (220 )*n;
+	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var  x = 0, amp = (0.5/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -80,7 +80,7 @@ var a=100,y=0;
 	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	24.do {
+	16.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -104,7 +104,7 @@ var a=100,y=0;
 		over = (y+1)/1;
 		under = 1/(y+a);
 
-	    pos = over.linlin(2, 25, 1/2, 1);
+	    pos = over.linlin(2, 17, 1/2, 1);
 
 			an = an+137.5;
 		pang = an.wrap(0, 360);
@@ -123,7 +123,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 \dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(24, aPattern))
+	\aToW, Ptuple(Array.fill(16, aPattern))
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [
@@ -140,7 +140,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 	\dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(24, aPattern))
+	\aToW, Ptuple(Array.fill(16, aPattern))
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [
