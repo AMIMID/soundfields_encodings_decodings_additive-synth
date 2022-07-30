@@ -19,7 +19,7 @@ s.waitForBoot;
 
 (
 (
-SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1,a=100;
+SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1,a=1000;
 var y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 	var  x = 0, amp = (0.3/n), fund = (110 )*n;
@@ -70,7 +70,7 @@ var y=0;
 }).add;
 );
 (
-SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1,a=1;
+SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1,a=1000;
 var y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 15);
 	var  x = 0, amp = (0.6/n), fund = (55 )*n;
