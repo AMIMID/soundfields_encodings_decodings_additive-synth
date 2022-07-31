@@ -1,7 +1,7 @@
 (
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=12;
+s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.waitForBoot
