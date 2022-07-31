@@ -66,7 +66,7 @@
 
 b = Buffer.alloc(s,2048);
 (
-~sig = Signal.sineFill(1024,[1,(2/3),(4/3),(1/2)],[1.degrad,(3/2).degrad,(4/3).degrad,2.degrad]);
+~sig = Signal.sineFill(1024,[1,(2/3),(4/3),(1/2)],[2.degrad,(3/2).degrad,(4/3).degrad,1.degrad]);
 ~wt = ~sig.asWavetable;
 b.loadCollection(~wt);
 );
@@ -75,12 +75,12 @@ b.plot;
 
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/30);
+TempoClock.default.tempo_(60/20);
 s.options.memSize = 8192*8;
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
-var a=1000,y=0;
+var a=1,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
 	var  x = 0, amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -92,8 +92,8 @@ var a=1000,y=0;
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 1/2, an = 0, pang=an.wrap(0,360);
 
-	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	24.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
@@ -179,10 +179,10 @@ var a=10,y=0;
 )
 
 (
-~aPattern = Pexprand(1, 10, inf);
+~aPattern = Pexprand(1, 2, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1, inf),
+\dur, Pexprand(1, 1.2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, ~aPattern))
