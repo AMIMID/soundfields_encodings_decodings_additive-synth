@@ -16,7 +16,7 @@ var a=1000,y=0;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
-	var decay = 4*((sqrt(5)+1)/2);
+	var decay = delay*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
@@ -35,9 +35,9 @@ var a=1000,y=0;
 			[-4]
 		), trig);
 
-		s2 = PanAz.ar(24,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
+		s2 = PanAz.ar(24,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under*a),orientation:(over-1),level:presence);
 
-		s4 = PanAz.ar(24,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
+		s4 = PanAz.ar(24,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1, pos:LFNoise1.ar(under*a),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		   Out.ar(0, s4*envd2);
@@ -60,21 +60,20 @@ var a=1000,y=0;
 );
 
 (
-~aPattern = Pexprand(1, 10, inf);
+~aPattern = Pexprand(1, 6, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1, inf),
+\dur, Pexprand(1, 1.2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, ~aPattern))
 	.collect { |array| [array] },
 
-	\interval, Pxrand([7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
-		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10,
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22], inf),
+	\interval, Pxrand([
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	//\delay, Pexprand(0.1,0.2,inf),
+	\delay, Pexprand(2,6,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
