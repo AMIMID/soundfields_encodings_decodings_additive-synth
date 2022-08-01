@@ -13,7 +13,7 @@ var a=1000,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
-	var under = 1/a, over = 1,attack=0.04;
+	var under = 1/a, over = 1,attack=0.02;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
@@ -43,9 +43,9 @@ var a=1000,y=0;
 
 		//s4 = PanAz.ar(8,LPF.ar(SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb),110*16), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
 
-		s2 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb)), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
+		s2 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb)), width: 1, pos:LFNoise1.ar(under*(a/over)),orientation:(over-1),level:presence);
 
-		s4 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb)), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
+		s4 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb)), width:1, pos:LFNoise1.ar(under*(a/over)),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		   Out.ar(0, s4*envd2);
@@ -97,9 +97,9 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wi
 			[-4]
 		), trig);
 
-s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
+s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under*(a/over)),orientation:(over-1),level:presence);
 
-s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
+s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:LFNoise1.ar(under*(a/over)),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		  Out.ar(0, s4*envd2);
