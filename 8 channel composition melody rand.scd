@@ -1,16 +1,10 @@
+(
 s.options.numWireBufs = 1024;
 s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=8;
-TempoClock.default.tempo_(120/30);
+TempoClock.default.tempo_(120/60);
 s.options.memSize = 8192*8;
-s.options.sampleRate = 44100;
-s.options.numBuffers = 1024*1;
-s.options.numRGens=64*1;
-s.options.numWireBufs=64*1;
-s.options.numInputBusChannels=0;
-s.options.outputStreamsEnabled.postln
-s.record(numChannels:8) ;
-
+s.waitForBoot;
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
@@ -19,7 +13,7 @@ var a=1000,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
-	var under = 1/a, over = 1,attack=0.01;
+	var under = 1/a, over = 1,attack=0.04;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
@@ -45,9 +39,13 @@ var a=1000,y=0;
 			[-4]
 		), trig);
 
-		s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
+		//s2 = PanAz.ar(8,LPF.ar(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb),110*16), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
 
-		s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
+		//s4 = PanAz.ar(8,LPF.ar(SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb),110*16), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
+
+		s2 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb)), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
+
+		s4 = PanAz.ar(8,(SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb)), width:1, pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		   Out.ar(0, s4*envd2);
@@ -71,7 +69,7 @@ var a=1000,y=0;
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 
-	var a=1000,y=0;
+	var a=10,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  x = 0, amp = (0.6/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -79,7 +77,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wi
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
-	var decay = 4*((sqrt(5)+1)/2);
+	var decay = delay*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
@@ -99,9 +97,9 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wi
 			[-4]
 		), trig);
 
-s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:SinOsc.ar(under),orientation:(over-1),level:presence);
+s2 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), width: 1, pos:LFNoise1.ar(under),orientation:(over-1),level:presence);
 
-s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:SinOsc.ar(under),orientation:(over-1).neg,level:presence);
+s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb), width:1,pos:LFNoise1.ar(under),orientation:(over-1).neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		  Out.ar(0, s4*envd2);
@@ -122,16 +120,16 @@ s4 = PanAz.ar(8,SinOsc.ar(freq:((ii*over)+envf),phase:pang.neg.degrad,mul: envb)
 	};
 }).add;
 )
-)
+);
 
 (
-var aPattern = Pexprand(1, 10, inf);
+ ~aPattern = Pexprand(1, 10, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1, inf),
+\dur, Pexprand(1, 1.2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(8, aPattern))
+	\aToW, Ptuple(Array.fill(8, ~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Prand([
@@ -145,22 +143,34 @@ Pdef(\1, Pbind(\instrument, \id1,
 )).play(quant:1);
 
 Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(1, 1, inf),
+	\dur, Pexprand(2, 8, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(8, aPattern))
+	\aToW, Ptuple(Array.fill(8, ~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Prand( [
 		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
 		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	//\delay, Pexprand(0.1,0.2,inf),
+	\delay, Pexprand(2,6,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
 )).play(quant:1)
 )
+)
+
+
+s.options.sampleRate = 44100;
+s.options.numBuffers = 1024*1;
+s.options.numRGens=64*1;
+s.options.numWireBufs=64*1;
+s.options.numInputBusChannels=0;
+s.options.outputStreamsEnabled.postln
+s.options.device_("USB Sound Device");
+s.record(numChannels:8) ;
+
 
 Pdef(\1).play
 Pdef(\2).play
