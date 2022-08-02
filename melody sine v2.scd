@@ -1,6 +1,5 @@
 (
 s.options.numWireBufs = 1024;
-s.options.device_("USB Sound Device");
 s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
@@ -8,7 +7,7 @@ s.waitForBoot
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
-var a=100,y=0;
+var a=1000,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
 	var  x = 0, amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -30,7 +29,7 @@ var a=100,y=0;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { 0.1999.rand2 }),
 			[-4]
 		), trig);
 
@@ -57,7 +56,7 @@ var a=100,y=0;
 );
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
-var a=100,y=0;
+var a=10,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 24);
 	var  x = 0, amp = (0.6/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -79,7 +78,7 @@ var a=100,y=0;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { 0.1999.rand2 }),
 			[-4]
 		), trig);
 
@@ -107,10 +106,24 @@ var a=100,y=0;
 );
 
 (
-~aPattern = Pexprand(1, 10, inf);
+~aPattern = Pexprand(1, 5, inf);
 
+Pdef(\2, Pbind(\instrument, \id2,
+	\dur, Pexprand(4, 8, inf),
+//	\dur, Prand([0.2,0.4], inf),
+
+	\aToW, Ptuple(Array.fill(24, ~aPattern))
+	.collect { |array| [array] },
+
+	\interval, Pxrand( [5,11,12,17], inf),
+	\presence, Pexprand(1, 1.5, inf),
+	\delay, Pexprand(2,8,inf),
+	//\n, Prand([1,(4/3),(3/2),2],inf),
+//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
+
+)).play(quant:1);
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1, inf),
+\dur, Pexprand(1, 1.2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(24, ~aPattern))
@@ -123,21 +136,6 @@ Pdef(\1, Pbind(\instrument, \id1,
 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
 )).play(quant:1);
-
-Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(1, 1, inf),
-//	\dur, Prand([0.2,0.4], inf),
-
-	\aToW, Ptuple(Array.fill(24, ~aPattern))
-	.collect { |array| [array] },
-
-	\interval, Pxrand( [5,11,12,17], inf),
-	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,8,inf),
-	//\n, Prand([1,(4/3),(3/2),2],inf),
-//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
-
-)).play(quant:1)
 )
 )
 
