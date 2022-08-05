@@ -1,8 +1,4 @@
-s.options.numWireBufs = 1024;
-s.options.device_("USB Sound Device");
-s.options.numOutputBusChannels=4;
-TempoClock.default.tempo_(120/30);
-s.options.memSize = 8192*8;
+
 s.options.sampleRate = 44100;
 s.options.numBuffers = 1024*1;
 s.options.numRGens=64*1;
@@ -10,13 +6,21 @@ s.options.numWireBufs=64*1;
 s.options.numInputBusChannels=0;
 s.options.outputStreamsEnabled.postln
 s.record(numChannels:4) ;
+s.options.device_("USB Sound Device");
+
+(
+s.options.numWireBufs = 1024;
+s.options.numOutputBusChannels=4;
+TempoClock.default.tempo_(120/30);
+s.options.memSize = 8192*8;
+s.waitForBoot;
 
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
 var a=100,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  x = 0, amp = (1/n), fund = (110 )*n;
+	var  x = 0, amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -36,7 +40,7 @@ var a=100,y=0;
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { decay.rand }),
+			Array.fill(aToW.size - 1, { 0.9999.rand }),
 			[-4]
 		), trig);
 
@@ -65,15 +69,15 @@ var a=100,y=0;
 );
 (
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , n=1, wide=1;
-var a=1,y=0;
+var a=10,y=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  x = 0, amp = (0.7/n), fund = (55 )*n;
+	var  x = 0, amp = (0.6/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var under = 1, over = 1,attack=0.01;
 	var aToWNeg = aToW.neg;
 	var tone = 2.pow(interval/12);
 	var i = fund * tone, ii = fund *tone;
-	var decay = 3*((sqrt(5)+1)/2);
+	var decay = delay*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 	var pos = 0, an = 0, pang=an.wrap(0,360),poss=0;
 
@@ -114,21 +118,21 @@ var a=1,y=0;
 	};
 }).add;
 )
-)
+);
 
 (
-var aPattern = Pexprand(1, 10, inf);
+~aPattern = Pexprand(1, 10, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-\dur, Pexprand(1, 1, inf),
+\dur, Pexprand(1, 1.2, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(16, aPattern))
+	\aToW, Ptuple(Array.fill(16,~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22], inf),
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
 \delay, Pexprand(3,6,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
@@ -140,24 +144,29 @@ Pdef(\2, Pbind(\instrument, \id2,
 	\dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(16, aPattern))
+	\aToW, Ptuple(Array.fill(16, ~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22], inf),
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	//\delay, Pexprand(0.01,0.2,inf),
+	\delay, Pexprand(3,8,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
 )).play(quant:1)
+)
 )
 
 Pdef(\1).play
 Pdef(\2).play
 Pdef(\1).stop
 Pdef(\2).stop
+
+[
+		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,12,19,20,
+		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,12,20,22]
 
 [7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,19,22,14,26,7,19,22,10,26,14,21,22,
 		5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,17,21,9,17,21,12,24,5,19,21,9,19,21,12,10]
