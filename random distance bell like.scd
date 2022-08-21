@@ -11,7 +11,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=angle.rand,y2=angle.rand;
+	var y1=phi.rand,y2=phi.rand;
 	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
 	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
 	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
@@ -52,8 +52,8 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//	p1=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
-		y1=y1+angle.rand;
-		y2=y2+angle.rand;
+		y1=y1+phi.rand;
+		y2=y2+phi.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
@@ -76,7 +76,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=angle.rand,y2=angle.rand;
+	var y1=phi.rand,y2=phi.rand;
 	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
 	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
 	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
@@ -116,8 +116,8 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//	p1=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
-		y1=y1+angle.rand;
-		y2=y2+angle.rand;
+		y1=y1+phi.rand;
+		y2=y2+phi.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
