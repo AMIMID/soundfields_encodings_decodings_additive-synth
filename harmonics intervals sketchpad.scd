@@ -11,7 +11,7 @@
 	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 	var interval=d;
 
-	16.do{
+	160.do{
 		Out.ar(0,Pan2.ar(SinOsc.ar(440*interval,phase:pang1.degrad,mul:1/interval),pos:0));
 
 		a=a+angle;
