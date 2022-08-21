@@ -1,7 +1,7 @@
 (
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=4;
-TempoClock.default.tempo_(120/40);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*8;
 s.waitForBoot
 (
@@ -34,7 +34,6 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	16.do {
-		envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -44,30 +43,29 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			[-4]
 		), trig);
 
-		s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
-		s4 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.neg.degrad,mul: envb), xpos:poss.real.neg, ypos:poss.imag.neg,level:presence);
-
-		   Out.ar(0, s2*envd2);
-		 //  Out.ar(0, s4*envd2);
-
-
-	a=a+angle;
-		//b=b+angle;
-		pang1=a.wrap(0,360);
-	//	pang2=b.wrap(0,360);
-	poss=exp(Complex(0,1)*pang1);
-	//	p1=exp(Complex(0,1)*pang1);
-	//	p2=exp(Complex(0,1)*pang2);
-
-		y1=y1+angle.rand;
-		y2=y2+angle.rand;
+		y1=y1+envf;
+		y2=y2+envf;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 		interval=interval+d;
 
-		trig = TDelay.ar(trig, under);
+				envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+
+				s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
+		s4 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.neg.degrad,mul: envb), xpos:poss.real.neg, ypos:poss.imag.neg,level:presence);
+
+		   Out.ar(0, s2*envd2);
+		 //  Out.ar(0, s4*envd2);
+	a=a+angle;
+		//b=b+angle;
+		pang1=a.wrap(0,360);
+	//	pang2=b.wrap(0,360);
+poss=exp(Complex(0,1)*pang1);
+	//	p1=exp(Complex(0,1)*pang1);
+	//	p2=exp(Complex(0,1)*pang2);
+		trig = TDelay.ar(trig, 1);
 	};
 }).add;
 );
@@ -100,7 +98,6 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	16.do {
-		envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -110,14 +107,23 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			[-4]
 		), trig);
 
-	s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
+
+		y1=y1+envf;
+		y2=y2+envf;
+
+		p1=exp(Complex(0,1)*y1);
+		p2=exp(Complex(0,1)*y2);
+		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
+		interval=interval+d;
+
+						envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+
+				s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
 		s4 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.neg.degrad,mul: envb), xpos:poss.real.neg, ypos:poss.imag.neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
 		 //  Out.ar(0, s4*envd2);
-
-
-	a=a+angle;
+			a=a+angle;
 		//b=b+angle;
 		pang1=a.wrap(0,360);
 	//	pang2=b.wrap(0,360);
@@ -125,15 +131,7 @@ poss=exp(Complex(0,1)*pang1);
 	//	p1=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
-		y1=y1+angle.rand;
-		y2=y2+angle.rand;
-
-		p1=exp(Complex(0,1)*y1);
-		p2=exp(Complex(0,1)*y2);
-		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
-		interval=interval+d;
-
-		trig = TDelay.ar(trig, under);
+		trig = TDelay.ar(trig, 1);
 	};
 }).add;
 )
@@ -187,7 +185,7 @@ s.options.numWireBufs=64*1;
 s.options.numInputBusChannels=0;
 s.options.outputStreamsEnabled.postln
 s.options.device_("USB Sound Device");
-s.record(numChannels:6) ;
+s.record(numChannels:4) ;
 
 [5,11,12,17]
 

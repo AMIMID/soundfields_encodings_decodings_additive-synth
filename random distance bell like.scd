@@ -11,13 +11,13 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=1,y2=2;
+	var y1=angle.rand,y2=angle.rand;
 	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
 	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
 	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
 	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 	var interval=d;
-	var under=0.001/interval;
+	var under=1/interval;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
 	var  amp = (0.3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -39,7 +39,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { 0.0999.rand2 }),
+			Array.fill(aToW.size - 1,{ 0.0999.rand}),
 			[-4]
 		), trig);
 
@@ -61,11 +61,11 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 
 envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
-		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)),phase:interval.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
+		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)),phase:pang1.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, under);
+		trig = TDelay.ar(trig, 1);
 	};
 
 }).add;
@@ -76,13 +76,13 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=1,y2=2;
+	var y1=angle.rand,y2=angle.rand;
 	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
 	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
 	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
 	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 	var interval=d;
-	var under=0.0001/interval;
+	var under=1/interval;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
 	var  amp = (0.6/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -104,10 +104,9 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { 0.0999.rand2 }),
+			Array.fill(aToW.size - 1, { 0.0999.rand }),
 			[-4]
 		), trig);
-
 
 	a=a+angle;
 		//b=b+angle;
@@ -127,11 +126,11 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 
 			envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
-			s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)),phase:interval.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
+			s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)),phase:pang1.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
 
 		   Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, under);
+		trig = TDelay.ar(trig, 1);
 	};
 }).add;
 )
@@ -151,7 +150,7 @@ Pdef(\1, Pbind(\instrument, \id1,
 		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
 		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,8,inf),
+	\delay, Pexprand(4,8,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
@@ -167,7 +166,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
 		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,8,inf),
+	\delay, Pexprand(4,8,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
