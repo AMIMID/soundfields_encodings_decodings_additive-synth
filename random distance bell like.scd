@@ -54,7 +54,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 			a=a+angle;
 		pang=a.wrap(0,360);
 
-		trig = TDelay.ar(trig, 0);
+		trig = TDelay.ar(trig, 1/interval);
 	};
 
 }).add;
@@ -108,7 +108,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 			a=a+angle;
 		pang=a.wrap(0,360);
 
-		trig = TDelay.ar(trig, 0);
+		trig = TDelay.ar(trig, 1/interval);
 	};
 }).add;
 )
@@ -118,7 +118,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 ~aPattern = Pexprand(1, 4, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(1, 1, inf),
+	\dur, Pexprand(4, 4, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
 	\aToW, Ptuple(Array.fill(16, ~aPattern))
