@@ -2,22 +2,18 @@
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/30);
-s.options.memSize = 8192*8;
+s.options.memSize = 8192*16;
 s.waitForBoot
 (
 (
 SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1;
 	var a=0;
 	var angle = 360-(360/((sqrt(5)+1)/2));
-	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=phi.rand,y2=phi.rand;
-	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
-	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
-	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
-	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
-	var interval=d;
-	var under=1/interval;
+	var y=0;
+	var pang=a.wrap(0,360);
+	var p1, p2,d;
+	var interval=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
 	var  amp = (0.3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -27,11 +23,10 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var i = fund * tone, ii = fund *tone;
 	var decay = delay*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
-	var pos = 1/2, an = 0, pang=an.wrap(0,360);
 
 
-	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+//	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	16.do {
 
@@ -43,27 +38,21 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			[-4]
 		), trig);
 
+	p1=exp(Complex(0,1)*y);
 
-	a=a+angle;
-		//b=b+angle;
-		pang1=a.wrap(0,360);
-	//	pang2=b.wrap(0,360);
+		y=y+phi.rand;
 
-	//	p1=exp(Complex(0,1)*pang1);
-	//	p2=exp(Complex(0,1)*pang2);
-
-		y1=y1+phi.rand;
-		y2=y2+phi.rand;
-
-		p1=exp(Complex(0,1)*y1);
-		p2=exp(Complex(0,1)*y2);
+		p2=exp(Complex(0,1)*y);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 		interval=interval+d;
 
 envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
-		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
+		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:interval.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
 
    Out.ar(0, s2*envd2);
+
+			a=a+angle;
+		pang=a.wrap(0,360);
 
 		trig = TDelay.ar(trig, 0);
 	};
@@ -74,15 +63,11 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1;
 	var a=0;
 	var angle = 360-(360/((sqrt(5)+1)/2));
-	var b=angle;
 	var phi=(sqrt(5)+1)/2;
-	var y1=phi.rand,y2=phi.rand;
-	var pang1=a.wrap(0,360),pang2=b.wrap(0,360);
-	//var p1=exp(Complex(0,1)*a), p2=exp(Complex(0,1)*b);
-	var p1=exp(Complex(0,1)*y1), p2=exp(Complex(0,1)*y2);
-	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
-	var interval=d;
-	var under=1/interval;
+	var y=0;
+	var pang=a.wrap(0,360);
+	var p1, p2,d;
+	var interval=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
 	var  amp = (0.6/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
@@ -92,7 +77,6 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var i = fund * tone, ii = fund *tone;
 	var decay = delay*((sqrt(5)+1)/2);
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
-	var pos = 1/2, an = 0, pang=an.wrap(0,360);
 
 
 	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
@@ -104,31 +88,25 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			aToW.collect { |letter, i|
 				Rand(aToWNeg[i], letter)
 			},
-			Array.fill(aToW.size - 1, { 0.0999.rand }),
+			Array.fill(aToW.size - 1,{ 0.0999.rand}),
 			[-4]
 		), trig);
 
-	a=a+angle;
-		//b=b+angle;
-		pang1=a.wrap(0,360);
-	//	pang2=b.wrap(0,360);
+	p1=exp(Complex(0,1)*y);
 
-	//	p1=exp(Complex(0,1)*pang1);
-	//	p2=exp(Complex(0,1)*pang2);
+		y=y+phi.rand;
 
-		y1=y1+phi.rand;
-		y2=y2+phi.rand;
-
-		p1=exp(Complex(0,1)*y1);
-		p2=exp(Complex(0,1)*y2);
+		p2=exp(Complex(0,1)*y);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 		interval=interval+d;
 
-			envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:interval.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
 
-			s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang1.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
+   Out.ar(0, s2*envd2);
 
-		   Out.ar(0, s2*envd2);
+			a=a+angle;
+		pang=a.wrap(0,360);
 
 		trig = TDelay.ar(trig, 0);
 	};
