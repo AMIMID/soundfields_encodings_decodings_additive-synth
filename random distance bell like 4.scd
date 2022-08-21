@@ -60,7 +60,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//	p2=exp(Complex(0,1)*pang2);
 
 		y1=y1+angle.rand;
-		y2=y1+angle.rand;
+		y2=y2+angle.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
@@ -126,7 +126,7 @@ poss=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
 		y1=y1+angle.rand;
-		y2=y1+angle.rand;
+		y2=y2+angle.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);

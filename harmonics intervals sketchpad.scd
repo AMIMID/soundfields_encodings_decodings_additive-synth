@@ -11,8 +11,8 @@
 	var d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 	var interval=d;
 
-	100.do{
-		Out.ar(0,Pan2.ar(SinOsc.ar(220*interval,phase:pang1.degrad,mul:1/interval),pos:0));
+	16.do{
+		Out.ar(0,Pan2.ar(SinOsc.ar(440*interval,phase:pang1.degrad,mul:1/interval),pos:0));
 
 		a=a+angle;
 		//b=b+angle;
@@ -23,7 +23,7 @@
 	//	p2=exp(Complex(0,1)*pang2);
 
 		y1=y1+angle.rand;
-		y2=y1+angle.rand;
+		y2=y2+angle.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
