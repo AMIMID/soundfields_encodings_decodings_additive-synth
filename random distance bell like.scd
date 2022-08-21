@@ -19,7 +19,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var interval=d;
 	var under=1/interval;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  amp = (0.3/n), fund = (220 )*n;
+	var  amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -30,8 +30,8 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var pos = 1/2, an = 0, pang=an.wrap(0,360);
 
 
-	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	16.do {
 
@@ -52,8 +52,8 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//	p1=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
-		y1=y1+envf;
-		y2=y2+envf;
+		y1=y1+angle.rand;
+		y2=y2+angle.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
@@ -65,7 +65,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 1);
+		trig = TDelay.ar(trig, 0);
 	};
 
 }).add;
@@ -84,7 +84,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var interval=d;
 	var under=1/interval;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  amp = (0.6/n), fund = (110 )*n;
+	var  amp = (0.6/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -116,8 +116,8 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//	p1=exp(Complex(0,1)*pang1);
 	//	p2=exp(Complex(0,1)*pang2);
 
-		y1=y1+envf;
-		y2=y2+envf;
+		y1=y1+angle.rand;
+		y2=y2+angle.rand;
 
 		p1=exp(Complex(0,1)*y1);
 		p2=exp(Complex(0,1)*y2);
@@ -130,14 +130,14 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 
 		   Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 1);
+		trig = TDelay.ar(trig, 0);
 	};
 }).add;
 )
 );
 
 (
-~aPattern = Pexprand(1, 10, inf);
+~aPattern = Pexprand(1, 100, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
 	\dur, Pexprand(1, 1, inf),
