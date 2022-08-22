@@ -16,7 +16,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var p1, p2,d;
 	var interval=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  amp = (0.3/n), fund = (110 )*n;
+	var  amp = (0.3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -29,7 +29,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 //	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	16.do {
+	8.do {
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -41,7 +41,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 
 	p1=exp(Complex(0,1)*y);
 
-		y=y+pi.rand;
+		y=pi.rand;
 
 		p2=exp(Complex(0,1)*y);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
@@ -55,7 +55,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 			a=a+angle;
 		pang=a.wrap(0,360);
 
-		trig = TDelay.ar(trig, 0.001/interval);
+		trig = TDelay.ar(trig, 0.01/d);
 	};
 
 }).add;
@@ -70,7 +70,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var p1, p2,d;
 	var interval=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  amp = (0.6/n), fund = (55 )*n;
+	var  amp = (0.6/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -95,7 +95,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 
 	p1=exp(Complex(0,1)*y);
 
-		y=y+pi.rand;
+		y=pi.rand;
 
 		p2=exp(Complex(0,1)*y);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
@@ -109,7 +109,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 			a=a+angle;
 		pang=a.wrap(0,360);
 
-		trig = TDelay.ar(trig, 0.001/interval);
+		trig = TDelay.ar(trig, 0.0001/interval);
 	};
 }).add;
 )
