@@ -48,15 +48,12 @@
 
         p1=exp(Complex(0,1)*y);
 
-		y=y+phi.rand;
+		y=phi.rand;
 
 		p2=exp(Complex(0,1)*y);
 
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
-
 		interval=interval+d;
-		interval.postln;
-
 		Out.ar(0,Pan2.ar(SinOsc.ar(440*interval,phase:interval.degrad,mul:1/interval),pos:0));
 
 		a=a+angle;
@@ -65,5 +62,35 @@
 	}
 }.play
 )
-exp(Complex(0,1)*100.degrad)
+///////////////////////////////////////////////
+
+(
+{
+	var a=0;
+	var angle = 360-(360/((sqrt(5)+1)/2));
+	var phi=(sqrt(5)+1)/2;
+	var y=0;
+	var pang=a.wrap(0,360);
+	var p1,p2,d,interval=0;
+
+	8.do{
+
+        p1=exp(Complex(0,1)*y);
+
+		y=pi.rand;
+
+		p2=exp(Complex(0,1)*y);
+
+		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
+		interval=interval+d;
+		Out.ar(0,Pan2.ar(SinOsc.ar(220*interval,phase:interval.degrad,mul:1/interval),pos:0));
+
+		a=a+angle;
+		pang=a.wrap(0,360);
+
+	}
+}.play
+)
+
+
 
