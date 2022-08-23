@@ -14,8 +14,8 @@ var a=0;
 	var pang=a.wrap(0,360);
 	var p1, p2,d;
 	var interval=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 4);
-	var  amp = (0.3/n), fund = (880 )*n;
+	var aToW = NamedControl.kr(\aToW, 0 ! 8);
+	var  amp = (0.3/n), fund = (220 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -29,7 +29,7 @@ var a=0;
 	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	4.do {
+	8.do {
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -41,7 +41,7 @@ var a=0;
 
 		p1=exp(Complex(0,1)*y);
 
-		y=y+phi.rand;
+		y=pi.linrand;
 
 		p2=exp(Complex(0,1)*y);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
@@ -49,11 +49,11 @@ var a=0;
 
 				envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
-				s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:interval.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
-		s4 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:interval.neg.degrad,mul: envb), xpos:poss.real.neg, ypos:poss.imag.neg,level:presence);
+				s2 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb), xpos: poss.real, ypos:poss.imag,level:presence);
+		s4 = Pan4.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.neg.degrad,mul: envb), xpos:poss.real.neg, ypos:poss.imag.neg,level:presence);
 
 		   Out.ar(0, s2*envd2);
-		 //  Out.ar(0, s4*envd2);
+		  Out.ar(0, s4*envd2);
 
 	a=a+angle;
 		pang=a.wrap(0,360);
@@ -128,23 +128,21 @@ poss=exp(Complex(0,1)*pang);
 (
 ~aPattern = Pexprand(1, 4, inf);
 
-Pdef(\2, Pbind(\instrument, \id2,
-	\dur, Pexprand(4, 4, inf),
+Pdef(\1, Pbind(\instrument, \id1,
+	\dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(4, ~aPattern))
+	\aToW, Ptuple(Array.fill(8, ~aPattern))
 	.collect { |array| [array] },
 
-	\note, Pxrand( [
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
+	\note, Pxrand( [1,2,5,6,8,9,12,13,14,17,18,20,21,24,25], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(2,8,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
 )).play(quant:1);
-Pdef(\1, Pbind(\instrument, \id1,
+Pdef(\2, Pbind(\instrument, \id2,
 \dur, Pexprand(1, 1, inf),
 //	\dur, Prand([0.2,0.4], inf),
 

@@ -72,19 +72,20 @@
 	var y=0;
 	var pang=a.wrap(0,360);
 	var p1,p2,d,interval=0;
+	//Out.ar(0,Pan2.ar(SinOsc.ar(220*interval,phase:0.degrad,mul:1/interval),pos:0));
 
 	8.do{
 
-        p1=exp(Complex(0,1)*y);
+        p1=exp(Complex(0,1)*y.degrad);
 
-		y=pi.rand;
+		y=360.linrand;
 
-		p2=exp(Complex(0,1)*y);
+		p2=exp(Complex(0,1)*y.degrad);
 
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 		interval=interval+d;
-		Out.ar(0,Pan2.ar(SinOsc.ar(220*interval,phase:interval.degrad,mul:1/interval),pos:0));
-
+		interval.postln;
+		Out.ar(0,Pan2.ar(SinOsc.ar(220*interval,phase:0.degrad,mul:1/interval),pos:0));
 		a=a+angle;
 		pang=a.wrap(0,360);
 
@@ -92,5 +93,32 @@
 }.play
 )
 
+exp(Complex(0,1)*3)
+////
+
+(
+{
+	var a=0;
+	var angle = 360-(360/((sqrt(5)+1)/2));
+	var phi=(sqrt(5)+1)/2;
+	var y=1;
+	var pang=a.wrap(0,360);
+	var p1,p2,d,interval=0;
+
+	8.do{
+
+
+		Out.ar(0,Pan2.ar(SinOsc.ar(220*y,phase:pang.degrad,mul:1/y),pos:0));
+
+		y=y+2;
+
+
+		a=a+angle;
+		pang=a.wrap(0,360);
+
+	}
+}.play
+)
+exp(Complex(0,1)*y)
 
 
