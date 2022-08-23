@@ -2,7 +2,7 @@
 (
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/40);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*16;
 s.waitForBoot
 (
@@ -16,7 +16,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var p1, p2,d;
 	var interval=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 8);
-	var  amp = (0.3/n), fund = (220 )*n;
+	var  amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -26,8 +26,8 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	8.do {
 
@@ -39,15 +39,14 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 			[-4]
 		), trig);
 
-	p1=exp(Complex(0,1)*y.degrad);
+	p1=exp(Complex(0,y.degrad).round(0.00001);
 
 		y=360.linrand;
-		y.postln;
 
-		p2=exp(Complex(0,1)*y.degrad);
+		p2=exp(Complex(0,y.degrad).round(0.00001);
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 		interval=interval+d;
-
+interval.postln;
 envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 		s2 = Pan2.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb), pos: LFNoise1.ar(0.1),level:presence);
 
@@ -56,7 +55,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 			a=a+angle;
 		pang=a.wrap(0,360);
 
-		trig = TDelay.ar(trig, 0);
+		trig = TDelay.ar(trig, 0.0001/interval);
 	};
 
 }).add;
