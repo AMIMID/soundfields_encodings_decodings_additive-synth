@@ -2,7 +2,7 @@
 (
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/30);
+TempoClock.default.tempo_(120/15);
 s.options.memSize = 8192*16;
 s.waitForBoot
 (
@@ -15,7 +15,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var pang=a.wrap(0,360);
 	var p1, p2,d;
 	var interval=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  amp = (0.3/n), fund = (110 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
@@ -29,7 +29,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	16.do {
+	8.do {
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -56,7 +56,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
    Out.ar(0, s2*envd2);
 
 
-		trig = TDelay.ar(trig, 0.0001/interval);
+		trig = TDelay.ar(trig, 0);
 	};
 
 }).add;
@@ -70,7 +70,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var pang=a.wrap(0,360);
 	var p1, p2,d;
 	var interval=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var aToW = NamedControl.kr(\aToW, 0 ! 8);
 	var  amp = (0.6/n), fund = (55 )*n;
 	var enva, envb, envd1, envd2, envf;
 	var attack=0.01;
@@ -84,7 +84,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	16.do {
+	8.do {
 
 		envf = EnvGen.ar(Env(
 			aToW.collect { |letter, i|
@@ -111,7 +111,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
    Out.ar(0, s2*envd2);
 
 
-		trig = TDelay.ar(trig, 0.0001/interval);
+		trig = TDelay.ar(trig, 0);
 	};
 
 }).add;
@@ -119,13 +119,13 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 );
 
 (
-~aPattern = Pexprand(1, 4, inf);
+~aPattern = Pexprand(1, 10, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Pexprand(1, 1, inf),
+	\dur, Prand([2, 4], inf),
 //	\dur, Prand([0.2,0.4], inf),
 	\b,Pexprand(1,2,inf),
-	\aToW, Ptuple(Array.fill(16, ~aPattern))
+	\aToW, Ptuple(Array.fill(8, ~aPattern))
 	.collect { |array| [array] },
 
 	\note, Pxrand([1,2,5,6,8,9,12,13,14,17,18,20,21,24,25], inf),
@@ -136,10 +136,10 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-\dur, Pexprand(2, 2, inf),
+\dur, Prand([2, 4], inf),
 //	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(16, ~aPattern))
+	\aToW, Ptuple(Array.fill(8, ~aPattern))
 	.collect { |array| [array] },
 
 	\note, Pxrand([1,2,5,6,8,9,12,13,14,17,18,20,21,24,25], inf),
