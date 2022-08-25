@@ -1,17 +1,20 @@
 
-(
+
+
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*16;
 s.waitForBoot
+
 (
+Tdef(\x, {loop{30.wait
 (
 SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1,b=pi;
 	var a=0;
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var phi=(sqrt(5)+1)/2;
-	var y=0,x=0;
+	var y=360.rand,x=0;
 	var pang=a.wrap(0,360);
 	var p1, p2,p3,p4,d,dx;
 	var interval=0,intervalx=0;
@@ -74,7 +77,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var a=0;
 	var angle = 360-(360/((sqrt(5)+1)/2));
 	var phi=(sqrt(5)+1)/2;
-	var y=0,x=0;
+	var y=360.rand,x=0;
 	var pang=a.wrap(0,360);
 	var p1, p2,p3,p4,d,dx;
 	var interval=0,intervalx=0;
@@ -132,7 +135,7 @@ envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
 
 }).add;
 )
-);
+}}).play);
 
 (
 ~aPattern = Pexprand(1, 4, inf);
@@ -170,7 +173,7 @@ Pdef(\2, Pbind(\instrument, \id2,
 
 )).play(quant:1);
 )
-)
+
 Pdef(\1).stop
 Pdef(\2).stop
 
