@@ -3,7 +3,7 @@
 
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/8);
+TempoClock.default.tempo_(120/15);
 s.options.memSize = 8192*16;
 s.waitForBoot
 (
@@ -48,7 +48,7 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 					a=a+angle;
 		pang=a.wrap(0,360);
 
-		y=360.rand;
+		y=pang.rand;
 		x=pang;
 
 			p2=exp(Complex(0,y.degrad)).round(0.00001);
@@ -59,15 +59,14 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+envb = EnvGen.ar(Env.perc(attack,decay, 4/1, [-4, -4]), trig);
 		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
 
-		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
+		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-
-		trig = TDelay.ar(trig, 0.01/d);
+		trig = TDelay.ar(trig, 0.001/d);
 	};
 
 }).send;
@@ -122,14 +121,14 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.perc(attack,decay, amp/interval, [-4, -4]), trig);
+envb = EnvGen.ar(Env.perc(attack,decay, 8/1, [-4, -4]), trig);
 		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
 
 		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 0.01/d);
+		trig = TDelay.ar(trig, 0.001/d);
 	};
 
 }).send;
@@ -156,21 +155,21 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
-\dur, Prand([2, 4], inf),
-//	\dur, Prand([0.2,0.4], inf),
+ 	\dur, Prand([2, 4], inf),
+ 	//	\dur, Prand([0.2,0.4], inf),
 
-	\aToW, Ptuple(Array.fill(16, ~aPattern))
-	.collect { |array| [array] },
+ 	\aToW, Ptuple(Array.fill(16, ~aPattern))
+ 	.collect { |array| [array] },
 
-	\note, Pxrand([
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
-	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,8,inf),
-	//\n, Prand([1,(4/3),(3/2),2],inf),
-	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
+ 	\note, Pxrand([
+ 		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
+ 	5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
+ 	\presence, Pexprand(1, 1.5, inf),
+ 	\delay, Pexprand(2,8,inf),
+// 	//\n, Prand([1,(4/3),(3/2),2],inf),
+// 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
-)).play(quant:1);
+ )).play(quant:1);
 )
 )
 s.scope
