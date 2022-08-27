@@ -59,14 +59,14 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.perc(attack,decay, 4/1, [-4, -4]), trig);
-		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
+envb = EnvGen.ar(Env.sine(decay, 4/1, [-4, -4]), trig);
+		envc = EnvGen.ar(Env.sine(decay, amp/intervalx, [-4, -4]), trig);
 
 		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 0.001/d);
+		trig = TDelay.ar(trig, 0.1/d);
 	};
 
 }).send;
@@ -81,7 +81,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var p1, p2,p3,p4,d,dx;
 	var interval=0,intervalx=0;
 	var aToW = NamedControl.kr(\aToW, 0 ! 16);
-	var  amp = (6/n), fund = (55 )*n;
+	var  amp = (12/n), fund = (55 )*n;
 	var enva, envb,envc, envd1, envd2, envf;
 	var attack=0.01;
 	var aToWNeg = aToW.neg;
@@ -110,7 +110,7 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 					a=a+angle;
 		pang=a.wrap(0,360);
 
-		y=360.rand;
+		y=pang.rand;
 		x=pang;
 
 			p2=exp(Complex(0,y.degrad)).round(0.00001);
@@ -121,14 +121,14 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.perc(attack,decay, 8/1, [-4, -4]), trig);
-		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
+envb = EnvGen.ar(Env.sine(decay, 4/1, [-4, -4]), trig);
+		envc = EnvGen.ar(Env.sine(decay, amp/intervalx, [-4, -4]), trig);
 
 		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 0.001/d);
+		trig = TDelay.ar(trig, 0.1/d);
 	};
 
 }).send;
@@ -141,7 +141,6 @@ envb = EnvGen.ar(Env.perc(attack,decay, 8/1, [-4, -4]), trig);
 Pdef(\1, Pbind(\instrument, \id1,
 	\dur, Prand([2, 4], inf),
 //	\dur, Prand([0.2,0.4], inf),
-	\b,Pexprand(1,2,inf),
 	\aToW, Ptuple(Array.fill(16, ~aPattern))
 	.collect { |array| [array] },
 
