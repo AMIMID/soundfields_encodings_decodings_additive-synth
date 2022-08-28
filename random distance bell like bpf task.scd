@@ -3,12 +3,12 @@
 
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/15);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*16;
 s.waitForBoot
 (
 (
-Tdef(\x, {loop{20.wait
+Tdef(\x, {loop{5.wait
 (
 SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1,b=pi;
 	var a=0;
@@ -29,8 +29,8 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 	var s1, s2, s3, s4, trig = Impulse.ar(0);
 
 
-	//envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
-	envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
+	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
+	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
 	16.do {
 
@@ -59,14 +59,14 @@ SynthDef.new(\id1, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.sine(decay, 4/1, [-4, -4]), trig);
-		envc = EnvGen.ar(Env.sine(decay, amp/intervalx, [-4, -4]), trig);
+envb = EnvGen.ar(Env.perc(attack,decay, 4/1, [-4, -4]), trig);
+		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
 
 		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 0.1/d);
+		trig = TDelay.ar(trig, 0.0001/d);
 	};
 
 }).send;
@@ -121,14 +121,16 @@ SynthDef.new(\id2, { arg dur = 1, note = 1, presence = 1, delay =1 , n=1, wide=1
 		interval=interval+d;
 		intervalx=intervalx+dx;
 
-envb = EnvGen.ar(Env.sine(decay, 4/1, [-4, -4]), trig);
-		envc = EnvGen.ar(Env.sine(decay, amp/intervalx, [-4, -4]), trig);
+
+envb = EnvGen.ar(Env.perc(attack,decay, 4/1, [-4, -4]), trig);
+		envc = EnvGen.ar(Env.perc(attack,decay, amp/intervalx, [-4, -4]), trig);
+
 
 		s2 = Pan2.ar(BPF.ar(SinOsc.ar(freq:((ii*interval)+envf),phase:pang.degrad,mul: envb),freq:((ii*intervalx)+envf),mul:envc,rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
    Out.ar(0, s2*envd2);
 
-		trig = TDelay.ar(trig, 0.1/d);
+		trig = TDelay.ar(trig, 0.0001/d);
 	};
 
 }).send;
@@ -139,14 +141,13 @@ envb = EnvGen.ar(Env.sine(decay, 4/1, [-4, -4]), trig);
 ~aPattern = Pexprand(1, 4, inf);
 
 Pdef(\1, Pbind(\instrument, \id1,
-	\dur, Prand([2, 4], inf),
+	\dur, Prand([1, 1], inf),
 //	\dur, Prand([0.2,0.4], inf),
 	\aToW, Ptuple(Array.fill(16, ~aPattern))
 	.collect { |array| [array] },
 
 	\note, Pxrand([
-		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
-		5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
+ 		1,4,5,7,8,10,12,13,16,171,19,20,22,24], inf),
 	\presence, Pexprand(1, 1.5, inf),
 	\delay, Pexprand(2,8,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
@@ -154,15 +155,14 @@ Pdef(\1, Pbind(\instrument, \id1,
 
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \id2,
- 	\dur, Prand([2, 4], inf),
+ 	\dur, Prand([2, 2], inf),
  	//	\dur, Prand([0.2,0.4], inf),
 
  	\aToW, Ptuple(Array.fill(16, ~aPattern))
  	.collect { |array| [array] },
 
  	\note, Pxrand([
- 		5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,17,20,12,24,5,17,20,8,22,10,19,20,
- 	5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,17,22,12,24,5,17,22,10,24,14,20,22], inf),
+ 		1,4,5,7,8,10,12,13,16,171,19,20,22,24], inf),
  	\presence, Pexprand(1, 1.5, inf),
  	\delay, Pexprand(2,8,inf),
 // 	//\n, Prand([1,(4/3),(3/2),2],inf),
