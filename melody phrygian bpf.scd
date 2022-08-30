@@ -1,16 +1,16 @@
 (
 s.options.numWireBufs = 1024;
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/30);
+TempoClock.default.tempo_(120/40);
 s.options.memSize = 8192*8;
 s.waitForBoot
 (
 (
 SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5, wide=1,attack=0.01;
 		var angle = 360-(360/((sqrt(5)+1)/2));
-     var a=1,y=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 8);
-	var  x = 0, amp = (0.3/1), fund = (110*(2.pow(index/12)));
+     var a=1000,y=0;
+	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var  x = 0, amp = (12/1), fund = (110*(2.pow(index/12)));
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1;
 	var aToWNeg = aToW.neg;
@@ -25,7 +25,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	8.do {
+	16.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -47,7 +47,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 
-		s2 = Pan2.ar(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), pos: LFNoise1.ar(d),level:presence);
+		s2 =  Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb),freq:((ii*over)+envf),rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
 		   Out.ar(0, s2*envd2);
 
@@ -59,7 +59,7 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 
 
 
-		trig = TDelay.ar(trig, 0.0001/d);
+		trig = TDelay.ar(trig,under);
 	};
 }).add;
 );
@@ -67,8 +67,8 @@ SynthDef.new(\id1, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5, wide=1,attack=0.01;
 		var angle = 360-(360/((sqrt(5)+1)/2));
      var a=1000,y=0;
-	var aToW = NamedControl.kr(\aToW, 0 ! 8);
-	var  x = 0, amp = (0.3/1), fund = (55*(2.pow(index/8)));
+	var aToW = NamedControl.kr(\aToW, 0 ! 16);
+	var  x = 0, amp = (12/1), fund = (55*(2.pow(index/12)));
 	var enva, envb, envd1, envd2, envf;
 	var under = 1/a, over = 1;
 	var aToWNeg = aToW.neg;
@@ -83,7 +83,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 	envd2 = EnvGen.ar(Env.perc(attack,(decay), amp/tone), doneAction: 2);
 	//envd2 = EnvGen.ar(Env.sine((decay), amp/tone), doneAction: 2);
 
-	8.do {
+	16.do {
 		envb = EnvGen.ar(Env.perc(attack,decay, amp/over, [-4, -4]), trig);
 
 		envf = EnvGen.ar(Env(
@@ -105,7 +105,7 @@ SynthDef.new(\id2, { arg dur = 1, interval = 1, presence = 1, delay =1 , index=5
 
 		d=sqrt((p2.real-p1.real).squared+(p2.imag-p1.imag).squared);
 
-		s2 = Pan2.ar(SinOsc.ar(freq:((ii*over)+envf),phase:pang.degrad,mul: envb), pos: LFNoise1.ar(d),level:presence);
+		s2 = Pan2.ar(BPF.ar(BrownNoise.ar(mul: envb),freq:((ii*over)+envf),rq:0.0001), pos: LFNoise1.ar(d),level:presence);
 
 		   Out.ar(0, s2*envd2);
 
@@ -131,13 +131,13 @@ Pdef(\1, Pbind(\instrument, \id1,
 	//\index,Prand([4,5,7],inf),
 	\attack,Prand([0.01,0.02],inf),
 
-	\aToW, Ptuple(Array.fill(8, ~aPattern))
+	\aToW, Ptuple(Array.fill(16, ~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Prand( [
-		1,4,5,7,8,10,12,13,16,17,19,20,22,24], inf),
+		1,4,5,7,8,10,12,13,16,17,19,20,22,24,Rest(1),Rest(1),Rest(1),Rest(1)], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,4,inf),
+	\delay, Pexprand(1,2,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 //\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
@@ -146,13 +146,13 @@ Pdef(\2, Pbind(\instrument, \id2,
 \dur, Pexprand(1, 1, inf),
 	//\index,Pxrand([1,4,5,7,8,10,12],inf),
 	\attack,Prand([0.01,0.02],inf),
-	\aToW, Ptuple(Array.fill(8, ~aPattern))
+	\aToW, Ptuple(Array.fill(16, ~aPattern))
 	.collect { |array| [array] },
 
 	\interval, Pxrand( [
-		1,4,5,7,8,10,12,13,16,17,19,20,22,24], inf),
+		1,4,5,7,8,10,12,13,16,17,19,20,22,24,Rest(1),Rest(1),Rest(1),Rest(1)], inf),
 	\presence, Pexprand(1, 1.5, inf),
-	\delay, Pexprand(2,4,inf),
+	\delay, Pexprand(1,2,inf),
 	//\n, Prand([1,(4/3),(3/2),2],inf),
 	//\wide,Prand([0.5,0.6,0.7,0.8,0.9,1],inf);
 
