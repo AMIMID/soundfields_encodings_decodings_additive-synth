@@ -9,7 +9,7 @@ s.record(numChannels:6) ;
 
 s.options.numWireBufs = 1024*4;
 s.options.numOutputBusChannels=14;
-TempoClock.default.tempo_(120/80);
+TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*8;
 s.waitForBoot
 
@@ -26,12 +26,12 @@ SynthDef.new(\sitarsun, {
 	over1=1;
 	over2=2;
 	m=0;
-	frequency=10;
+	frequency=6;
 	position=0;
 	bank=28;
-	speed1 = 1;
+	speed1 = 2;
 	speed2 = 1;
-	speed3= 0.5;
+	speed3= 1.5;
 	x=2;
 	y=3;
 	z=4;
@@ -45,9 +45,9 @@ SynthDef.new(\sitarsun, {
 	 envelope3= EnvGen.ar((Env.new([0,0.5,1,0,1,0],[0.01,y/2,y,y,y],curve:\sine)), doneAction: 0);
 	 envelope4 = EnvGen.ar((Env.new([0,0.5,1,0,1,0],[0.01,z/2,z,z,z],curve:\sine)), doneAction: 0);
 
-	note1 = 4.pow(n1/512);    //2.pow(1/12) //496
-	note2 = 4.pow(n2/512);
-	note3 = 4.pow(n3/512);
+	note1 = 4.pow(n1/256);    //2.pow(1/12) //496
+	note2 = 4.pow(n2/256);
+	note3 = 4.pow(n3/256);
 
 	detune1 = Complex.new(fundamental1, note1).abs;
 	detune2 = Complex.new(fundamental2, note2).abs;
@@ -83,18 +83,30 @@ SynthDef.new(\sitarsun, {
 		trig = TDelay.ar(trig, 0.001);
 	};
 
-	Out.ar(0,LeakDC.ar(InFeedback.ar(2)*envelope));
-	Out.ar(0,LeakDC.ar(InFeedback.ar(6)*envelope));
+
+
+
+	Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(2)+InFeedback.ar(4))*envelopez),pos:SinOsc.ar(speed1,phase:0.degrad,mul:1))));
+	Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(6)+InFeedback.ar(8))*envelopey),pos:SinOsc.ar(speed2,phase:45.degrad,mul:1))));
+	Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(10)+InFeedback.ar(12))*envelopex),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
+
+		Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(3)+InFeedback.ar(5))*envelope4),pos:SinOsc.ar(speed1,phase:0.degrad,mul:1))));
+	Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(7)+InFeedback.ar(9))*envelope3),pos:SinOsc.ar(speed2,phase:45.degrad,mul:1))));
+	Out.ar(0,LeakDC.ar(PanAz.ar(2,((InFeedback.ar(11)+InFeedback.ar(13))*envelope2),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
+
+
+/*	Out.ar(0,LeakDC.ar(InFeedback.ar(2)*envelope));
+	Out.ar(1,LeakDC.ar(InFeedback.ar(6)*envelope));
 	Out.ar(0,LeakDC.ar(InFeedback.ar(10)*envelope));
-	Out.ar(0,LeakDC.ar(InFeedback.ar(3)*envelope));
+	Out.ar(1,LeakDC.ar(InFeedback.ar(3)*envelope));
 	Out.ar(0,LeakDC.ar(InFeedback.ar(7)*envelope));
-	Out.ar(0,LeakDC.ar(InFeedback.ar(11)*envelope));
+	Out.ar(1,LeakDC.ar(InFeedback.ar(11)*envelope));
 	Out.ar(1,LeakDC.ar(InFeedback.ar(4)*envelope));
-	Out.ar(1,LeakDC.ar(InFeedback.ar(8)*envelope));
+	Out.ar(0,LeakDC.ar(InFeedback.ar(8)*envelope));
 	Out.ar(1,LeakDC.ar(InFeedback.ar(12)*envelope));
-	Out.ar(1,LeakDC.ar(InFeedback.ar(5)*envelope));
+	Out.ar(0,LeakDC.ar(InFeedback.ar(5)*envelope));
 	Out.ar(1,LeakDC.ar(InFeedback.ar(9)*envelope));
-	Out.ar(1,LeakDC.ar(InFeedback.ar(13)*envelope));
+	Out.ar(0,LeakDC.ar(InFeedback.ar(13)*envelope));*/
 
 
 	/*Out.ar(0,PanAz.ar(2,LeakDC.ar(InFeedback.ar(2))*envelope,pos:SinOsc.ar(speed1,phase:0.degrad,mul:1)));
@@ -116,7 +128,7 @@ SynthDef.new(\sitarsun, {
 (
 Pdef(\1, Pbind(\instrument, \sitarsun, \dur, Pexprand(1, 4/3, inf),
 \fundamental1,Prand([6,8,9,12],inf), \fundamental2,Prand([6,8,9,12],inf), \fundamental3,Prand([6,8,9,12],inf),
-	\n1, Prand(Array.fill(12, { arg i; 1+ i }),inf), \n2, Prand(Array.fill(12, { arg i; 1+ i }),inf), \n3, Prand(Array.fill(12, { arg i; 1+ i }),inf); )).play(quant:1);)
+	\n1, Prand(Array.fill(4, { arg i; 1+ i }),inf), \n2, Prand(Array.fill(4, { arg i; 1+ i }),inf), \n3, Prand(Array.fill(4, { arg i; 1+ i }),inf); )).play(quant:1);)
 
 Pdef(\1).stop
 Pdef(\2).stop
