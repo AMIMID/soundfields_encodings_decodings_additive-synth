@@ -29,9 +29,9 @@ SynthDef.new(\sitarsun, {
 	frequency=64;
 	position=0;
 	bank=32;
-	speed1 = 0.1;
-	speed2 = 0.1;
-	speed3= 0.1;
+	speed1 = 0.01;
+	speed2 = 0.01;
+	speed3= 0.01;
 	x=2;
 	y=2;
 	z=2;
