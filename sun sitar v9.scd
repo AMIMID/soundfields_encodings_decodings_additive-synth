@@ -28,10 +28,10 @@ SynthDef.new(\sitarsun, {
 	m=0;
 	frequency=64;
 	position=0;
-	bank=102;
-	speed1 = 0.01;
-	speed2 = 0.01;
-	speed3= 0.01;
+	bank=32;
+	speed1 = 0.1;
+	speed2 = 0.1;
+	speed3= 0.1;
 	x=2;
 	y=2;
 	z=2;
@@ -45,9 +45,9 @@ SynthDef.new(\sitarsun, {
 	 envelope3= EnvGen.ar(Env.new([0,0,1,0,-1,0],[y],curve:[4,-4]), doneAction: 0);
 	envelope4 = EnvGen.ar(Env.new([0,0,1,0,-1,0],[z],curve:[4,-4]), doneAction: 0);
 
-	note1 = 2.pow(n1/(130816*2));
-	note2 = 2.pow(n2/(130816*2));
-	note3 = 2.pow(n3/(130816*2));
+	note1 = 2.pow(n1/(8128*2));
+	note2 = 2.pow(n2/(8128*2));
+	note3 = 2.pow(n3/(8128*2));
 
 	detune1 = Complex.new(fundamental1, note1).abs;
 	detune2 = Complex.new(fundamental2, note2).abs;
@@ -60,7 +60,7 @@ SynthDef.new(\sitarsun, {
 	bank.do {
 
 		osc_z = Pan2.ar(SinOsc.ar(freq:((frequency)*freq1)*over1, mul:(freq1*over1).reciprocal,phase:45.degrad)*
-			SinOsc.ar(freq:((frequency)*freq1)*over2, mul:(freq1*over2).reciprocal,phase:45.degrad), pos: position.imag);
+			SinOsc.ar(freq:((frequency)*freq1)*over2, mul:(freq1*over2).reciprocal,phase:45.degrad), pos: position.real);
 
 		osc_y = Pan2.ar(SinOsc.ar(freq:((frequency)*freq2)*over1, mul:(freq2*over1).reciprocal,phase:90.degrad)*
 			SinOsc.ar(freq:((frequency)*freq2)*over2, mul:(freq1*over2).reciprocal,phase:90.degrad), pos: position.imag);
@@ -82,7 +82,7 @@ SynthDef.new(\sitarsun, {
 		trig = TDelay.ar(trig, 0.1);
 	};
 //////////////xyz
-Out.ar(8,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(2)*envelopex),pos:SinOsc.ar(speed1,phase:45.degrad,mul:1))));
+Out.ar(8,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(2)*envelopez),pos:SinOsc.ar(speed1,phase:45.degrad,mul:1))));
 Out.ar(10,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(4)*envelopey),pos:SinOsc.ar(speed2,phase:90.degrad,mul:1))));
 Out.ar(12,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(6)*envelopez),pos:SinOsc.ar(speed3,phase:0.degrad,mul:1))));
 /////////////234
@@ -103,7 +103,7 @@ Out.ar(24,LeakDC.ar(InFeedback.ar(19))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,z,z,z
 Out.ar(25,LeakDC.ar(InFeedback.ar(13))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[y],curve:[4,-4]), doneAction: 0));
 Out.ar(25,LeakDC.ar(InFeedback.ar(18))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[y],curve:[4,-4]), doneAction: 0));
 ///////////01
-	Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(20))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0),1024));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(20))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0),1024));
 Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(22))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0),1024));
 Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(24))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0),1024));
 Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(21))*EnvGen.ar(Env.new([0,1,0,-1,0],[x],curve:[-4,4]), doneAction: 0),1024));
@@ -115,7 +115,7 @@ Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(25))*EnvGen.ar(Env.new([0,1,0,-1,0],[x],
 (
 Pdef(\1, Pbind(\instrument, \sitarsun, \dur, Pexprand(1,2,inf),
 	\fundamental1,Prand([6,8,9,12],inf), \fundamental2,Prand([6,8,9,12],inf), \fundamental3,Prand([6,8,9,12],inf),
-	\n1, Prand(Array.fill(496*2, { arg i; 1+ i }),inf), \n2, Prand(Array.fill(496*2, { arg i; 1+ i }),inf), \n3, Prand(Array.fill(496*2, { arg i; 1+ i }),inf); )).play(quant:1);)
+	\n1, Prand(Array.fill(32*2, { arg i; 1+ i }),inf), \n2, Prand(Array.fill(32*2, { arg i; 1+ i }),inf), \n3, Prand(Array.fill(32*2, { arg i; 1+ i }),inf); )).play(quant:1);)
 
 (/*
 Pdef(\1, Pbind(\instrument, \sitarsun, \dur, Pexprand(2,4,inf),
@@ -131,7 +131,7 @@ Pdef(\2).stop
 [6,8,9,12]
 ///////////////////////
 (
-var x=128,y;
+var x=32,y;
 y=((4*x)-1)*((4*x)/2);
 )
 )
