@@ -29,9 +29,9 @@ SynthDef.new(\sitarsun, {
 	frequency=64;
 	position=0;
 	bank=6;
-	speed1 = 0.01;
-	speed2 = 0.01;
-	speed3= 0.01;
+	speed1 = 0.1;
+	speed2 = 0.1;
+	speed3= 0.1;
 	x=2;
 	y=2;
 	z=2;
@@ -61,14 +61,14 @@ SynthDef.new(\sitarsun, {
 
 	bank.do {
 
-		osc_z = Pan2.ar(SinOsc.ar(freq:((frequency)*freq1)*over1, mul:(freq1*over1).reciprocal,phase:135.degrad)*
-			SinOsc.ar(freq:((frequency)*freq1)*over2, mul:(freq1*over2).reciprocal,phase:135.degrad), pos: position.imag);
+		osc_z = Pan2.ar(SinOsc.ar(freq:((frequency)*freq1)*over1, mul:(freq1*over1).reciprocal,phase:45.degrad)*
+			SinOsc.ar(freq:((frequency)*freq1)*over2, mul:(freq1*over2).reciprocal,phase:45.degrad), pos: position.imag);
 
-		osc_y = PanAz.ar(3,SinOsc.ar(freq:((frequency)*freq2)*over1, mul:(freq2*over1).reciprocal,phase:270.degrad)*
-			SinOsc.ar(freq:((frequency)*freq2)*over2, mul:(freq2*over2).reciprocal,phase:270.degrad), pos: SinOsc.ar(speed1));
+		osc_y = PanAz.ar(3,SinOsc.ar(freq:((frequency)*freq2)*over1, mul:(freq2*over1).reciprocal,phase:90.degrad)*
+			SinOsc.ar(freq:((frequency)*freq2)*over2, mul:(freq2*over2).reciprocal,phase:90.degrad), pos: SinOsc.ar(speed1));
 
-		osc_x = PanAz.ar(3,SinOsc.ar(freq:((frequency)*freq3)*over1, mul:(freq3*over1).reciprocal,phase:180.degrad)*
-			SinOsc.ar(freq:((frequency)*freq3)*over2, mul:(freq3*over2).reciprocal,phase:180.degrad), pos: SinOsc.ar(speed2));
+		osc_x = PanAz.ar(3,SinOsc.ar(freq:((frequency)*freq3)*over1, mul:(freq3*over1).reciprocal,phase:90.degrad)*
+			SinOsc.ar(freq:((frequency)*freq3)*over2, mul:(freq3*over2).reciprocal,phase:90.degrad), pos: SinOsc.ar(speed2));
 
 		Out.ar(2, LeakDC.ar(osc_z)*envelope);
 		Out.ar(4, LeakDC.ar(osc_y)*envelope);
@@ -84,15 +84,15 @@ SynthDef.new(\sitarsun, {
 		trig = TDelay.ar(trig, 0.1);
 	};
 //////////////
-Out.ar(10,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(2)*envelopez),pos:SinOsc.ar(speed1,phase:225.degrad,mul:1))));
-Out.ar(12,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(4)*envelopey),pos:SinOsc.ar(speed2,phase:180.degrad,mul:1))));
+Out.ar(10,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(2)*envelopez),pos:SinOsc.ar(speed1,phase:45.degrad,mul:1))));
+Out.ar(12,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(4)*envelopey),pos:SinOsc.ar(speed2,phase:90.degrad,mul:1))));
 Out.ar(14,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(7)*envelopez),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
 /////
 Out.ar(16,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(3)*envelope2),pos:SinOsc.ar(speed1,phase:135.degrad,mul:1))));
-Out.ar(18,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(5)*envelope3),pos:SinOsc.ar(speed2,phase:270.degrad,mul:1))));
+Out.ar(18,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(5)*envelope3),pos:SinOsc.ar(speed2,phase:180.degrad,mul:1))));
 Out.ar(20,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(8)*envelope4),pos:SinOsc.ar(speed3,phase:180.degrad,mul:1))));
 ////
-Out.ar(22,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(6)*envelope),pos:SinOsc.ar(speed3,phase:0.degrad,mul:1))));
+Out.ar(22,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(6)*envelope),pos:SinOsc.ar(speed3,phase:270.degrad,mul:1))));
 Out.ar(24,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(9)*envelope),pos:SinOsc.ar(speed3,phase:270.degrad,mul:1))));
 ////////////0
 
