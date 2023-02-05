@@ -88,12 +88,12 @@ Out.ar(10,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(2)*envelopez),pos:SinOsc.ar(speed1
 Out.ar(12,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(4)*envelopey),pos:SinOsc.ar(speed2,phase:90.degrad,mul:1))));
 Out.ar(14,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(7)*envelopez),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
 /////
-Out.ar(16,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(3)*envelope2),pos:SinOsc.ar(speed1,phase:135.degrad,mul:1))));
-Out.ar(18,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(5)*envelope3),pos:SinOsc.ar(speed2,phase:180.degrad,mul:1))));
-Out.ar(20,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(8)*envelope4),pos:SinOsc.ar(speed3,phase:180.degrad,mul:1))));
+Out.ar(16,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(3)*envelope2),pos:SinOsc.ar(speed1,phase:45.degrad,mul:1))));
+Out.ar(18,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(5)*envelope3),pos:SinOsc.ar(speed2,phase:90.degrad,mul:1))));
+Out.ar(20,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(8)*envelope4),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
 ////
-Out.ar(22,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(6)*envelope),pos:SinOsc.ar(speed3,phase:270.degrad,mul:1))));
-Out.ar(24,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(9)*envelope),pos:SinOsc.ar(speed3,phase:270.degrad,mul:1))));
+Out.ar(22,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(6)*envelope),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
+Out.ar(24,LeakDC.ar(PanAz.ar(2,(InFeedback.ar(9)*envelope),pos:SinOsc.ar(speed3,phase:90.degrad,mul:1))));
 ////////////0
 
 Out.ar(26,LeakDC.ar(InFeedback.ar(10))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0));///z
