@@ -37,13 +37,14 @@ SynthDef.new(\sitarsun, {
 	z=2;
 	angle =0;
 
-	envelope=  EnvGen.ar(Env.sine(12,0.1), doneAction: 2);
-    envelopex = EnvGen.ar(Env.new([0,1,0,-1,0],[x],curve:[4,-4]), doneAction: 0);
+	envelope=  EnvGen.ar(Env.sine(10,0.1), doneAction: 2);
+    envelopex = EnvGen.ar(Env.new([0,0,1,0,-1,0],[x],curve:[4,-4]), doneAction: 0);
 	 envelopey= EnvGen.ar(Env.new([0,0,1,0,-1,0],[y],curve:[-4,4]), doneAction: 0);
 	 envelopez = EnvGen.ar(Env.new([0,0,1,0,-1,0],[1,z,z,z,z],curve:[4,-4]), doneAction: 0);
-	  envelope4= EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0);
+	  envelope2= EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,x,x,x,x],curve:[4,-4]), doneAction: 0);
 	 envelope3= EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,y,y,y,y],curve:[-4,4]), doneAction: 0);
-	envelope2 = EnvGen.ar(Env.new([0,0,1,0,-1,0],[3,z,z,z,z],curve:[4,-4]), doneAction: 0);
+	envelope4 = EnvGen.ar(Env.new([0,0,1,0,-1,0],[3,z,z,z,z],curve:[4,-4]), doneAction: 0);
+
 
 
 	note1 = 2.pow(n1/(8128*2));
@@ -105,12 +106,12 @@ Out.ar(28,LeakDC.ar(InFeedback.ar(22))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,y,y,y
 Out.ar(29,LeakDC.ar(InFeedback.ar(13))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,y,y,y,y],curve:[4,-4]), doneAction: 0));///-yy
 Out.ar(29,LeakDC.ar(InFeedback.ar(19))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,y,y,y,y],curve:[4,-4]), doneAction: 0));///-yy
 Out.ar(29,LeakDC.ar(InFeedback.ar(23))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,y,y,y,y],curve:[4,-4]), doneAction: 0));///x
-Out.ar(30,LeakDC.ar(InFeedback.ar(14))*EnvGen.ar(Env.new([0,1,0,-1,0],[x,x,x,x],curve:[4,-4]), doneAction: 0));///x
-Out.ar(30,LeakDC.ar(InFeedback.ar(20))*EnvGen.ar(Env.new([0,1,0,-1,0],[x,x,x,x],curve:[4,-4]), doneAction: 0));///x
-Out.ar(30,LeakDC.ar(InFeedback.ar(24))*EnvGen.ar(Env.new([0,1,0,-1,0],[x,x,x,x],curve:[4,-4]), doneAction: 0));///-x
-Out.ar(31,LeakDC.ar(InFeedback.ar(15))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
-Out.ar(31,LeakDC.ar(InFeedback.ar(21))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
-Out.ar(31,LeakDC.ar(InFeedback.ar(25))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
+Out.ar(30,LeakDC.ar(InFeedback.ar(14))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));///x
+Out.ar(30,LeakDC.ar(InFeedback.ar(20))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));///x
+Out.ar(30,LeakDC.ar(InFeedback.ar(24))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[2,x,x,x,x],curve:[4,-4]), doneAction: 0));///-x
+Out.ar(31,LeakDC.ar(InFeedback.ar(15))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
+Out.ar(31,LeakDC.ar(InFeedback.ar(21))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
+Out.ar(31,LeakDC.ar(InFeedback.ar(25))*EnvGen.ar(Env.new([0,0,1,0,-1,0],[4,x,x,x,x],curve:[4,-4]), doneAction: 0));////-xx
 
 
 ///////////01
