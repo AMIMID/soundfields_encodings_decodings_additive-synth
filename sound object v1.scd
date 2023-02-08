@@ -22,7 +22,7 @@ SynthDef.new(\ob, {
 	var envelope, envelopex,envelopey, envelopez;
 	var osc_z, osc_y, osc_x, over1, over2, over3, over4, m;
 	var freq1, freq2, freq3;
-	var timex,timey, dx, dy, dz;
+	var timex,timey,timez, dx, dy, dz;
 	var bank, angle, phasex, phasey, phasez;
 	var trig = Impulse.ar(0);
 
@@ -31,10 +31,11 @@ SynthDef.new(\ob, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=8;
-	bank=38;
+	frequency=6;
+	bank=18;
 	timex=4;
 	timey=4;
+	timez=4;
 	angle=0;
 	detune=1;
 
@@ -51,10 +52,10 @@ SynthDef.new(\ob, {
 	dz = Complex.new(x,y).magnitude;
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,12,4), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(12,2), doneAction: 2);
-	envelopez = EnvGen.ar(Env.new([0,dz,0],[timex],curve:[-4,4]), doneAction: 0);
+	envelope=  EnvGen.ar(Env.sine(12,1), doneAction: 2);
+	envelopez = EnvGen.ar(Env.new([0,dz,0],[timez],curve:[-4,4]), doneAction: 0);
 	envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
-	envelopex= EnvGen.ar(Env.new([0,0,dx,0],[timey],curve:[-4,4]), doneAction: 0);
+	envelopex= EnvGen.ar(Env.new([0,0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
 
 	bank.do {
@@ -106,36 +107,43 @@ Out.ar(16,LeakDC.ar(Pan2.ar((InFeedback.ar(6)*envelopex),pos:SinOsc.ar(speed3,0.
 Out.ar(18,LeakDC.ar(Pan2.ar((InFeedback.ar(7)*envelopey),pos:SinOsc.ar(speed3,90.degrad))));
 
 ///////////01
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(8))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(9))*envelope,frequency*1000));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(10))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(11))*envelope,frequency*1000));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(12))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(13))*envelope,frequency*1000));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(14))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(15))*envelope,frequency*1000));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(16))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(17))*envelope,frequency*1000));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(18))*envelope,frequency*1000));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelope,frequency*1000));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(8))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(9))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(10))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(11))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(12))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(13))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(14))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(15))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(16))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(17))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(18))*envelope,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelope,frequency*100));
 
 }).add;
 )
 
 (
-Pdef(\1, Pbind(\instrument, \ob, \dur,Pexprand(1,2,inf),
+Pdef(\1, Pbind(\instrument, \ob, \dur,1/2,
 	//\fundamental1,Prand([6,8,9,12],inf),
 	//\fundamental2,Prand([6,8,9,12],inf),
 	//\fundamental3,Prand([6,8,9,12],inf),
-	//\n1,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-   // \n2,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-  //	\n3,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-	//\speed1,Prand([1,1/2,2/3,3/4],inf),
-	//\speed2,Prand([1,1/2,2/3,3/4],inf),
-	//\speed3,Prand([1,1/2,2/3,3/4],inf),
+	\n1,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+   \n2,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+  	\n3,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+	\speed1,Pexprand(0.1,1,inf),
+	\speed2,Pexprand(0.1,1,inf),
+	\speed3,Pexprand(0.1,1,inf),
+	\x,Pexprand(0.1,1,inf),
+	\y,Pexprand(0.1,1,inf),
+	\z,Pexprand(0.1,1,inf),
+
+	/*\speed1,Prand([1,1/2,2/3,3/4],inf),
+	\speed2,Prand([1,1/2,2/3,3/4],inf),
+	\speed3,Prand([1,1/2,2/3,3/4],inf),
 	\x,Prand([2,3/2,4/3,1],inf),
 	\y,Prand([2,3/2,4/3,1],inf),
-	\z,Prand([2,3/2,4/3,1],inf);
+	\z,Prand([2,3/2,4/3,1],inf);*/
 )).play(quant:1);)
 
 (/*
