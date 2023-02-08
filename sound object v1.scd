@@ -16,7 +16,7 @@ s.waitForBoot
 
 (
 SynthDef.new(\ob, {
-	arg fundamental1=6, fundamental2=6, fundamental3=6, n1=1, n2=1, n3=1,speed1=0.1, speed2=0.1, speed3=0.1,
+	arg fundamental1=6, fundamental2=6, fundamental3=6, n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01,
 	x=1, y=1, z=1;
 	var frequency, note1, note2, note3, detune;
 	var envelope, envelopex,envelopey, envelopez;
@@ -54,7 +54,7 @@ SynthDef.new(\ob, {
 	envelope=  EnvGen.ar(Env.sine(12,2), doneAction: 2);
 	envelopez = EnvGen.ar(Env.new([0,dz,0],[timex],curve:[-4,4]), doneAction: 0);
 	envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
-	envelopex= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
+	envelopex= EnvGen.ar(Env.new([0,0,dx,0],[timey],curve:[-4,4]), doneAction: 0);
 
 
 	bank.do {
@@ -76,13 +76,13 @@ SynthDef.new(\ob, {
 		SinOsc.ar(freq:((note2*freq2)*over2)+detune.real, mul:((note2*fundamental2)*over2).reciprocal,phase:phasey))
 		+
 		(SinOsc.ar(freq:((note2*freq2)*over3)+detune.real, mul:((note2*fundamental2)*over3).reciprocal,phase:phasey)*
-		SinOsc.ar(freq:((note2*freq2)*over4)+detune.real, mul:((note2*fundamental2)*over4).reciprocal,phase:phasey)),SinOsc.ar(detune.imag,phasez));
+		SinOsc.ar(freq:((note2*freq2)*over4)+detune.real, mul:((note2*fundamental2)*over4).reciprocal,phase:phasey)),SinOsc.ar(detune.imag,phasey));
 
 		osc_x = Pan2.ar((SinOsc.ar(freq:((note3*freq3)*over1)+detune.real, mul:((note3*fundamental3)*over1).reciprocal,phase:phasex)*
 		SinOsc.ar(freq:((note3*freq3)*over2)+detune.real, mul:((note3*fundamental3)*over2).reciprocal,phase:phasex))
 		+
 		(SinOsc.ar(freq:((note3*freq3)*over3)+detune.real, mul:((note3*fundamental3)*over3).reciprocal,phase:phasex)*
-		SinOsc.ar(freq:((note3*freq3)*over4)+detune.real, mul:((note3*fundamental3)*over4).reciprocal,phase:phasex)),SinOsc.ar(detune.imag,phasez));
+		SinOsc.ar(freq:((note3*freq3)*over4)+detune.real, mul:((note3*fundamental3)*over4).reciprocal,phase:phasex)),SinOsc.ar(detune.imag,phasex));
 
 
 		Out.ar(2, LeakDC.ar(osc_z)*envelopez);
@@ -124,15 +124,15 @@ Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelope,frequency*1000));
 
 (
 Pdef(\1, Pbind(\instrument, \ob, \dur,Pexprand(1,2,inf),
-	\fundamental1,Prand([6,8,9,12],inf),
-	\fundamental2,Prand([6,8,9,12],inf),
-	\fundamental3,Prand([6,8,9,12],inf),
-	\n1,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-    \n2,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-  	\n3,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
-	\speed1,Prand([1,1/2,2/3,3/4],inf),
-	\speed2,Prand([1,1/2,2/3,3/4],inf),
-	\speed3,Prand([1,1/2,2/3,3/4],inf),
+	//\fundamental1,Prand([6,8,9,12],inf),
+	//\fundamental2,Prand([6,8,9,12],inf),
+	//\fundamental3,Prand([6,8,9,12],inf),
+	//\n1,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+   // \n2,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+  //	\n3,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
+	//\speed1,Prand([1,1/2,2/3,3/4],inf),
+	//\speed2,Prand([1,1/2,2/3,3/4],inf),
+	//\speed3,Prand([1,1/2,2/3,3/4],inf),
 	\x,Prand([2,3/2,4/3,1],inf),
 	\y,Prand([2,3/2,4/3,1],inf),
 	\z,Prand([2,3/2,4/3,1],inf);
