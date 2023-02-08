@@ -16,14 +16,14 @@ s.waitForBoot
 
 (
 SynthDef.new(\ob, {
-	arg fundamental1=6, fundamental2=6, fundamental3=6, n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01,
-	x=1, y=1, z=1;
+	arg fundamental1=6, fundamental2=6, fundamental3=6, n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01;
 	var frequency, note1, note2, note3, detune;
 	var envelope, envelopex,envelopey, envelopez;
 	var osc_z, osc_y, osc_x, over1, over2, over3, over4, m;
-	var freq1, freq2, freq3;
+	var freq1, freq2, freq3, objectz, objectx, objecty;
 	var timex,timey,timez, dx, dy, dz;
-	var bank, angle, phasex, phasey, phasez;
+	var bank, angle, scale=1;
+	var azimuth, elevation;
 	var trig = Impulse.ar(0);
 
 	over1=1;
@@ -31,7 +31,7 @@ SynthDef.new(\ob, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=6;
+	frequency=8;
 	bank=18;
 	timex=4;
 	timey=4;
@@ -43,13 +43,17 @@ SynthDef.new(\ob, {
 	note2 = 2.pow(n2/(8128*2));
 	note3 = 2.pow(n3/(8128*2));
 
-	phasez = Complex.new(x,y).phase.degrad;
-	phasey = Complex.new(x,z).phase.degrad;
-	phasex = Complex.new(y,z).phase.degrad;
+	objectz = Cartesian.new(1,1,0)*scale;
+	objecty = Cartesian.new(1,0,1)*scale;
+	objectx = Cartesian.new(0,1,1)*scale;
 
-	dx = Complex.new(y,z).magnitude;
-	dy = Complex.new(x,z).magnitude;
-	dz = Complex.new(x,y).magnitude;
+	objectz = objectz.rotate(45.degrad);
+	objecty = objecty.tilt(45.degrad);
+	objectx = objectx.tumble(45.degrad);
+
+	dx = objectx.rho;
+	dy = objecty.rho;
+	dz = objectz.rho;
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,12,4), doneAction: 2);
 	envelope=  EnvGen.ar(Env.sine(12,1), doneAction: 2);
@@ -67,28 +71,28 @@ SynthDef.new(\ob, {
 	freq2 = (fundamental2*frequency);
 	freq3 = (fundamental3*frequency);
 
-		osc_z = Pan2.ar((SinOsc.ar(freq:((note1*freq1)*over1)+detune.real, mul:((note1*fundamental1)*over1).reciprocal,phase:phasez)*
-		SinOsc.ar(freq:((note1*freq1)*over2)+detune.real, mul:((note1*fundamental1)*over2).reciprocal,phase:phasez))
+		osc_z = Pan2.ar((SinOsc.ar(freq:((note1*freq1)*over1)+detune.real, mul:((note1*fundamental1)*over1).reciprocal,phase:objectz.phi)*
+		SinOsc.ar(freq:((note1*freq1)*over2)+detune.real, mul:((note1*fundamental1)*over2).reciprocal,phase:objectz.phi))
 		+
-		(SinOsc.ar(freq:((note1*freq1)*over3)+detune.real, mul:((note1*fundamental1)*over3).reciprocal,phase:phasez)*
-			SinOsc.ar(freq:((note1*freq1)*over4)+detune.real, mul:((note1*fundamental1)*over4).reciprocal,phase:phasez)),SinOsc.ar(detune.imag,phasez));
+		(SinOsc.ar(freq:((note1*freq1)*over3)+detune.real, mul:((note1*fundamental1)*over3).reciprocal,phase:objectz.phi)*
+			SinOsc.ar(freq:((note1*freq1)*over4)+detune.real, mul:((note1*fundamental1)*over4).reciprocal,phase:objectz.phi)),0);
 
-		osc_y = Pan2.ar((SinOsc.ar(freq:((note2*freq2)*over1)+detune.real, mul:((note2*fundamental2)*over1).reciprocal,phase:phasey)*
-		SinOsc.ar(freq:((note2*freq2)*over2)+detune.real, mul:((note2*fundamental2)*over2).reciprocal,phase:phasey))
+		osc_y = Pan2.ar((SinOsc.ar(freq:((note2*freq2)*over1)+detune.real, mul:((note2*fundamental2)*over1).reciprocal,phase: objecty.theta)*
+		SinOsc.ar(freq:((note2*freq2)*over2)+detune.real, mul:((note2*fundamental2)*over2).reciprocal,phase: objecty.theta))
 		+
-		(SinOsc.ar(freq:((note2*freq2)*over3)+detune.real, mul:((note2*fundamental2)*over3).reciprocal,phase:phasey)*
-		SinOsc.ar(freq:((note2*freq2)*over4)+detune.real, mul:((note2*fundamental2)*over4).reciprocal,phase:phasey)),SinOsc.ar(detune.imag,phasey));
+		(SinOsc.ar(freq:((note2*freq2)*over3)+detune.real, mul:((note2*fundamental2)*over3).reciprocal,phase: objecty.theta)*
+			SinOsc.ar(freq:((note2*freq2)*over4)+detune.real, mul:((note2*fundamental2)*over4).reciprocal,phase: objecty.theta)),0);
 
-		osc_x = Pan2.ar((SinOsc.ar(freq:((note3*freq3)*over1)+detune.real, mul:((note3*fundamental3)*over1).reciprocal,phase:phasex)*
-		SinOsc.ar(freq:((note3*freq3)*over2)+detune.real, mul:((note3*fundamental3)*over2).reciprocal,phase:phasex))
+		osc_x = Pan2.ar((SinOsc.ar(freq:((note3*freq3)*over1)+detune.real, mul:((note3*fundamental3)*over1).reciprocal,phase:objectx.theta)*
+		SinOsc.ar(freq:((note3*freq3)*over2)+detune.real, mul:((note3*fundamental3)*over2).reciprocal,phase:objectx.theta))
 		+
-		(SinOsc.ar(freq:((note3*freq3)*over3)+detune.real, mul:((note3*fundamental3)*over3).reciprocal,phase:phasex)*
-		SinOsc.ar(freq:((note3*freq3)*over4)+detune.real, mul:((note3*fundamental3)*over4).reciprocal,phase:phasex)),SinOsc.ar(detune.imag,phasex));
+		(SinOsc.ar(freq:((note3*freq3)*over3)+detune.real, mul:((note3*fundamental3)*over3).reciprocal,phase:objectx.theta)*
+		SinOsc.ar(freq:((note3*freq3)*over4)+detune.real, mul:((note3*fundamental3)*over4).reciprocal,phase:objectx.theta)),0);
 
 
-		Out.ar(2, LeakDC.ar(osc_z)*envelopez);
-		Out.ar(4, LeakDC.ar(osc_y)*envelopey);
-		Out.ar(6, LeakDC.ar(osc_x)*envelopex);
+		Out.ar(2, LeakDC.ar(osc_z)*envelope);
+		Out.ar(4, LeakDC.ar(osc_y)*envelope);
+		Out.ar(6, LeakDC.ar(osc_x)*envelope);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -99,26 +103,26 @@ SynthDef.new(\ob, {
 		trig = TDelay.ar(trig, 0.0001);
 	};
 //////////////+/-
-Out.ar(8,LeakDC.ar(Pan2.ar((InFeedback.ar(2)*envelopex),pos:SinOsc.ar(speed1,0.degrad))));
-Out.ar(10,LeakDC.ar(Pan2.ar((InFeedback.ar(3)*envelopey),pos:SinOsc.ar(speed1,90.degrad))));
-Out.ar(12,LeakDC.ar(Pan2.ar((InFeedback.ar(4)*envelopex),pos:SinOsc.ar(speed2,0.degrad))));
-Out.ar(14,LeakDC.ar(Pan2.ar((InFeedback.ar(5)*envelopey),pos:SinOsc.ar(speed2,90.degrad))));
-Out.ar(16,LeakDC.ar(Pan2.ar((InFeedback.ar(6)*envelopex),pos:SinOsc.ar(speed3,0.degrad))));
-Out.ar(18,LeakDC.ar(Pan2.ar((InFeedback.ar(7)*envelopey),pos:SinOsc.ar(speed3,90.degrad))));
+Out.ar(8,LeakDC.ar(Pan2.ar((InFeedback.ar(2)*envelopex),pos:SinOsc.ar(speed1,objectz.phi))));
+Out.ar(10,LeakDC.ar(Pan2.ar((InFeedback.ar(3)*envelopey),pos:SinOsc.ar(speed1,objectz.rotate(45.degrad).tilt(90.degrad).phi))));
+Out.ar(12,LeakDC.ar(Pan2.ar((InFeedback.ar(4)*envelopex),pos:SinOsc.ar(speed2,objecty.theta))));
+Out.ar(14,LeakDC.ar(Pan2.ar((InFeedback.ar(5)*envelopey),pos:SinOsc.ar(speed2,objecty.rotate(90.degrad).tilt(45.neg.degrad).theta))));
+Out.ar(16,LeakDC.ar(Pan2.ar((InFeedback.ar(6)*envelopex),pos:SinOsc.ar(speed3,objectx.theta))));
+Out.ar(18,LeakDC.ar(Pan2.ar((InFeedback.ar(7)*envelopey),pos:SinOsc.ar(speed3,objectx.rotate(90.neg.degrad).tumble(45.neg.degrad).theta))));
 
 ///////////01
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(8))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(9))*envelope,frequency*100));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(10))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(11))*envelope,frequency*100));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(12))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(13))*envelope,frequency*100));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(14))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(15))*envelope,frequency*100));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(16))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(17))*envelope,frequency*100));
-Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(18))*envelope,frequency*100));
-Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelope,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(8))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(9))*envelopey,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(10))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(11))*envelopey,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(12))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(13))*envelopey,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(14))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(15))*envelopey,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(16))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(17))*envelopey,frequency*100));
+Out.ar(0,LPF.ar(LeakDC.ar(InFeedback.ar(18))*envelopex,frequency*100));
+Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelopey,frequency*100));
 
 }).add;
 )
@@ -127,7 +131,7 @@ Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelope,frequency*100));
 Pdef(\1, Pbind(\instrument, \ob, \dur,1/2,
 	//\fundamental1,Prand([6,8,9,12],inf),
 	//\fundamental2,Prand([6,8,9,12],inf),
-	//\fundamental3,Prand([6,8,9,12],inf),
+	///\fundamental3,Prand([6,8,9,12],inf),
 	\n1,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
    \n2,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
   	\n3,Prand(Array.fill(32*2, { arg i; 1+ i }),inf),
