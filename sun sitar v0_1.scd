@@ -76,8 +76,8 @@ SynthDef.new(\sitarsun, {
 		position=exp(Complex(0,1)*angle);
 
 		m = m+1;
-		over1 = (m+1)/1;
-		over2 = (m+1)/1;
+		over1 = over1 + (m+1)/1;
+		over2 = over2 + (m+1)/1;
 
 		trig = TDelay.ar(trig, 0.001);
 	};
