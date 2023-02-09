@@ -59,7 +59,7 @@ SynthDef.new(\ob, {
 	envelope=  EnvGen.ar(Env.sine(12,1), doneAction: 2);
 	envelopez = EnvGen.ar(Env.new([0,dz,0],[timez],curve:[-4,4]), doneAction: 0);
 	envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
-	envelopex= EnvGen.ar(Env.new([0,0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
+	envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
 
 	bank.do {

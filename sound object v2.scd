@@ -31,8 +31,8 @@ SynthDef.new(\ob, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=16;
-	bank=12;
+	frequency=8;
+	bank=28;
 	timex=4;
 	timey=4;
 	timez=4;
@@ -59,7 +59,7 @@ SynthDef.new(\ob, {
 	envelope=  EnvGen.ar(Env.sine(12,1), doneAction: 2);
 	envelopez = EnvGen.ar(Env.new([0,dz,0],[timez],curve:[-4,4]), doneAction: 0);
 	envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
-	envelopex= EnvGen.ar(Env.new([0,0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
+	envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
 
 	bank.do {
@@ -128,7 +128,7 @@ Out.ar(1,LPF.ar(LeakDC.ar(InFeedback.ar(19))*envelopey,frequency*1000));
 )
 
 (
-Pdef(\1, Pbind(\instrument, \ob, \dur,1/2,
+Pdef(\1, Pbind(\instrument, \ob, \dur,1,
 	//\fundamental1,Prand([6,8,9,12],inf),
 	//\fundamental2,Prand([6,8,9,12],inf),
 	///\fundamental3,Prand([6,8,9,12],inf),
