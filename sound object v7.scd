@@ -24,7 +24,7 @@ SynthDef.new(\o, {
 	var osc_1, osc_2, osc_3;
 	var over1, over2, over3, over4, m;
 	var freq;
-	var bank, angle, scale=1;
+	var bank, angle, scale=0.1;
     var fundamental;
 
 	over1=1;
@@ -75,9 +75,12 @@ SynthDef.new(\o, {
 	SinOsc.ar(freq:((note2*freq)*over4)+detune.real, mul:((cf*note2)*over4).reciprocal,phase:90.degrad)),SinOsc.ar(speed3+detune.imag,45.degrad,(speed3+detune.imag).reciprocal));
 
 
-		Out.ar(0,osc_1*envelope);
-		Out.ar(0,osc_2*envelope);
-		Out.ar(0,osc_3*envelope);
+		Out.ar(2,osc_1*envelope);
+		Out.ar(2,osc_2*envelope);
+		Out.ar(2,osc_3*envelope);
+
+		Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(2)*envelope),detune.real));
+	Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(3)*envelope),detune.imag));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -85,9 +88,6 @@ SynthDef.new(\o, {
 		over3 = over3 + (m+1)/1;
 		over4 = over4 + (m+1)/1;
 	};
-//Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(2)*envelope),pos:LFNoise1.ar(speed))));
-//Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(3)*envelope),pos:LFNoise1.ar(speed))));
-
 
 }).add;
 )
