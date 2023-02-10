@@ -8,7 +8,8 @@ s.options.device_("USB Sound Device");
 s.record(numChannels:6) ;
 
 s.options.numWireBufs = 1024*4;
-s.options.numOutputBusChannels=20;
+
+s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*8;
 s.waitForBoot
@@ -32,7 +33,7 @@ SynthDef.new(\o, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=8;
+	frequency=16;
 	bank=12;
 	timex=4;
 	timey=4;
@@ -101,12 +102,12 @@ SynthDef.new(\o, {
 			SinOsc.ar(freq:((note3*freq3)*over4)+detune.real, mul:((note3*fundamental3)*over4).reciprocal,phase:90.degrad)),SinOsc.ar(0.1,270.degrad));
 
 
-		Out.ar(2, LPF.ar(LeakDC.ar(osc_1)*envelope,frequency*500));
-		Out.ar(2,LPF.ar( LeakDC.ar(osc_2)*envelope,frequency*500));
-		Out.ar(2,LPF.ar( LeakDC.ar(osc_3)*envelope),frequency*500);
-		Out.ar(2,LPF.ar( LeakDC.ar(osc_4)*envelope,frequency*500));
-		Out.ar(2, LPF.ar(LeakDC.ar(osc_5)*envelope,frequency*500));
-		Out.ar(2,LPF.ar( LeakDC.ar(osc_6)*envelope,frequency*500));
+		Out.ar(0, LPF.ar(LeakDC.ar(osc_1)*envelope,frequency*500));
+		Out.ar(0,LPF.ar( LeakDC.ar(osc_2)*envelope,frequency*500));
+		Out.ar(0,LPF.ar( LeakDC.ar(osc_3)*envelope),frequency*500);
+		Out.ar(0,LPF.ar( LeakDC.ar(osc_4)*envelope,frequency*500));
+		Out.ar(0, LPF.ar(LeakDC.ar(osc_5)*envelope,frequency*500));
+		Out.ar(0,LPF.ar( LeakDC.ar(osc_6)*envelope,frequency*500));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -117,8 +118,8 @@ SynthDef.new(\o, {
 	///trig = TDelay.ar(trig, 0.1);
 	};
 
-Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(2)*envelope),pos:LFNoise1.ar(speed))));
-Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(3)*envelope),pos:LFNoise1.ar(speed))));
+//Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(2)*envelope),pos:LFNoise1.ar(speed))));
+//Out.ar(0,LeakDC.ar(Pan2.ar((InFeedback.ar(3)*envelope),pos:LFNoise1.ar(speed))));
 
 
 }).add;
