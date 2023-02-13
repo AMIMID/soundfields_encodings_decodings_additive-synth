@@ -27,10 +27,10 @@ SynthDef.new(\o, {
 	var osc_1, osc_2, osc_3;
 	var over1, over2, over3, over4, m;
 	var freq;
-	var bank, angle, scale=1;
+	var bank, angle, scale;
     var fundamental;
 	var v=343;
-	var l1,f2;
+	var l1,f2,l2;
 	var modamp;
 
 	over1=1;
@@ -38,17 +38,18 @@ SynthDef.new(\o, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=2/3;
+	frequency=1;
 	bank=32;
 	angle=0;
 	detune=1;
-	modamp=1;
+	modamp=3;
+	scale=modamp.reciprocal;
 
-	note1 = 2.pow(n1/(496*2));
-	note2 = 2.pow(n2/(496*2));
-	note3 = 2.pow(n3/(496*2));
+	 fundamental=((4*cf)-1)*((4*cf)/2);
 
-    fundamental=((4*cf)-1)*((4*cf)/2);
+	note1 = 2.pow(n1/(130816*2));
+	note2 = 2.pow(n2/(130816*2));
+	note3 = 2.pow(n3/(130816*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
 	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
@@ -57,79 +58,80 @@ SynthDef.new(\o, {
 
 	freq =(fundamental*frequency);
 	l1=(v/freq);
-	f2=(v/l1);
+	l2=l1/2;
+	f2=(v/l2);
 
 	bank.do {
 
 	angle=(angle+(360-(360/1.61803398874989484820458683436563811772030917980576))).wrap(0,360);
 	detune=exp(Complex(0,1)*angle);
 
-		osc_1 = Pan2.ar((SinOsc.ar(freq:((note1*freq)*over1)+detune.real,
+		osc_1 = Pan2.ar((SinOsc.ar(freq:((note1*f2)*over1)+detune.real,
 			mul:((cf*note1)*over1).reciprocal,
 			phase:0.degrad,
-			add:SinOsc.ar(freq:((note1*f2)*over1)+detune.real,
+			add:SinOsc.ar(freq:((note1*freq)*over1)+detune.real,
 				mul:(((cf*note1)*over1).reciprocal)*modamp,phase:0.degrad))
 		*
-		SinOsc.ar(freq:((note1*freq)*over3)+detune.real,
+		SinOsc.ar(freq:((note1*f2)*over3)+detune.real,
 			mul:((cf*note1)*over3).reciprocal,phase:0.degrad,
-		add:SinOsc.ar(freq:((note1*f2)*over3)+detune.real,
+		add:SinOsc.ar(freq:((note1*freq)*over3)+detune.real,
 				mul:(((cf*note1)*over1).reciprocal)*modamp,phase:0.degrad)))
 		+
-		(SinOsc.ar(freq:((note1*freq)*over2)+detune.real,
+		(SinOsc.ar(freq:((note1*f2)*over2)+detune.real,
 			mul:((cf*note1)*over2).reciprocal,phase:0.degrad,
-			add:SinOsc.ar(freq:((note1*f2)*over2)+detune.real,
+			add:SinOsc.ar(freq:((note1*freq)*over2)+detune.real,
 				mul:(((cf*note1)*over2).reciprocal)*modamp,phase:0.degrad))
 		*
-		SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
+		SinOsc.ar(freq:((note1*f2)*over4)+detune.real,
 			mul:((cf*note1)*over4).reciprocal,phase:0.degrad,
-		add:SinOsc.ar(freq:((note1*f2)*over4)+detune.real,
+		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 				mul:(((cf*note1)*over4).reciprocal)*modamp,phase:0.degrad))),
 
 		SinOsc.ar(speed1+detune.imag,45.degrad,(speed1+detune.imag).reciprocal));
 
 
-		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*freq)*over1)+detune.real,
+		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
 			mul:((cf*note2)*over1).reciprocal,phase:45.degrad,
-			add:SinOsc.ar(freq:((note1*f2)*over1)+detune.real,
+			add:SinOsc.ar(freq:((note1*freq)*over1)+detune.real,
 				mul:(((cf*note2)*over1).reciprocal)*modamp,phase:45.degrad))
 		*
-		SinOsc.ar(freq:((note1*freq)*over3)+detune.real,
+		SinOsc.ar(freq:((note1*f2)*over3)+detune.real,
 			mul:((cf*note2)*over3).reciprocal,phase:45.degrad,
-		add:SinOsc.ar(freq:((note2*f2)*over3)+detune.real,
+		add:SinOsc.ar(freq:((note2*freq)*over3)+detune.real,
 			mul:(((cf*note2)*over1).reciprocal)*modamp,phase:45.degrad)))
 		+
-		(SinOsc.ar(freq:((note1*freq)*over2)+detune.real,
+		(SinOsc.ar(freq:((note1*f2)*over2)+detune.real,
 			mul:((cf*note2)*over2).reciprocal,phase:45.degrad,
-			add:SinOsc.ar(freq:((note2*f2)*over2)+detune.real,
+			add:SinOsc.ar(freq:((note2*freq)*over2)+detune.real,
 				mul:(((cf*note2)*over2).reciprocal)*modamp,phase:45.degrad))
 		*
-		SinOsc.ar(freq:((note2*freq)*over4)+detune.real,
+		SinOsc.ar(freq:((note2*f2)*over4)+detune.real,
 			mul:((cf*note2)*over4).reciprocal,phase:45.degrad,
-		add:SinOsc.ar(freq:((note1*f2)*over4)+detune.real,
+		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad))),
 
 		SinOsc.ar(speed1+detune.imag,0.degrad,(speed1+detune.imag).reciprocal));
 
 
 
-		osc_3 = Pan2.ar((SinOsc.ar(freq:((note3*freq)*over1)+detune.real,
+		osc_3 = Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
 			mul:((cf*note3)*over1).reciprocal,phase:90.degrad,
-			add:SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
+			add:SinOsc.ar(freq:((note3*freq)*over1)+detune.real,
 				mul:(((cf*note3)*over1).reciprocal)*modamp,phase:90.degrad))
 		*
-		SinOsc.ar(freq:((note3*freq)*over3)+detune.real,
+		SinOsc.ar(freq:((note3*f2)*over3)+detune.real,
 			mul:((cf*note3)*over3).reciprocal,phase:90.degrad,
-		add:SinOsc.ar(freq:((note3*f2)*over3)+detune.real,
+		add:SinOsc.ar(freq:((note3*freq)*over3)+detune.real,
 		mul:(((cf*note3)*over1).reciprocal)*modamp,phase:90.degrad)))
 		+
-		(SinOsc.ar(freq:((note3*freq)*over2)+detune.real,
+		(SinOsc.ar(freq:((note3*f2)*over2)+detune.real,
 			mul:((cf*note3)*over2).reciprocal,phase:90.degrad,
-			add:SinOsc.ar(freq:((note3*f2)*over2)+detune.real,
+			add:SinOsc.ar(freq:((note3*freq)*over2)+detune.real,
 				mul:(((cf*note3)*over2).reciprocal)*modamp,phase:90.degrad))
 		*
-		SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
+		SinOsc.ar(freq:((note3*f2)*over4)+detune.real,
 			mul:((cf*note3)*over4).reciprocal,phase:90.degrad,
-		add:SinOsc.ar(freq:((note3*f2)*over4)+detune.real,
+		add:SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
 		mul:(((cf*note3)*over4).reciprocal)*modamp,phase:90.degrad))),
 
 		SinOsc.ar(speed1+detune.imag,45.degrad,(speed1+detune.imag).reciprocal));
@@ -157,9 +159,9 @@ SynthDef.new(\o, {
 (
 Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1,2,inf),
 	\cf,Prand([2],inf),
-	\n1,Prand(Array.fill(28, { arg i; (1*496)+ i }),inf),
-   \n2,Prand(Array.fill(28, { arg i; (1*496)+ i }),inf),
-  	\n3,Prand(Array.fill(28, { arg i; (1*496)+ i }),inf),
+	\n1,Prand(Array.fill(28, { arg i; (1*130816)+ i }),inf),
+   \n2,Prand(Array.fill(28, { arg i; (1*130816)+ i }),inf),
+  	\n3,Prand(Array.fill(28, { arg i; (1*130816)+ i }),inf),
 	\speed1,Pexprand(0.5,0.5,inf);
 	\speed2,Pexprand(5,5,inf);
 	\speed3,Pexprand(0.5,0.5,inf);
@@ -167,6 +169,5 @@ Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1,2,inf),
 
 ///
 
-
-
+((4*128)-1)*((4*128)/2);
 ////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\/////////////////
