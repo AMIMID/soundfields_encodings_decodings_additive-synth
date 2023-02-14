@@ -58,7 +58,7 @@ SynthDef.new(\o, {
 
 	freq =(fundamental*frequency);
 	l1=(v/freq);
-	l2=l1/100;
+	l2=l1/3;
 	f2=(v/l2);
 
 	bank.do {
