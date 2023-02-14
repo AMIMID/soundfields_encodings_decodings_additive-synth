@@ -87,7 +87,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 				mul:(((cf*note1)*over4).reciprocal)*modamp,phase:0.degrad)))
 
-		,SinOsc.ar(detune.real,phase:45.degrad));
+		,SinOsc.ar(speed3*detune.real,phase:45.degrad));
 
 
 		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
@@ -110,7 +110,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad)))
 
-		,SinOsc.ar(detune.imag,phase:0.degrad));
+		,SinOsc.ar(speed2*detune.imag,phase:0.degrad));
 
 
 
@@ -134,7 +134,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
 		mul:(((cf*note3)*over4).reciprocal)*modamp,phase:90.degrad)))
 
-		,SinOsc.ar(detune.real,phase:45.degrad));
+		,SinOsc.ar(speed3*detune.real,phase:45.degrad));
 
 
 
@@ -162,6 +162,9 @@ Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1/2,1,inf),
 	\n1,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
    \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
   	\n3,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
+	\speed1,Pexprand(0.1,1,inf);
+	\speed2,Pexprand(1,10,inf);
+	\speed3,Pexprand(0.1,1,inf);
 )).play(quant:1);)
 
 ///
