@@ -39,7 +39,7 @@ SynthDef.new(\o, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=34;
+	bank=16;
 	angle=0;
 	detune=1;
 	modamp=3;
@@ -52,13 +52,13 @@ SynthDef.new(\o, {
 	note3 = 2.pow(n3/(496*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(3,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
 	freq =(fundamental*frequency);
 	l1=(v/freq);
-	l2=l1/2;
+	l2=l1/100;
 	f2=(v/l2);
 
 	bank.do {
@@ -66,7 +66,7 @@ SynthDef.new(\o, {
 	angle=(angle+(360-(360/1.61803398874989484820458683436563811772030917980576))).wrap(0,360);
 	detune=exp(Complex(0,1)*angle);
 
-		osc_1 = Pan4.ar((SinOsc.ar(freq:((note1*f2)*over1)+detune.real,
+		osc_1 = Pan2.ar((SinOsc.ar(freq:((note1*f2)*over1)+detune.real,
 			mul:((cf*note1)*over1).reciprocal,
 			phase:0.degrad,
 			add:SinOsc.ar(freq:((note1*freq)*over1)+detune.real,
@@ -87,10 +87,10 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 				mul:(((cf*note1)*over4).reciprocal)*modamp,phase:0.degrad)))
 
-		,xpos:SinOsc.ar(detune.real,phase:0.degrad),ypos:SinOsc.ar(detune.imag,phase:90.degrad));
+		,detune.real);
 
 
-		osc_2 = Pan4.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
+		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
 			mul:((cf*note2)*over1).reciprocal,phase:45.degrad,
 			add:SinOsc.ar(freq:((note1*freq)*over1)+detune.real,
 				mul:(((cf*note2)*over1).reciprocal)*modamp,phase:45.degrad))
@@ -110,11 +110,11 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad)))
 
-		,xpos:SinOsc.ar(detune.imag,phase:90.degrad),ypos:SinOsc.ar(detune.real,phase:0.degrad));
+		,detune.imag);
 
 
 
-		osc_3 = Pan4.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
+		osc_3 = Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
 			mul:((cf*note3)*over1).reciprocal,phase:90.degrad,
 			add:SinOsc.ar(freq:((note3*freq)*over1)+detune.real,
 				mul:(((cf*note3)*over1).reciprocal)*modamp,phase:90.degrad))
@@ -134,7 +134,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
 		mul:(((cf*note3)*over4).reciprocal)*modamp,phase:90.degrad)))
 
-		,xpos:SinOsc.ar(detune.real,phase:0.degrad),ypos:SinOsc.ar(detune.imag,phase:90.degrad));
+		,detune.real);
 
 
 
@@ -157,14 +157,16 @@ SynthDef.new(\o, {
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1,2,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1/2,1,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
-   \n2,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
-  	\n3,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
+	\n1,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
+   \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
+  	\n3,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
 )).play(quant:1);)
 
 ///
 
-((4*8)-1)*((4*8)/2);
+((4*32)-1)*((4*32)/2);
 ////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\/////////////////
+
+28*(8128/28)
