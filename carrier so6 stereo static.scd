@@ -47,12 +47,12 @@ SynthDef.new(\o, {
 
 	 fundamental=((4*cf)-1)*((4*cf)/2);
 
-	note1 = 2.pow(n1/(496*2));
-	note2 = 2.pow(n2/(496*2));
-	note3 = 2.pow(n3/(496*2));
+	note1 = 2.pow(n1/(6*2));
+	note2 = 2.pow(n2/(6*2));
+	note3 = 2.pow(n3/(6*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(3/2,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(16,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -157,16 +157,16 @@ SynthDef.new(\o, {
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1/4,1/2,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(2,4,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
-   \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
-  	\n3,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
+	\n1,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
+   \n2,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
+  	\n3,Pseq(Array.fill(496, { arg i; (1*1)+ i }),inf),
 )).play(quant:1);)
 
 ///
 
-((4*32)-1)*((4*32)/2);
+((4*2)-1)*((4*2)/2);
 ////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\/////////////////
 
 28*(8128/28)
