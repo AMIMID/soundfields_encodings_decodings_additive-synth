@@ -17,7 +17,7 @@ s.waitForBoot
 s.reboot;
 
 
-~a= Buffer.read(s,path:"/Users/petrostatsiopoulos/Desktop/SC_230216_222144.wav");
+~a= Buffer.read(s,path:"/Users/petrostatsiopoulos/Music/SuperCollider Recordings/SC_230216_233121.wav");
 ~a.play
 ~a.numFrames;
 ~a.numChannels;
@@ -62,14 +62,14 @@ Synth.new(\o,[\note,~a.numFrames.rand,\time,7.999999.rand.postln]);
 (
 Pdef(\1, Pbind(\instrument, \b, \dur,Prand([1/2,1],inf),
 	\time,Prand([1,2,4],inf),
-	\note,Prand(Array.fill(78871040, { arg i; (1*1)+ i }),inf);
+	\note,Prand(Array.fill(~a.numFrames, { arg i; (1*1)+ i }),inf);
 )).play(quant:1););
 ///
 
 (
 Pdef(\2, Pbind(\instrument, \b, \dur,Prand([1/2,1],inf),
 	\time,Prand([2,4,8],inf),
-	\note,Prand(Array.fill(78871040, { arg i; (1*1)+ i }),inf);
+	\note,Prand(Array.fill(~a.numFrames, { arg i; (1*1)+ i }),inf);
 )).play(quant:1);)
 
 

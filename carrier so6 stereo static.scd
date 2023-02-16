@@ -52,7 +52,7 @@ SynthDef.new(\o, {
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(16,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -157,7 +157,7 @@ SynthDef.new(\o, {
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(2,4,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1,2,inf),
 	\cf,Prand([2],inf),
 	\n1,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
    \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
