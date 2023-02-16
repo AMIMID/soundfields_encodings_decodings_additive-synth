@@ -47,12 +47,12 @@ SynthDef.new(\o, {
 
 	 fundamental=((4*cf)-1)*((4*cf)/2);
 
-	note1 = 2.pow(n1/(496*2));
-	note2 = 2.pow(n2/(496*2));
-	note3 = 2.pow(n3/(496*2));
+	note1 = 2.pow(n1/(fundamental*2));
+	note2 = 2.pow(n2/(fundamental*2));
+	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(3,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(4,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -163,7 +163,7 @@ Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1/2,1,inf),
    \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
   	\n3,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
 	\speed1,Pexprand(0.1,1,inf);
-	\speed2,Pexprand(1,10,inf);
+	\speed2,Pexprand(1,1,inf);
 	\speed3,Pexprand(0.1,1,inf);
 )).play(quant:1);)
 
