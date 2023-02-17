@@ -21,7 +21,7 @@ s.reboot;
 
 (
 SynthDef.new(\o, {
-	arg n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01, cf=8;
+	arg n1=1, n2=1, n3=1,rotation=0.01, cf=8;
 	var frequency, note1, note2, note3, detune;
 	var envelope, envelopex, envelopey, envelopez;
 	var osc_1, osc_2, osc_3;
@@ -39,7 +39,7 @@ SynthDef.new(\o, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=c;
+	bank=32;
 	angle=0;
 	detune=1;
 	modamp=3;
@@ -52,7 +52,7 @@ SynthDef.new(\o, {
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(4,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -87,7 +87,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 				mul:(((cf*note1)*over4).reciprocal)*modamp,phase:0.degrad)))
 
-		,SinOsc.ar(speed3*detune.real,phase:45.degrad));
+		,SinOsc.ar(rotation*detune.real,phase:45.degrad));
 
 
 		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
@@ -110,8 +110,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad)))
 
-		,SinOsc.ar(speed2*detune.imag,phase:0.degrad));
-
+		,SinOsc.ar(rotation*detune.imag,phase:0.degrad));
 
 
 		osc_3 = Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
@@ -134,13 +133,14 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
 		mul:(((cf*note3)*over4).reciprocal)*modamp,phase:90.degrad)))
 
-		,SinOsc.ar(speed3*detune.real,phase:45.degrad));
+		,SinOsc.ar(rotation*detune.real,phase:45.degrad));
 
 
 
-		Out.ar(0,osc_1*envelope);
-		Out.ar(0,osc_2*envelope);
-		Out.ar(0,osc_3*envelope);
+
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_1*envelope),2400));
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_2*envelope),2400));
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_3*envelope),2400));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -157,18 +157,16 @@ SynthDef.new(\o, {
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1/2,1,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(2,4,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
-   \n2,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
-  	\n3,Pseq(Array.fill(8128, { arg i; (1*1)+ i }),inf),
-	\speed1,Pexprand(0.1,1,inf);
-	\speed2,Pexprand(1,1,inf);
-	\speed3,Pexprand(0.1,1,inf);
+	\n1,Pseq(Array.series(8128,1,1),inf),
+   \n2,Pseq(Array.geom(8128, 1,2),inf),
+  	\n3,Pseq(Array.series(8128,1,2),inf),
+	\rotation,Pexprand(1,1,inf);
 )).play(quant:1);)
 
 ///
-
+Array.fib(5, 1 ).postln;
 ((4*32)-1)*((4*32)/2);
 ////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\/////////////////
 

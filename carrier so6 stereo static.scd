@@ -9,19 +9,20 @@ s.record(numChannels:4) ;
 
 ({Out.ar(2,SoundIn.ar(0))}.play;
 s.record(bus:2,numChannels:1))
-
+(
 s.options.numWireBufs = 1024*4;
 
 s.options.numOutputBusChannels=2;
 TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*8;
 s.waitForBoot
+)
 s.reboot;
 
 
 (
 SynthDef.new(\o, {
-	arg n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01, cf=8;
+	arg n1=1, n2=1, n3=1, cf=8;
 	var frequency, note1, note2, note3, detune;
 	var envelope, envelopex, envelopey, envelopez;
 	var osc_1, osc_2, osc_3;
@@ -38,7 +39,7 @@ SynthDef.new(\o, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=4;
 	bank=16;
 	angle=0;
 	detune=1;
@@ -138,9 +139,9 @@ SynthDef.new(\o, {
 
 
 
-		Out.ar(0,osc_1*envelope);
-		Out.ar(0,osc_2*envelope);
-		Out.ar(0,osc_3*envelope);
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_1*envelope),3000));
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_2*envelope),3000));
+		Out.ar(0,LPF.ar(LeakDC.ar(osc_3*envelope),3000));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
