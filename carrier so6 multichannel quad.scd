@@ -12,7 +12,7 @@ s.record(bus:2,numChannels:1))
 
 s.options.numWireBufs = 1024*4;
 
-s.options.numOutputBusChannels=2;
+s.options.numOutputBusChannels=4;
 TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*8;
 s.waitForBoot
@@ -21,7 +21,7 @@ s.reboot;
 
 (
 SynthDef.new(\o, {
-	arg n1=1, n2=1, n3=1,speed1=0.01, speed2=0.01, speed3=0.01, cf=8;
+	arg n1=1, n2=1, n3=1,rotation=0.01, cf=8;
 	var frequency, note1, note2, note3, detune;
 	var envelope, envelopex, envelopey, envelopez;
 	var osc_1, osc_2, osc_3;
@@ -39,13 +39,14 @@ SynthDef.new(\o, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=34;
+	bank=32;
 	angle=0;
 	detune=1;
-	modamp=3;
-	scale=modamp.reciprocal;
 
 	 fundamental=((4*cf)-1)*((4*cf)/2);
+
+modamp=1;
+scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(496*2));
 	note2 = 2.pow(n2/(496*2));
@@ -110,7 +111,7 @@ SynthDef.new(\o, {
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad)))
 
-		,xpos:SinOsc.ar(detune.imag,phase:90.degrad),ypos:SinOsc.ar(detune.real,phase:0.degrad));
+		,xpos:SinOsc.ar(detune.imag,phase:0.degrad),ypos:SinOsc.ar(detune.real,phase:90.degrad));
 
 
 
@@ -122,7 +123,7 @@ SynthDef.new(\o, {
 		SinOsc.ar(freq:((note3*f2)*over3)+detune.real,
 			mul:((cf*note3)*over3).reciprocal,phase:90.degrad,
 		add:SinOsc.ar(freq:((note3*freq)*over3)+detune.real,
-		mul:(((cf*note3)*over1).reciprocal)*modamp,phase:90.degrad)))
+		mul:(((cf*note3)*over1).reciprocal)*scale,phase:90.degrad)))
 		+
 		(SinOsc.ar(freq:((note3*f2)*over2)+detune.real,
 			mul:((cf*note3)*over2).reciprocal,phase:90.degrad,
@@ -138,9 +139,9 @@ SynthDef.new(\o, {
 
 
 
-		Out.ar(0,osc_1*envelope);
-		Out.ar(0,osc_2*envelope);
-		Out.ar(0,osc_3*envelope);
+		Out.ar(0,FreeVerb.ar(osc_1*envelope,room:scale.wrap(0,1)));
+		Out.ar(0,FreeVerb.ar(osc_2*envelope,room:scale.wrap(0,1)));
+		Out.ar(0,FreeVerb.ar(osc_3*envelope,room:scale.wrap(0,1)));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -155,6 +156,19 @@ SynthDef.new(\o, {
 }).add;
 )
 
+
+
+
+(
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(6,6,inf),
+	\cf,Prand([2],inf),
+	\n1,Pseq(Array.fill(8128, { arg i; i * 2 }),inf),
+   \n2,Pseq(Array.fill(8128, { arg i; i * 2 }),inf),
+  	\n3,Pseq(Array.fill(8128, { arg i; i * 2 }),inf),
+	//\rotation,Pexprand(0.1,10,inf);
+)).play(quant:1);)
+
+//////////////////////////////
 
 (
 Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(1,2,inf),
