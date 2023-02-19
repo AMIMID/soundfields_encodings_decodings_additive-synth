@@ -12,7 +12,7 @@ s.record(bus:2,numChannels:1))
 
 s.options.numWireBufs = 1024*4;
 
-s.options.numOutputBusChannels=2;
+s.options.numOutputBusChannels=2;;
 TempoClock.default.tempo_(120/80);
 s.options.memSize = 8192*8;
 s.waitForBoot
@@ -39,7 +39,7 @@ SynthDef.new(\o, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=16;
+	bank=26;
 	angle=0;
 	detune=1;
 	modamp=1;
@@ -55,7 +55,7 @@ scale=modamp.reciprocal;
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(6,modamp), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(4,modamp), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -90,7 +90,7 @@ scale=modamp.reciprocal;
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 				mul:(((cf*note1)*over4).reciprocal)*modamp,phase:0.degrad)))
 
-		,SinOsc.ar(rotation*detune.real,phase:45.degrad));
+		,SinOsc.ar(rotation+detune.real,phase:45.degrad));
 
 
 		osc_2 = Pan2.ar((SinOsc.ar(freq:((note2*f2)*over1)+detune.real,
@@ -113,7 +113,7 @@ scale=modamp.reciprocal;
 		add:SinOsc.ar(freq:((note1*freq)*over4)+detune.real,
 			mul:(((cf*note2)*over4).reciprocal)*modamp,phase:45.degrad)))
 
-		,SinOsc.ar(rotation*detune.imag,phase:0.degrad));
+		,SinOsc.ar(rotation+detune.imag,phase:0.degrad));
 
 
 		osc_3 = Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,
@@ -136,7 +136,7 @@ scale=modamp.reciprocal;
 		add:SinOsc.ar(freq:((note3*freq)*over4)+detune.real,
 		mul:(((cf*note3)*over4).reciprocal)*modamp,phase:90.degrad)))
 
-		,SinOsc.ar(rotation*detune.real,phase:45.degrad));
+		,SinOsc.ar(rotation+detune.real,phase:45.degrad));
 
 
 
@@ -160,7 +160,7 @@ scale=modamp.reciprocal;
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(6,6,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(3,3,inf),
 	\cf,Prand([2],inf),
 	\n1,Pseq(Array.fill(8128, { arg i; i * 2 }),inf),
    \n2,Pseq(Array.fill(8128, { arg i; i * 2 }),inf),
