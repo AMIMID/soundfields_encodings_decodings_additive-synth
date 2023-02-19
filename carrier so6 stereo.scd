@@ -141,9 +141,9 @@ scale=modamp.reciprocal;
 
 
 
-		Out.ar(0,FreeVerb.ar(osc_1*envelope,room:scale.wrap(0,1)));
-		Out.ar(0,FreeVerb.ar(osc_2*envelope,room:scale.wrap(0,1)));
-		Out.ar(0,FreeVerb.ar(osc_3*envelope,room:scale.wrap(0,1)));
+		Out.ar(0,FreeVerb.ar(osc_1*envelope,room:scale.linlin(200.reciprocal,200000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(osc_2*envelope,room:scale.linlin(200.reciprocal,200000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(osc_3*envelope,room:scale.linlin(200.reciprocal,200000.reciprocal,1,0)));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
