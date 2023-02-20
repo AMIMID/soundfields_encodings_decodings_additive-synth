@@ -42,7 +42,7 @@ SynthDef.new(\o, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=18;
+	bank=32;
 	angle=0;
 	detune=1;
 	modamp=20;
