@@ -128,19 +128,6 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 	};
 
 
-	/*edge1a = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(2)),SinOsc.ar(rotation,phase:0.degrad),level:envelope));
-	edge1b = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(3)),SinOsc.ar(rotation,phase:90.degrad),level:envelope));
-	edge1c = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(4)),SinOsc.ar(rotation,phase:180.degrad),level:envelope));
-	edge2a = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(5)),SinOsc.ar(rotation,phase:360.degrad),level:envelope));
-	edge2b = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(6)),SinOsc.ar(rotation,phase:0.degrad),level:envelope));
-	edge2c = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(7)),SinOsc.ar(rotation,phase:90.degrad),level:envelope));
-	edge3a = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(8)),SinOsc.ar(rotation,phase:180.degrad),level:envelope));
-	edge3b = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(9)),SinOsc.ar(rotation,phase:360.degrad),level:envelope));
-	edge3c = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(10)),SinOsc.ar(rotation,phase:0.degrad),level:envelope));
-	edge4a = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(11)),SinOsc.ar(rotation,phase:90.degrad),level:envelope));
-	edge4b = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(12)),SinOsc.ar(rotation,phase:180.degrad),level:envelope));
-	edge4c = Out.ar(0,Pan2.ar(LeakDC.ar(InFeedback.ar(13)),SinOsc.ar(rotation,phase:360.degrad),level:envelope));*/
-
 
 }).add;
 )
@@ -151,7 +138,7 @@ Synth.new(\t);
 
 
 (
-Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(2,2,inf),
+Pdef(\1, Pbind(\instrument, \o, \dur,Pexprand(6,6,inf),
 	\cf,Prand([2],inf),
 	\n1,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
    \n2,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
