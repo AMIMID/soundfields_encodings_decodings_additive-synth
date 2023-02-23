@@ -1,5 +1,5 @@
 s.options.sampleRate = 44100;
-s.options.numBuffers = 1024*8;
+s.options.numBuffers = 1024*16;
 s.options.numRGens=64*1;
 s.options.numWireBufs=64*1;
 s.options.numInputBusChannels=0;
@@ -13,7 +13,7 @@ s.record(bus:2,numChannels:1))
 s.options.numWireBufs = 1024*8;
 
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/60);
+TempoClock.default.tempo_(120/120);
 s.options.memSize = 8192*16;
 s.waitForBoot
 s.reboot;
@@ -42,7 +42,7 @@ SynthDef.new(\oa, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=12;
+	bank=16;
 	angle=0;
 	detune=1;
 	modamp=20;
@@ -58,7 +58,7 @@ scale=modamp.reciprocal;
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(3,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -115,9 +115,9 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 ,pos:SinOsc.ar(rotation+detune.real,phase:(0+45).degrad)));
 
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -157,7 +157,7 @@ SynthDef.new(\ob, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=12;
+	bank=16;
 	angle=0;
 	detune=1;
 	modamp=20;
@@ -173,7 +173,7 @@ scale=modamp.reciprocal;
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(3,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -230,9 +230,9 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 ,pos:SinOsc.ar(rotation+detune.real,phase:(0+90).degrad)));
 
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,6000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,6000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,6000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -272,7 +272,7 @@ SynthDef.new(\oc, {
 	over4=4;
 	m=0;
 	frequency=1;
-	bank=12;
+	bank=16;
 	angle=0;
 	detune=1;
 	modamp=20;
@@ -288,7 +288,7 @@ scale=modamp.reciprocal;
 	note3 = 2.pow(n3/(fundamental*2));
 
 	//envelope=  EnvGen.ar(Env.perc(0.01,8,scale), doneAction: 2);
-	envelope=  EnvGen.ar(Env.sine(6,scale), doneAction: 2);
+	envelope=  EnvGen.ar(Env.sine(3,scale), doneAction: 2);
 	//envelopey= EnvGen.ar(Env.new([0,0,dy,0],[timey],curve:[-4,4]), doneAction: 0);
 	//envelopex= EnvGen.ar(Env.new([0,dx,0],[timex],curve:[-4,4]), doneAction: 0);
 
@@ -345,9 +345,9 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 ,pos:SinOsc.ar(rotation+detune.real,phase:(0+45).degrad)));
 
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,6000)*envelope,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_1,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_2,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,FreeVerb.ar(LPF.ar(osc_3,10000)*envelope,0.33,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -364,30 +364,29 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 )
 
 (
-Pdef(\1, Pbind(\instrument, \oa, \dur,Pexprand(6,6,inf),
+Pdef(\1, Pbind(\instrument, \oa, \dur,2,
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
+	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(1,2,inf);
 )).play(quant:1);
-Pdef(\2, Pbind(\instrument, \ob, \dur,Pexprand(6,6,inf),
+Pdef(\2, Pbind(\instrument, \ob, \dur,2,
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
+	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(1,2,inf);
 )).play(quant:1);
 
-Pdef(\3, Pbind(\instrument, \oc, \dur,Pexprand(6,6,inf),
+Pdef(\3, Pbind(\instrument, \oc, \dur,2,
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i * 1 }),inf),
+	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(1,2,inf);
 )).play(quant:1);
 )
-
 
 
 Array.series(8128,1,1)
