@@ -115,15 +115,18 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 ,pos:SinOsc.ar(rotation+detune.real,phase:(0+45).degrad)));
 
-	osc_1=osc_1*envelope;
+	    osc_1=osc_1*envelope;
 		osc_2=osc_2*envelope;
 		osc_3=osc_3*envelope;
 
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -242,9 +245,12 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+	//Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -363,9 +369,12 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+			//Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -482,9 +491,12 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 		osc_3=osc_3*envelope;
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+			//Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -603,9 +615,12 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+	    //Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
@@ -718,14 +733,17 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 ,pos:SinOsc.ar(rotation+detune.real,phase:(0+45).degrad)));
 
-			osc_1=osc_1*envelope;
+		osc_1=osc_1*envelope;
 		osc_2=osc_2*envelope;
 		osc_3=osc_3*envelope;
 
 
-		Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
-		Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+			//Out.ar(0,FreeVerb.ar(osc_1,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_2,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		//Out.ar(0,FreeVerb.ar(osc_3,1,room:scale.linlin(20.reciprocal,20000.reciprocal,1,0)));
+		Out.ar(0,osc_1);
+		Out.ar(0,osc_2);
+	    Out.ar(0,osc_3);
 
 		m = m+1;
 		over1 = over1 + (m+1)/1;
