@@ -41,16 +41,14 @@ SynthDef.new(\oa, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
-		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=3/2;
+ fundamental=((4*cf)-1)*((4*cf)/2);
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -165,16 +163,14 @@ SynthDef.new(\ob, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
-		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=1;
+fundamental=((4*cf)-1)*((4*cf)/2);
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -289,16 +285,14 @@ SynthDef.new(\oc, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
 		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=1;
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -412,16 +406,14 @@ SynthDef.new(\od, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
 		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=3/2;
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -535,16 +527,14 @@ SynthDef.new(\oe, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
 		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=1;
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -659,16 +649,14 @@ SynthDef.new(\of, {
 	over3=3;
 	over4=4;
 	m=0;
-	frequency=1;
+	frequency=2;
 	bank=6;
 	angle=0;
 	detune=1;
-	modamp=20;
+	modamp=2;
 	scale=modamp.reciprocal;
 
 		 fundamental=((4*cf)-1)*((4*cf)/2);
-
-modamp=1;
 scale=modamp.reciprocal;
 
 	note1 = 2.pow(n1/(fundamental*2));
@@ -761,48 +749,48 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 )
 
 (
-Pdef(\1, Pbind(\instrument, \oa, \dur,Pexprand(4,4,inf),
+Pdef(\1, Pbind(\instrument, \oa, \dur,Pexprand(6,8,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(0.1,1,inf);
 )).play(quant:1);
-Pdef(\2, Pbind(\instrument, \ob, \dur,Pexprand(4,4,inf),
+Pdef(\2, Pbind(\instrument, \ob, \dur,Pexprand(6,8,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-	\rotation,Pexprand(0.1,1,inf);
-)).play(quant:1);
-
-Pdef(\3, Pbind(\instrument, \oc, \dur,Pexprand(4,4,inf),
-	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-	\rotation,Pexprand(0.1,1,inf);
-)).play(quant:1);
-Pdef(\4, Pbind(\instrument, \od, \dur,Pexprand(4,4,inf),
-	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-	\rotation,Pexprand(0.1,1,inf);
-)).play(quant:1);
-Pdef(\5, Pbind(\instrument, \oe, \dur,Pexprand(4,4,inf),
-	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(0.1,1,inf);
 )).play(quant:1);
 
-Pdef(\6, Pbind(\instrument, \of, \dur,Pexprand(4,4,inf),
+Pdef(\3, Pbind(\instrument, \oc, \dur,Pexprand(6,8,inf),
 	\cf,Prand([2],inf),
-	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-   \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
-  	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+	\rotation,Pexprand(0.1,1,inf);
+)).play(quant:1);
+Pdef(\4, Pbind(\instrument, \od, \dur,Pexprand(6,8,inf),
+	\cf,Prand([2],inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+	\rotation,Pexprand(0.1,1,inf);
+)).play(quant:1);
+Pdef(\5, Pbind(\instrument, \oe, \dur,Pexprand(6,8,inf),
+	\cf,Prand([2],inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+	\rotation,Pexprand(0.1,1,inf);
+)).play(quant:1);
+
+Pdef(\6, Pbind(\instrument, \of, \dur,Pexprand(6,8,inf),
+	\cf,Prand([2],inf),
+	\n1,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+   \n2,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
+  	\n3,Pseq(Array.fill(28*2, { arg i; i + 1 }),inf),
 	\rotation,Pexprand(0.1,1,inf);
 )).play(quant:1);
 )
