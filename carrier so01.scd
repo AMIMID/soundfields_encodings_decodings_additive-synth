@@ -13,7 +13,7 @@ s.record(bus:2,numChannels:1))
 s.options.numWireBufs = 1024*16;
 
 s.options.numOutputBusChannels=2;
-TempoClock.default.tempo_(120/120);
+TempoClock.default.tempo_(120/30);
 s.options.memSize = 8192*16;
 s.waitForBoot
 s.reboot;
@@ -60,7 +60,7 @@ scale=modamp.reciprocal;
 	envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	//envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -180,7 +180,7 @@ scale=modamp.reciprocal;
 	envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	//envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -302,7 +302,7 @@ scale=modamp.reciprocal;
 	envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	//envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -423,7 +423,7 @@ scale=modamp.reciprocal;
 	//envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -544,7 +544,7 @@ scale=modamp.reciprocal;
 	//envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -666,7 +666,7 @@ scale=modamp.reciprocal;
 	//envelope= EnvGen.ar(Env.new([0,0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 	envelope= EnvGen.ar(Env.new([0,scale,0],[2],curve:[-4,4]), doneAction: 2);
 
-	freq =(10*fundamental);
+	freq =(((4*2)-1)*((4*2)/2));
 	l1=(v/freq);
 	l2=l1/modamp;
 	f2=(v/l2);
@@ -748,14 +748,14 @@ osc_3 = (Pan2.ar((SinOsc.ar(freq:((note3*f2)*over1)+detune.real,mul:((cf*note3)*
 
 (
 Pdef(\1, Pbind(\instrument, \oa, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
-	\rotation,Pexprand(0.1,1,28*2,);
+	\rotation,Pexprand(0.1,1,496*2,);
 )).play(quant:1);
 Pdef(\2, Pbind(\instrument, \ob, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
@@ -763,29 +763,29 @@ Pdef(\2, Pbind(\instrument, \ob, \dur,Pexprand(3,3,496*2,),
 )).play(quant:1);
 
 Pdef(\3, Pbind(\instrument, \oc, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
 	\rotation,Pexprand(0.1,1,496*2,);
 )).play(quant:1);
 Pdef(\4, Pbind(\instrument, \od, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
-	\rotation,Pexprand(0.1,1,28*2,);
+	\rotation,Pexprand(0.1,1,496*2,);
 )).play(quant:1);
 Pdef(\5, Pbind(\instrument, \oe, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
-	\rotation,Pexprand(0.1,1,28*2,);
+	\rotation,Pexprand(0.1,1,496*2,);
 )).play(quant:1);
 
 Pdef(\6, Pbind(\instrument, \of, \dur,Pexprand(3,3,496*2,),
-	\cf,Prand([1],496*2,),
+	\cf,Prand([8],496*2,),
 	\n1,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
    \n2,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
   	\n3,Pseq(Array.fill(496*2, { arg i; i + 1 }),1),
